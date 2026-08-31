@@ -20,6 +20,7 @@ import QuoteCalculator from "./pages/QuoteCalculator";
 import Reviews from "./pages/Reviews";
 import ServiceDetail from "./pages/ServiceDetail";
 import Services from "./pages/Services";
+import TermsAndConditions from "./pages/TermsAndConditions";
 import Work from "./pages/Work";
 import WorkDetail from "./pages/WorkDetail";
 
@@ -74,6 +75,7 @@ const App = () => (
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/auth" element={<Auth />} />
 
           {/* Dashboard Routes - Using Layout Route */}
