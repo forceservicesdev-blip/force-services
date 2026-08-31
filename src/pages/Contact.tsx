@@ -12,11 +12,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { services } from "@/data/services";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { supabase } from "@/integrations/supabase/client";
-import { Clock, DollarSign, Mail, MapPin, Phone, Wrench } from "lucide-react";
+import { CLEANING_SERVICES, COMPANY } from "@/lib/config";
+import { Clock, DollarSign, Mail, MapPin, Phone, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { toast } from "sonner";
@@ -25,24 +25,24 @@ import type { QuoteData } from "./QuoteCalculator";
 const contactInfo = [
   {
     icon: Mail,
-    title: "Chat to sale",
-    description: "Email us for scheduling",
-    value: "hello@aquafix.com",
-    href: "mailto:hello@aquafix.com",
+    title: "Email Us",
+    description: "Send us a message anytime",
+    value: COMPANY.email,
+    href: `mailto:${COMPANY.email}`,
   },
   {
     icon: MapPin,
-    title: "Visit our office",
-    description: "Visit us for scheduling",
-    value: "100 Smart Street VIC 3066 AU",
+    title: "Visit Us",
+    description: "Serving " + COMPANY.serviceArea,
+    value: COMPANY.address,
     href: "https://www.google.com/maps",
   },
   {
     icon: Phone,
-    title: "Contact us",
-    description: "Call us for scheduling",
-    value: "+(1)578-365-379",
-    href: "tel:+1578365379",
+    title: "Call Us",
+    description: COMPANY.openingHours,
+    value: COMPANY.phone,
+    href: `tel:${COMPANY.phone}`,
   },
 ];
 
@@ -52,7 +52,6 @@ const Contact = () => {
   const { data: profile } = useUserProfile(user?.id);
 
   const quoteData = location.state?.quoteData as QuoteData | undefined;
-  const planData = location.state?.planData as { planName: string; planType: string; price: number } | undefined;
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -66,7 +65,7 @@ const Contact = () => {
   // Pre-fill form with user data when logged in
   useEffect(() => {
     if (user) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         fullName: profile?.full_name || prev.fullName,
         email: user.email || prev.email,
@@ -77,7 +76,7 @@ const Contact = () => {
 
   useEffect(() => {
     if (quoteData) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         service: quoteData.serviceSlug,
       }));
@@ -116,27 +115,6 @@ const Contact = () => {
         if (error) throw error;
 
         toast.success("Quote request submitted successfully! We'll contact you soon.");
-      } else if (planData) {
-        // Submit plan inquiry to database
-        const { error } = await supabase.from("quote_requests").insert({
-          full_name: formData.fullName,
-          phone: formData.phone,
-          email: formData.email || null,
-          service_slug: `${planData.planType}-plan`,
-          service_title: `${planData.planName} (${planData.planType})`,
-          complexity_label: "Plan Inquiry",
-          complexity_multiplier: 1,
-          estimated_hours: 1,
-          urgency: "standard",
-          base_price: planData.price,
-          estimated_min: planData.price,
-          estimated_max: planData.price,
-          notes: formData.notes || null,
-        });
-
-        if (error) throw error;
-
-        toast.success("Plan inquiry submitted successfully! We'll contact you soon.");
       } else {
         // Regular contact form - save to contacts table
         const { error } = await supabase.from("contacts").insert({
@@ -169,7 +147,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Header />
 
       {/* Hero Section */}
@@ -177,80 +155,63 @@ const Contact = () => {
         <div className="container-custom mx-auto text-center">
           <FadeIn>
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
-              <Link to="/" className="hover:text-primary transition-colors">Home</Link>
+              <Link to="/" className="hover:text-primary transition-colors">
+                Home
+              </Link>
               <span>/</span>
               <span className="text-primary">Contact</span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6">
-              {quoteData ? "Request Official Quote" : planData ? "Plan Inquiry" : "Contact Us"}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+              {quoteData ? "Request Official Quote" : "Contact Us"}
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               {quoteData
                 ? "Complete your information below and we'll send you an official quote based on your estimate."
-                : planData
-                  ? "Fill in your details and we'll contact you about the selected plan."
-                  : "Get in touch with our team for any questions or to schedule a service."}
+                : `Have a question or want to book a clean? Reach out to the ${COMPANY.name} team and we'll get back to you quickly.`}
             </p>
           </FadeIn>
         </div>
       </section>
 
-      {/* Quote Summary (if coming from calculator or pricing) */}
-      {(quoteData || planData) && (
+      {/* Quote Summary (if coming from calculator) */}
+      {quoteData && (
         <section className="pb-8 px-4">
           <div className="container mx-auto section-padding">
             <FadeIn>
               <div className="max-w-4xl mx-auto bg-primary rounded-2xl p-6 text-primary-foreground">
-                <h3 className="text-xl font-bold mb-4">
-                  {quoteData ? "Your Quote Summary" : "Selected Plan"}
-                </h3>
-                {quoteData ? (
-                  <div className="grid md:grid-cols-4 gap-4">
-                    <div className="flex items-center gap-3">
-                      <Wrench className="w-5 h-5 text-accent" />
-                      <div>
-                        <p className="text-sm text-primary-foreground/70">Service</p>
-                        <p className="font-medium">{quoteData.serviceTitle}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Clock className="w-5 h-5 text-accent" />
-                      <div>
-                        <p className="text-sm text-primary-foreground/70">Hours</p>
-                        <p className="font-medium">{quoteData.estimatedHours} hrs</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Clock className="w-5 h-5 text-accent" />
-                      <div>
-                        <p className="text-sm text-primary-foreground/70">Urgency</p>
-                        <p className="font-medium capitalize">{quoteData.urgency}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <DollarSign className="w-5 h-5 text-accent" />
-                      <div>
-                        <p className="text-sm text-primary-foreground/70">Estimate</p>
-                        <p className="font-bold text-lg">${quoteData.estimatedMin} - ${quoteData.estimatedMax}</p>
-                      </div>
+                <h3 className="text-xl font-bold mb-4">Your Quote Summary</h3>
+                <div className="grid md:grid-cols-4 gap-4">
+                  <div className="flex items-center gap-3">
+                    <Sparkles className="w-5 h-5 text-accent" />
+                    <div>
+                      <p className="text-sm text-primary-foreground/70">Service</p>
+                      <p className="font-medium">{quoteData.serviceTitle}</p>
                     </div>
                   </div>
-                ) : planData ? (
-                  <div className="grid md:grid-cols-3 gap-4">
+                  <div className="flex items-center gap-3">
+                    <Clock className="w-5 h-5 text-accent" />
                     <div>
-                      <p className="text-sm text-primary-foreground/70">Plan Name</p>
-                      <p className="font-medium">{planData.planName}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-primary-foreground/70">Type</p>
-                      <p className="font-medium capitalize">{planData.planType}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-primary-foreground/70">Rate</p>
-                      <p className="font-bold text-lg">${planData.price}/hr</p>
+                      <p className="text-sm text-primary-foreground/70">Details</p>
+                      <p className="font-medium">{quoteData.complexityLabel}</p>
                     </div>
                   </div>
-                ) : null}
+                  <div className="flex items-center gap-3">
+                    <Clock className="w-5 h-5 text-accent" />
+                    <div>
+                      <p className="text-sm text-primary-foreground/70">Urgency</p>
+                      <p className="font-medium capitalize">{quoteData.urgency}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <DollarSign className="w-5 h-5 text-accent" />
+                    <div>
+                      <p className="text-sm text-primary-foreground/70">Estimate</p>
+                      <p className="font-bold text-lg">
+                        €{quoteData.estimatedMin} - €{quoteData.estimatedMax}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </FadeIn>
           </div>
@@ -266,71 +227,79 @@ const Contact = () => {
               <div className="rounded-2xl overflow-hidden">
                 <img
                   src={contact}
-                  alt="Plumber at work"
+                  alt="Professional cleaner at work"
                   className="w-full h-full object-cover min-h-[400px]"
                 />
               </div>
 
               {/* Form */}
-              <div className="bg-[#f4f4f7] rounded-2xl p-8">
-                <h2 className="text-3xl font-bold text-black mb-6">
-                  {quoteData || planData ? "Your Information" : "Get In Touch"}
+              <div className="bg-secondary rounded-2xl p-8">
+                <h2 className="text-3xl font-bold text-foreground mb-6">
+                  {quoteData ? "Your Information" : "Get In Touch"}
                 </h2>
 
                 <form className="space-y-5" onSubmit={handleSubmit}>
                   <div>
-                    <label className="block font-medium text-black mb-2">
+                    <label className="block font-medium text-foreground mb-2">
                       Full Name <span className="text-destructive">*</span>
                     </label>
                     <Input
-                      className="bg-transparent h-12"
+                      className="bg-background h-12"
                       value={formData.fullName}
-                      onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, fullName: e.target.value })
+                      }
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block font-medium text-black mb-2">
+                    <label className="block font-medium text-foreground mb-2">
                       Phone <span className="text-destructive">*</span>
                     </label>
                     <Input
-                      type="number"
-                      placeholder="Ex. +123 456 789"
-                      className="bg-transparent border-border"
+                      type="tel"
+                      placeholder="Ex. 085 123 4567"
+                      className="bg-background border-border h-12"
                       value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, phone: e.target.value })
+                      }
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block font-medium text-black mb-2">
+                    <label className="block font-medium text-foreground mb-2">
                       Email
                     </label>
                     <Input
                       type="email"
                       placeholder="your@email.com"
-                      className="bg-transparent border-border"
+                      className="bg-background border-border h-12"
                       value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
                     />
                   </div>
 
-                  {!quoteData && !planData && (
+                  {!quoteData && (
                     <div>
-                      <label className="block font-medium text-black mb-2">
-                        Select A Service
+                      <label className="block font-medium text-foreground mb-2">
+                        Service
                       </label>
                       <Select
                         value={formData.service}
-                        onValueChange={(value) => setFormData({ ...formData, service: value })}
+                        onValueChange={(value) =>
+                          setFormData({ ...formData, service: value })
+                        }
                       >
-                        <SelectTrigger className="bg-transparent border-border">
+                        <SelectTrigger className="bg-background border-border h-12">
                           <SelectValue placeholder="Choose a service..." />
                         </SelectTrigger>
                         <SelectContent>
-                          {services.map((service) => (
+                          {CLEANING_SERVICES.map((service) => (
                             <SelectItem key={service.slug} value={service.slug}>
                               {service.title}
                             </SelectItem>
@@ -341,29 +310,29 @@ const Contact = () => {
                   )}
 
                   <div>
-                    <label className="block font-medium text-black mb-2">
-                      {quoteData || planData ? "Additional Notes" : "Note"}
+                    <label className="block font-medium text-foreground mb-2">
+                      Message
                     </label>
                     <Textarea
-                      placeholder="Type here..."
-                      className="bg-transparent border-border min-h-[120px]"
+                      placeholder="Tell us about your cleaning needs..."
+                      className="bg-background border-border min-h-[120px]"
                       value={formData.notes}
-                      onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, notes: e.target.value })
+                      }
                     />
                   </div>
 
                   <Button
                     type="submit"
-                    className="w-full bg-primary hover:text-accent/80 text-primary-foreground py-6"
+                    className="w-full py-6"
                     disabled={isSubmitting}
                   >
                     {isSubmitting
                       ? "Submitting..."
                       : quoteData
                         ? "Submit Quote Request"
-                        : planData
-                          ? "Submit Plan Inquiry"
-                          : "Submit"}
+                        : "Send Message"}
                   </Button>
                 </form>
               </div>
@@ -378,19 +347,14 @@ const Contact = () => {
           <FadeIn>
             <div className="grid md:grid-cols-3 gap-6">
               {contactInfo.map((info, index) => (
-                <div
-                  key={index}
-                  className="bg-[#f4f4f7] rounded-2xl p-6"
-                >
-                  <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center mb-4">
-                    <info.icon className="w-5 h-5 text-primary" />
+                <div key={index} className="bg-secondary rounded-2xl p-6">
+                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center mb-4">
+                    <info.icon className="w-5 h-5 text-primary-foreground" />
                   </div>
-                  <h3 className="text-xl font-bold text-black mb-1">
+                  <h3 className="text-xl font-bold text-foreground mb-1">
                     {info.title}
                   </h3>
-                  <p className="text-muted-foreground mb-2">
-                    {info.description}
-                  </p>
+                  <p className="text-muted-foreground mb-2">{info.description}</p>
                   <a
                     href={info.href}
                     className="font-medium text-primary hover:underline"
