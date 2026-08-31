@@ -35,7 +35,7 @@ const CompareSlider = ({ beforeSrc, afterSrc, label }: SliderProps) => {
           <img
             src={beforeSrc}
             alt={`${label} before cleaning`}
-            className="h-full object-cover"
+            className="h-full object-cover grayscale contrast-75 brightness-75"
             style={{ width: containerRef.current?.clientWidth ?? "100%", maxWidth: "none" }}
           />
         </div>
