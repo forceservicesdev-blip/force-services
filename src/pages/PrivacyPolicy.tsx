@@ -1,106 +1,86 @@
 import FadeIn from "@/components/FadeIn";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { COMPANY } from "@/lib/config";
 import { Link } from "react-router-dom";
 
 const PrivacyPolicy = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Hero Section */}
       <section className="pt-32 pb-12 px-4">
         <div className="container-custom mx-auto section-padding text-center">
           <FadeIn>
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
               <Link to="/" className="hover:text-primary transition-colors">Home</Link>
               <span>/</span>
-              <span className="text-primary">Privacy</span>
+              <span className="text-primary">Privacy Policy</span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-4">
               Privacy Policy
             </h1>
             <p className="text-muted-foreground font-medium">
-              Last Updated: November 15, 2023
+              Last Updated: {new Date().toLocaleDateString("en-IE", { year: "numeric", month: "long", day: "numeric" })}
             </p>
           </FadeIn>
         </div>
       </section>
 
-      {/* Content Section */}
       <section className="pb-20 px-4">
         <div className="container mx-auto max-w-4xl">
           <FadeIn>
             <div className="space-y-12">
-              {/* What Information We are Taking */}
               <div>
-                <h2 className="text-4xl font-bold text-black mb-4">
-                  What Information We are Taking
-                </h2>
-                <div className="space-y-4 text-muted-foreground leading-relaxed">
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur. Lorem et purus enim velit sed vel laoreet enim non. Eros ultrices ut risus quisque curabitur aliquet eget nascetur tincidunt. Iaculis curabitur tempor maecenas sit. Cras eu enim leo sit eu quis quis ullamcorper. Bibendum quam consectetur et suspendisse duis aliquam cras. Aliquet in malesuada quis augue turpis fringilla iaculis quam pretium. Nulla id non eu non vel donec. Scelerisque tellus praesent suspendisse egestas at scelerisque. Leo at semper gravida sit leo odio.
-                  </p>
-                  <p>
-                    Nibh hac dolor odio in curabitur. Cursus ornare id elit cras dolor. Tincidunt sed quisque sed enim nulla metus. Dui porttitor scelerisque ullamcorper id praesent semper platea nisi. Id ullamcorper vehicula velit egestas id. Tristique arcu facilisi ipsum arcu fermentum tellus. Facilisi augue orci dolor id sit. Aliquam auctor interdum turpis sit ut viverra id nullam. Lobortis mauris neque elit massa a. Nibh pharetra bibendum fermentum consectetur pharetra volutpat eu amet.
-                  </p>
-                </div>
+                <h2 className="text-2xl font-bold text-primary mb-4">Who We Are</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  {COMPANY.name} (“we”, “us” or “our") is a local cleaning services company based in {COMPANY.serviceArea}. This Privacy Policy explains how we collect, use and protect your personal information when you visit our website or request a quote.
+                </p>
               </div>
 
-              {/* How We Use Your Informations */}
               <div>
-                <h2 className="text-4xl font-bold text-black mb-4">
-                  How We Use Your Informations
-                </h2>
-                <div className="space-y-4 text-muted-foreground leading-relaxed">
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur. Lorem et purus enim velit sed vel laoreet enim non. Eros ultrices ut risus quisque curabitur aliquet eget nascetur tincidunt. Iaculis curabitur tempor maecenas sit. Cras eu enim leo sit eu quis quis ullamcorper. Bibendum quam consectetur et suspendisse duis aliquam cras. Aliquet in malesuada quis augue turpis fringilla iaculis quam pretium. Nulla id non eu non vel donec. Scelerisque tellus praesent suspendisse egestas at scelerisque. Leo at semper gravida sit leo odio.
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 pl-2">
-                    <li>Some legal item</li>
-                    <li>Some another legal item</li>
-                    <li>Last legal item</li>
-                  </ul>
-                </div>
+                <h2 className="text-2xl font-bold text-primary mb-4">Information We Collect</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  We may collect your name, phone number, email address, property details and service preferences when you complete our quote form, contact us by phone, email or WhatsApp. We do not collect sensitive personal data unless it is necessary to provide our services.
+                </p>
               </div>
 
-              {/* Cookies and Tracking */}
               <div>
-                <h2 className="text-4xl font-bold text-black mb-4">
-                  Cookies and Tracking
-                </h2>
-                <div className="space-y-4 text-muted-foreground leading-relaxed">
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur. Lorem et purus enim velit sed vel laoreet enim non. Eros ultrices ut risus quisque curabitur aliquet eget nascetur tincidunt. Iaculis curabitur tempor maecenas sit. Cras eu enim leo sit eu quis quis ullamcorper. Bibendum quam consectetur et suspendisse duis aliquam cras. Aliquet in malesuada quis augue turpis fringilla iaculis quam pretium. Nulla id non eu non vel donec. Scelerisque tellus praesent suspendisse egestas at scelerisque. Leo at semper gravida sit leo odio.
-                  </p>
-                  <p>
-                    Nibh hac dolor odio in curabitur. Cursus ornare id elit cras dolor. Tincidunt sed quisque sed enim nulla metus. Dui porttitor scelerisque ullamcorper id praesent semper platea nisi. Id ullamcorper vehicula velit egestas id. Tristique arcu facilisi ipsum arcu fermentum tellus. Facilisi augue orci dolor id sit. Aliquam auctor interdum turpis sit ut viverra id nullam. Lobortis mauris neque elit massa a. Nibh pharetra bibendum fermentum consectetur pharetra volutpat eu amet.
-                  </p>
-                </div>
+                <h2 className="text-2xl font-bold text-primary mb-4">How We Use Your Information</h2>
+                <ul className="list-disc list-inside space-y-2 text-muted-foreground leading-relaxed">
+                  <li>To respond to your quote request or enquiry.</li>
+                  <li>To schedule, confirm and manage cleaning appointments.</li>
+                  <li>To send service-related updates or reminders.</li>
+                  <li>To improve our website, services and customer experience.</li>
+                </ul>
               </div>
 
-              {/* Your Rights */}
               <div>
-                <h2 className="text-4xl font-bold text-black mb-4">
-                  Your Rights
-                </h2>
-                <div className="space-y-4 text-muted-foreground leading-relaxed">
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur. Lorem et purus enim velit sed vel laoreet enim non. Eros ultrices ut risus quisque curabitur aliquet eget nascetur tincidunt. Iaculis curabitur tempor maecenas sit. Cras eu enim leo sit eu quis quis ullamcorper. Bibendum quam consectetur et suspendisse duis aliquam cras. Aliquet in malesuada quis augue turpis fringilla iaculis quam pretium. Nulla id non eu non vel donec. Scelerisque tellus praesent suspendisse egestas at scelerisque. Leo at semper gravida sit leo odio.
-                  </p>
-                </div>
+                <h2 className="text-2xl font-bold text-primary mb-4">Cookies & Tracking</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  Our website may use cookies and similar technologies to understand how visitors use the site and to improve functionality. You can disable cookies in your browser settings at any time.
+                </p>
               </div>
 
-              {/* Contact Us */}
               <div>
-                <h2 className="text-4xl font-bold text-black mb-4">
-                  Contact Us
-                </h2>
-                <div className="space-y-4 text-muted-foreground leading-relaxed">
-                  <p>
-                    Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring interoperable internal or "organic" sources.
-                  </p>
-                </div>
+                <h2 className="text-2xl font-bold text-primary mb-4">Data Sharing</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  We do not sell your personal information. We may share your details with our trusted cleaning staff solely for the purpose of delivering your booked service. All staff are bound by confidentiality obligations.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-bold text-primary mb-4">Your Rights</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  You have the right to access, correct or delete your personal data. To make a request, please contact us using the details below. We will respond within 30 days.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-bold text-primary mb-4">Contact Us</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  If you have any questions about this Privacy Policy or how we handle your data, please contact us at {COMPANY.email} or call {COMPANY.phone}.
+                </p>
               </div>
             </div>
           </FadeIn>
