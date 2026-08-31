@@ -1,90 +1,63 @@
+import { Button } from "@/components/ui/button";
+import { CLEANING_SERVICES } from "@/lib/config";
 import FadeIn from "@/components/FadeIn";
-import { services } from "@/data/services";
-import { ArrowUpRight } from "lucide-react";
+import {
+  Home,
+  Sparkles,
+  KeyRound,
+  Building2,
+  Truck,
+  Settings2,
+  ArrowRight,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
-// FlipButton component
-const FlipButton = ({
-  children
-}: {
-  children: React.ReactNode;
-}) => {
-  return <button className="group relative px-8 py-4 bg-white border-primary rounded-full overflow-hidden border">
-    <span className="relative block overflow-hidden h-6">
-      <span className="block transition-transform duration-300 group-hover:-translate-y-full text-primary font-semibold">
-        {children}
-      </span>
-      <span className="absolute top-full left-0 block transition-transform duration-300 group-hover:-translate-y-full text-primary font-semibold">
-        {children}
-      </span>
-    </span>
-  </button>;
-};
+const icons = [Home, Sparkles, KeyRound, Building2, Truck, Settings2];
 
 const Services = () => {
-  return <section id="services" className="py-20 lg:py-32 bg-[#ebebeb]">
-    <div className="container-custom section-padding">
-      <div className="grid lg:grid-cols-2 gap-16 items-start relative">
-        {/* Left Column - Sticky */}
-        <div className="lg:sticky lg:top-32">
-          <FadeIn>
-            <p className="text-primary font-bold mb-4">Our Services</p>
-          </FadeIn>
-          <FadeIn delay={100}>
-            <h2 className="text-black mb-6 text-6xl">
-              <span className="relative inline-block">
-                <span className="relative z-10">Ensuring Reliable</span>
-              </span>
-              <br />
-              Plumbing Solutions
-            </h2>
-          </FadeIn>
-          <FadeIn delay={200}>
-            <p className="text-muted-foreground mb-8 max-w-md text-base">
-              We specialize in providing high-quality plumbing solutions for your home or business. Our experienced team is committed to resolving all your plumbing issues, ensuring your complete satisfaction with every job.
+  return (
+    <section className="py-20 md:py-28 bg-background">
+      <div className="container-custom section-padding">
+        <FadeIn>
+          <div className="max-w-2xl mx-auto text-center mb-14">
+            <h2 className="text-3xl md:text-h2 font-bold text-primary mb-4">Our Cleaning Services</h2>
+            <p className="text-muted-foreground text-lg">
+              From regular tidy-ups to deep cleans, we have a service to fit every home and business.
             </p>
-          </FadeIn>
-
-          <FadeIn delay={300}>
-            <Link to="/services">
-              <FlipButton>See All Services</FlipButton>
-            </Link>
-          </FadeIn>
-        </div>
-
-        {/* Right Column - Cards */}
-        <div className="space-y-4">
-          {services.map((service, index) => <FadeIn key={index} delay={index * 100}>
-            <Link to={`/services/${service.slug}`}>
-              <div className="group px-12 py-[41px] rounded-2xl cursor-pointer transition-all duration-500 bg-white hover:bg-tertiary">
-                <div className="flex items-start gap-6 px-0 ">
-                  {/* Number Circle */}
-                  <div className="w-12 h-12 rounded-full border flex items-center justify-center flex-shrink-0 transition-colors duration-500 border-primary text-primary">
-                    <span className="font-medium">{service.number}</span>
+          </div>
+        </FadeIn>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {CLEANING_SERVICES.map((service, index) => {
+            const Icon = icons[index % icons.length];
+            return (
+              <FadeIn key={service.slug} delay={index * 75}>
+                <div className="h-full flex flex-col rounded-2xl bg-secondary p-8 shadow-card transition-transform hover:-translate-y-1">
+                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+                    <Icon className="h-7 w-7 text-primary" />
                   </div>
-
-                  {/* Content */}
-                  <div className="flex-1">
-                    <h5 className="mb-2 text-3xl font-bold transition-colors duration-500 text-primary group-hover:text-primary">
-                      {service.title}
-                    </h5>
-
-                    <p className="text-lg font-medium transition-colors duration-500 text-muted-foreground group-hover:text-primary/80">
-                      {service.description}
-                    </p>
-                  </div>
-
-                  {/* Arrow - only visible on hover */}
-                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center flex-shrink-0 transition-all duration-500 opacity-0 -translate-y-5 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0">
-                    <ArrowUpRight className="h-5 w-5 text-white" />
+                  <h3 className="text-xl font-bold text-primary mb-2">{service.title}</h3>
+                  <p className="text-muted-foreground mb-6 flex-1">{service.shortDescription}</p>
+                  <div className="flex flex-wrap gap-3">
+                    <Link to={`/services/${service.slug}`}>
+                      <Button variant="outline" size="sm" className="gap-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                        Learn More
+                        <ArrowRight className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                    <Link to="/quote">
+                      <Button size="sm" className="bg-tertiary text-tertiary-foreground hover:bg-tertiary/90">
+                        Get a Quote
+                      </Button>
+                    </Link>
                   </div>
                 </div>
-              </div>
-            </Link>
-          </FadeIn>)}
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
-    </div>
-  </section>;
+    </section>
+  );
 };
+
 export default Services;
