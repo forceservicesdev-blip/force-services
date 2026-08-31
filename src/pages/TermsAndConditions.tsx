@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { COMPANY } from "@/lib/config";
 import { Link } from "react-router-dom";
 
 const TermsAndConditions = () => {
@@ -29,14 +30,14 @@ const TermsAndConditions = () => {
             <div>
               <h2 className="text-2xl font-bold text-primary mb-4">1. Introduction</h2>
               <p className="text-muted-foreground leading-relaxed">
-                Welcome to [COMPANY NAME]. These Terms & Conditions govern the use of our website and the cleaning services we provide. By booking a service or using this website, you agree to these terms.
+                Welcome to {COMPANY.name}. These Terms & Conditions govern the use of our website and the cleaning services we provide. By booking a service or using this website, you agree to these terms.
               </p>
             </div>
 
             <div>
               <h2 className="text-2xl font-bold text-primary mb-4">2. Services</h2>
               <p className="text-muted-foreground leading-relaxed">
-                We provide domestic and commercial cleaning services across [SERVICE AREA]. All services are carried out by trained, insured and vetted cleaners. The scope of each clean is agreed in advance and may be tailored to your requirements.
+                We provide domestic and commercial cleaning services across {COMPANY.serviceArea}. All services are carried out by trained, insured and vetted cleaners. The scope of each clean is agreed in advance and may be tailored to your requirements.
               </p>
             </div>
 
@@ -57,7 +58,7 @@ const TermsAndConditions = () => {
             <div>
               <h2 className="text-2xl font-bold text-primary mb-4">5. Liability & Insurance</h2>
               <p className="text-muted-foreground leading-relaxed">
-                [COMPANY NAME] is fully insured for public liability and damage caused during cleaning. We ask that valuables, fragile items and pets are secured before our team arrives.
+                {COMPANY.name} is fully insured for public liability and damage caused during cleaning. We ask that valuables, fragile items and pets are secured before our team arrives.
               </p>
             </div>
 
@@ -71,7 +72,7 @@ const TermsAndConditions = () => {
             <div>
               <h2 className="text-2xl font-bold text-primary mb-4">7. Contact Us</h2>
               <p className="text-muted-foreground leading-relaxed">
-                If you have any questions about these Terms & Conditions, please contact us at [EMAIL ADDRESS] or call [PHONE NUMBER].
+                If you have any questions about these Terms & Conditions, please contact us at {COMPANY.email} or call {COMPANY.phone}.
               </p>
             </div>
           </div>

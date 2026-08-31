@@ -32,7 +32,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand Column */}
           <div>
-            <Logo isDark />
+            <Logo isDark size="lg" />
             <p className="text-primary-foreground/70 mt-4 mb-6 max-w-sm text-sm">
               {COMPANY.description}
             </p>
