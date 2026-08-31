@@ -1,29 +1,33 @@
-import About from "@/components/About";
-import Blog from "@/components/Blog";
-import CTA from "@/components/CTA";
-import Experience from "@/components/Experience";
-import FeaturedWorks from "@/components/FeaturedWorks";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
-import Solutions from "@/components/Solutions";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import BeforeAfter from "@/components/BeforeAfter";
+import AboutSection from "@/components/AboutSection";
 import Testimonials from "@/components/Testimonials";
+import BookingProcess from "@/components/BookingProcess";
+import QuoteForm from "@/components/QuoteForm";
+import ServiceAreas from "@/components/ServiceAreas";
+import FAQSection from "@/components/FAQSection";
+import FinalCTA from "@/components/FinalCTA";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
-      <Header isDark={true} />
+      <Header isDark={false} />
       <main>
         <Hero />
-        <Experience />
         <Services />
-        <FeaturedWorks />
-        <About />
-        <Solutions />
+        <WhyChooseUs />
+        <BeforeAfter />
+        <AboutSection />
         <Testimonials />
-        <Blog />
-        <CTA />
+        <BookingProcess />
+        <QuoteForm />
+        <ServiceAreas />
+        <FAQSection />
+        <FinalCTA />
       </main>
       <Footer />
     </div>

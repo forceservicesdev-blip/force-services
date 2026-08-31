@@ -54,49 +54,49 @@ export default {
   		},
   		fontSize: {
   			h1: [
-  				'70px',
+  				'3.5rem',
   				{
   					lineHeight: '1.1',
   					fontWeight: '600'
   				}
   			],
   			h2: [
-  				'52px',
+  				'3rem',
   				{
   					lineHeight: '1.15',
   					fontWeight: '600'
   				}
   			],
   			h3: [
-  				'40px',
+  				'2.25rem',
   				{
   					lineHeight: '1.2',
   					fontWeight: '600'
   				}
   			],
   			h4: [
-  				'30px',
+  				'1.75rem',
   				{
   					lineHeight: '1.3',
   					fontWeight: '500'
   				}
   			],
   			h5: [
-  				'24px',
+  				'1.375rem',
   				{
   					lineHeight: '1.4',
   					fontWeight: '500'
   				}
   			],
   			h6: [
-  				'18px',
+  				'1.125rem',
   				{
   					lineHeight: '1.5',
   					fontWeight: '500'
   				}
   			],
   			body: [
-  				'18px',
+  				'1.125rem',
   				{
   					lineHeight: '1.7'
   				}
@@ -143,6 +143,8 @@ export default {
   			grey: 'hsl(var(--grey))',
   			'text-grey': 'hsl(var(--text-grey))',
   			white: 'hsl(var(--white))',
+  			'soft-blue': 'hsl(var(--soft-blue))',
+  			'fresh-green': 'hsl(var(--fresh-green))',
   			sidebar: {
   				DEFAULT: 'hsl(var(--sidebar-background))',
   				foreground: 'hsl(var(--sidebar-foreground))',
@@ -163,9 +165,9 @@ export default {
   			'3xl': '2rem'
   		},
   		boxShadow: {
-  			card: '0 10px 40px -10px hsl(var(--primary) / 0.2)',
-  			glow: '0 0 30px hsl(var(--tertiary) / 0.4)',
-  			soft: '0 4px 20px -4px rgba(0, 0, 0, 0.1)'
+  			card: '0 10px 40px -10px hsl(var(--primary) / 0.1)',
+  			glow: '0 0 30px hsl(var(--tertiary) / 0.25)',
+  			soft: '0 4px 20px -4px rgba(0, 0, 0, 0.08)'
   		},
   		keyframes: {
   			'accordion-down': {

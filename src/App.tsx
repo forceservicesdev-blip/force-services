@@ -4,19 +4,23 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
+import { WhatsAppButton } from "./components/WhatsAppButton";
 import About from "./pages/About";
 import Auth from "./pages/Auth";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import Career from "./pages/Career";
 import Contact from "./pages/Contact";
+import FAQ from "./pages/FAQ";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import QuoteCalculator from "./pages/QuoteCalculator";
+import Reviews from "./pages/Reviews";
 import ServiceDetail from "./pages/ServiceDetail";
 import Services from "./pages/Services";
+import TermsAndConditions from "./pages/TermsAndConditions";
 import Work from "./pages/Work";
 import WorkDetail from "./pages/WorkDetail";
 
@@ -68,7 +72,10 @@ const App = () => (
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/quote" element={<QuoteCalculator />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/auth" element={<Auth />} />
 
           {/* Dashboard Routes - Using Layout Route */}
@@ -88,6 +95,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <WhatsAppButton />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

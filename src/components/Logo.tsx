@@ -1,13 +1,42 @@
-
 const Logo = ({ isDark = false }: { isDark?: boolean }) => {
   return (
     <div className="flex items-center gap-2">
       <div className="relative">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="28" viewBox="0 0 24 28" fill="none">
-          <path d="M8.554 27.5782C2.7085 25.956 -0.939754 20.0348 0.212042 14.1568C0.787039 11.2133 2.39487 8.95301 4.52001 6.95764C4.97063 6.53586 5.19955 6.4926 5.64837 6.95764C8.10698 9.45771 10.6034 11.9253 13.0801 14.42C14.2193 15.5646 14.3148 17.021 13.3324 18.0033C12.3501 18.9857 10.8936 18.8902 9.75086 17.751C8.33049 16.3324 6.91913 14.9049 5.43748 13.425C3.19878 17.6537 6.41804 23.0305 11.2163 23.2937C12.6181 23.3839 14.0143 23.047 15.2207 22.3274C16.4271 21.6079 17.387 20.5395 17.9739 19.2633C18.58 17.9778 18.7726 16.536 18.525 15.1366C18.2774 13.7371 17.6018 12.4489 16.5913 11.4495C14.0222 8.83464 11.4338 6.24205 8.82618 3.67169C8.45126 3.30218 8.36474 3.08407 8.79734 2.68752C9.6373 1.91786 10.4376 1.10313 11.2163 0.270374C11.5768 -0.111755 11.7877 -0.0721004 12.1392 0.282992C14.7546 2.92906 17.4529 5.49582 20.0053 8.19956C23.3038 11.6946 24.1618 15.8187 22.5973 20.3574C20.6506 26.0209 14.3887 29.2005 8.554 27.5782Z" fill="#A3F000" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          className="text-fresh-green"
+        >
+          <path
+            d="M12 2C9.5 4.5 7 7 7 10.5C7 14.1 9.2 17 12 17C14.8 17 17 14.1 17 10.5C17 7 14.5 4.5 12 2Z"
+            fill="currentColor"
+            fillOpacity="0.2"
+          />
+          <path
+            d="M12 6C10.5 7.5 9.5 9 9.5 10.5C9.5 12.5 10.6 14 12 14C13.4 14 14.5 12.5 14.5 10.5C14.5 9 13.5 7.5 12 6Z"
+            fill="currentColor"
+          />
+          <path
+            d="M5 16C5 16 6 18 8 19C10 20 14 20 16 19C18 18 19 16 19 16"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M4 20C4 20 5.5 21.5 8 22C10.5 22.5 13.5 22.5 16 22C18.5 21.5 20 20 20 20"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeOpacity="0.4"
+          />
         </svg>
       </div>
-      <span className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-primary'}`}>Aquafix</span>
+      <span className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-primary'}`}>
+        [COMPANY NAME]
+      </span>
     </div>
   );
 };

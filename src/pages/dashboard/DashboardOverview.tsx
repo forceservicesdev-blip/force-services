@@ -60,9 +60,9 @@ function AdminOverview() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-primary">Dashboard Overview</h1>
+        <h1 className="text-3xl font-bold text-primary">Cleaning Business Overview</h1>
         <p className="text-black mt-1">
-          Monitor your business metrics and recent activity
+          Monitor leads, quote requests and cleaning inquiries
         </p>
       </div>
 
@@ -215,9 +215,9 @@ function UserOverview() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-primary">My Dashboard</h1>
+        <h1 className="text-3xl font-bold text-primary">My Cleaning Dashboard</h1>
         <p className="text-black mt-1">
-          View your activity and manage your account
+          View your cleaning quotes and manage your account
         </p>
       </div>
 
@@ -279,7 +279,7 @@ function UserOverview() {
               <DollarSign className="h-8 w-8 text-primary" />
               <div>
                 <p className="font-medium">Request a Quote</p>
-                <p className="text-sm text-muted-foreground">Get an estimate for your project</p>
+                <p className="text-sm text-muted-foreground">Get an estimate for your clean</p>
               </div>
             </a>
             <a href="/contact" className="flex items-center gap-4 p-4 rounded-lg border border-gray-200 hover:bg-black/5 transition-colors">

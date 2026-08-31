@@ -7,60 +7,62 @@
 
 @layer base {
   :root {
-    /* Aquafix Brand Colors */
-    --background: 228 71% 14%; /* #0C133B */
-    --foreground: 0 0% 100%;
+    /* Cleaning Brand Colors */
+    --background: 0 0% 100%; /* white */
+    --foreground: 215 55% 15%; /* #0f1b2e */
 
-    --card: 240 14% 96%;
-    --card-foreground: 228 71% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 55% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 228 71% 14%;
+    --popover-foreground: 215 55% 15%;
 
-    --primary: 217 100% 28%; /* #0C133B */
+    --primary: 215 60% 18%; /* #0b1f3a dark navy */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 208 18% 44%; /* #003890 */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 200 55% 95%; /* #e8f4fc soft blue */
+    --secondary-foreground: 215 60% 18%;
 
-    --tertiary: 78 100% 47%; /* #A3F000 */
-    --tertiary-foreground: 228 71% 14%;
+    --tertiary: 155 60% 45%; /* #2ab673 fresh green */
+    --tertiary-foreground: 0 0% 100%;
 
-    --muted: 231 5% 38%; /* #595B67 */
-    --muted-foreground: 231 5% 38%;
+    --muted: 215 15% 55%;
+    --muted-foreground: 215 15% 45%;
 
-    --accent: 78 100% 47%; /* #A3F000 */
-    --accent-foreground: 228 71% 14%;
+    --accent: 155 60% 45%; /* fresh green */
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 228 20% 25%;
-    --input: 228 20% 25%;
-    --ring: 78 100% 47%;
+    --border: 210 25% 90%;
+    --input: 210 25% 90%;
+    --ring: 155 60% 45%;
 
     --radius: 0.5rem;
 
     /* Custom Colors */
-    --grey: 200 3% 34%; /* #56595A */
-    --text-grey: 231 5% 38%; /* #595B67 */
+    --grey: 215 10% 40%;
+    --text-grey: 215 10% 40%;
     --white: 0 0% 100%;
+    --soft-blue: 200 55% 95%;
+    --fresh-green: 155 60% 45%;
 
     /* Gradients */
     --gradient-primary: linear-gradient(
       135deg,
       hsl(var(--primary)),
-      hsl(var(--secondary))
+      hsl(215 55% 28%)
     );
     --gradient-accent: linear-gradient(
       135deg,
       hsl(var(--tertiary)),
-      hsl(78 100% 55%)
+      hsl(155 60% 55%)
     );
 
     /* Shadows */
-    --shadow-card: 0 10px 40px -10px hsl(var(--primary) / 0.3);
-    --shadow-glow: 0 0 30px hsl(var(--tertiary) / 0.4);
+    --shadow-card: 0 10px 40px -10px hsl(var(--primary) / 0.12);
+    --shadow-glow: 0 0 30px hsl(var(--tertiary) / 0.25);
 
     /* Sidebar */
     --sidebar-background: 0 0% 98%;
@@ -74,25 +76,25 @@
   }
 
   .dark {
-    --background: 228 71% 14%;
+    --background: 215 55% 10%;
     --foreground: 0 0% 100%;
-    --card: 228 71% 10%;
+    --card: 215 55% 12%;
     --card-foreground: 0 0% 100%;
-    --popover: 228 71% 10%;
+    --popover: 215 55% 12%;
     --popover-foreground: 0 0% 100%;
     --primary: 0 0% 100%;
-    --primary-foreground: 228 71% 14%;
-    --secondary: 214 100% 28%;
+    --primary-foreground: 215 55% 15%;
+    --secondary: 215 40% 22%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 231 5% 38%;
-    --muted-foreground: 231 5% 50%;
-    --accent: 78 100% 47%;
-    --accent-foreground: 228 71% 14%;
+    --muted: 215 15% 45%;
+    --muted-foreground: 215 15% 65%;
+    --accent: 155 60% 45%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
-    --border: 228 20% 25%;
-    --input: 228 20% 25%;
-    --ring: 78 100% 47%;
+    --border: 215 25% 22%;
+    --input: 215 25% 22%;
+    --ring: 155 60% 45%;
   }
 }
 
@@ -110,37 +112,37 @@
   }
 
   h1 {
-    @apply text-5xl md:text-6xl lg:text-[70px] font-semibold leading-tight tracking-tight;
+    @apply text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight;
   }
 
   h2 {
-    @apply text-4xl md:text-[52px] font-semibold leading-tight tracking-tight;
+    @apply text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight;
   }
 
   h3 {
-    @apply text-3xl md:text-[40px] font-semibold leading-tight;
+    @apply text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight;
   }
 
   h4 {
-    @apply text-2xl md:text-[30px] font-medium leading-snug;
+    @apply text-xl md:text-2xl font-medium leading-snug;
   }
 
   h5 {
-    @apply text-xl md:text-2xl font-medium;
+    @apply text-lg md:text-xl font-medium;
   }
 
   h6 {
-    @apply text-lg font-medium;
+    @apply text-base font-medium;
   }
 
   p {
-    @apply text-lg leading-relaxed;
+    @apply text-base md:text-lg leading-relaxed;
   }
 }
 
 @layer components {
   .section-padding {
-    @apply px-4 lg:px-8;
+    @apply px-4 sm:px-6 lg:px-8;
   }
 
   .container-custom {
@@ -182,7 +184,7 @@
   }
 
   .hover-glow {
-    @apply transition-shadow duration-300 hover:shadow-[0_0_30px_hsl(78_100%_47%_/_0.3)];
+    @apply transition-shadow duration-300 hover:shadow-[0_0_30px_hsl(155_60%_45%_/_0.2)];
   }
 }
 
