@@ -2,66 +2,105 @@ import CTA from "@/components/CTA";
 import FadeIn from "@/components/FadeIn";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { services } from "@/data/services";
+import { Button } from "@/components/ui/button";
+import { CLEANING_SERVICES, COMPANY } from "@/lib/config";
+import {
+  Building2,
+  Home,
+  KeyRound,
+  Sparkles,
+  SprayCan,
+  Truck,
+} from "lucide-react";
 import { Link } from "react-router-dom";
-const Services = () => {
-  return <div className="min-h-screen">
-    <Header />
 
-    {/* Hero Section with Service Cards */}
-    <section className="pt-20 bg-white">
-      <div className="container-custom section-padding">
-        {/* Breadcrumb */}
-        <div className="text-muted-foreground text-sm mb-4">
-          <Link to="/" className="hover:text-primary transition-colors">Home</Link>
-          <span className="mx-2">/</span>
-          <span className="text-primary">Service</span>
-        </div>
-
-        {/* Header */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-16">
-          <h1 className="text-black text-7xl font-bold">Our Service</h1>
-          <p className="text-muted-foreground text-lg lg:pt-4">
-            We offer experienced technicians quickly identify the source of leaks and provide effective solutions to restore your plumbing system.
-          </p>
-        </div>
-
-        {/* Service Cards Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {services.map((service, index) => <FadeIn key={index} delay={index * 100}>
-            <Link to={`/services/${service.slug}`}>
-              <div className="group cursor-pointer transition-all bg-[#f3f3f6] rounded-xl hover:bg-primary h-full px-[30px] py-[28px] duration-300">
-                {/* Image */}
-                <div className="overflow-hidden mb-6 rounded-md min-h-[340px] max-h-[340px]">
-                  <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 rounded-md" />
-                </div>
-
-                {/* Content */}
-                <div className="flex items-center justify-between mb-3">
-                  <h5 className="font-bold text-4xl duration-300 transition-all text-black group-hover:text-accent">
-                    {service.title}
-                  </h5>
-                </div>
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-lg font-bold text-primary group-hover:text-white transition-colors duration-300">
-                    From ${service.basePrice}/hr
-                  </span>
-                </div>
-                <p className="text-muted-foreground leading-relaxed transition-all duration-300 group-hover:text-white">
-                  {service.description}
-                </p>
-              </div>
-            </Link>
-          </FadeIn>)}
-        </div>
-      </div>
-    </section>
-
-
-
-    <CTA />
-
-    <Footer />
-  </div>;
+const SERVICE_ICONS: Record<string, typeof Home> = {
+  "regular-house-cleaning": Home,
+  "deep-cleaning": Sparkles,
+  "end-of-tenancy-cleaning": KeyRound,
+  "office-commercial-cleaning": Building2,
+  "move-in-move-out-cleaning": Truck,
+  "custom-cleaning": SprayCan,
 };
+
+const Services = () => {
+  return (
+    <div className="min-h-screen">
+      <Header />
+
+      {/* Hero Section */}
+      <section className="pt-32 pb-16 lg:pb-24 bg-secondary">
+        <div className="container-custom section-padding">
+          <div className="text-muted-foreground text-sm mb-4">
+            <Link to="/" className="hover:text-primary transition-colors">
+              Home
+            </Link>
+            <span className="mx-2">/</span>
+            <span className="text-primary">Services</span>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            <FadeIn>
+              <h1 className="text-foreground font-bold text-4xl md:text-5xl lg:text-6xl">
+                Our Cleaning Services
+              </h1>
+            </FadeIn>
+            <FadeIn delay={100}>
+              <p className="text-muted-foreground text-lg lg:pt-4">
+                From regular house cleans to end-of-tenancy deep cleans,{" "}
+                {COMPANY.name} offers a full range of professional cleaning
+                services across {COMPANY.serviceArea}. Fully insured, fully
+                trusted, and tailored to you.
+              </p>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* Service Cards Grid */}
+      <section className="py-16 lg:py-24 bg-background">
+        <div className="container-custom section-padding">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {CLEANING_SERVICES.map((service, index) => {
+              const Icon = SERVICE_ICONS[service.slug] || Sparkles;
+              return (
+                <FadeIn key={service.slug} delay={index * 100}>
+                  <div className="group flex flex-col h-full rounded-2xl border border-border bg-card p-8 transition-all duration-300 hover:bg-primary hover:border-primary">
+                    <div className="w-14 h-14 rounded-full bg-primary/10 group-hover:bg-primary-foreground/10 flex items-center justify-center mb-6 transition-colors duration-300">
+                      <Icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                    </div>
+                    <h3 className="font-bold text-xl mb-3 text-card-foreground group-hover:text-primary-foreground transition-colors duration-300">
+                      {service.title}
+                    </h3>
+                    <p className="text-muted-foreground group-hover:text-primary-foreground/80 mb-6 flex-1 transition-colors duration-300">
+                      {service.shortDescription}
+                    </p>
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="font-bold text-primary group-hover:text-primary-foreground transition-colors duration-300">
+                        From €{service.basePrice}
+                      </span>
+                      <Link to="/quote" state={{ serviceSlug: service.slug }}>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="rounded-full group-hover:bg-primary-foreground group-hover:text-primary group-hover:border-primary-foreground"
+                        >
+                          Get a Quote
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </FadeIn>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <CTA />
+      <Footer />
+    </div>
+  );
+};
+
 export default Services;
