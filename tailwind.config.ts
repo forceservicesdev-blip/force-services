@@ -20,7 +20,7 @@ export default {
   	extend: {
   		fontFamily: {
   			clash: [
-  				'Clash Grotesk"',
+  				'"Clash Grotesk"',
   				'Verdana',
   				'sans-serif'
   			],

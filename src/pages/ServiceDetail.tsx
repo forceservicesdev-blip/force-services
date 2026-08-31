@@ -7,231 +7,228 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useCreateServiceInquiry } from "@/hooks/useServiceInquiries";
-import { Check, Loader2 } from "lucide-react";
+import { CLEANING_SERVICES, COMPANY } from "@/lib/config";
+import { Check, Loader2, Phone, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { z } from "zod";
 
-// Import images
-import bathroomRemodel from "@/assets/bathroom-remodel.jpg";
-import drainCleaning from "@/assets/drain-cleaning.jpg";
-import faucetRepair from "@/assets/faucet-repair.jpg";
+// Images
 import heroGrid1 from "@/assets/hero-grid-1.jpg";
 import heroGrid2 from "@/assets/hero-grid-2.jpg";
 import heroGrid3 from "@/assets/hero-grid-3.jpg";
-import plumberTeam from "@/assets/plumber-team.jpg";
+import heroGrid4 from "@/assets/hero-grid-4.jpg";
+import cleaningKitchen from "@/assets/cleaning-kitchen.jpg";
+import cleaningBathroom from "@/assets/cleaning-bathroom.jpg";
+import cleaningTeam from "@/assets/cleaning-team.jpg";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserProfile } from "@/hooks/useUserProfile";
 
-// Validation schemas
 const nameSchema = z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters");
 const phoneSchema = z.string().trim().min(1, "Phone is required").max(20, "Phone must be less than 20 characters");
 
-// Service data
-const servicesData: Record<string, {
+interface ServiceDetailData {
   title: string;
-  description: string;
+  tagline: string;
   image: string;
   aboutTitle: string;
   aboutDescription: string;
   included: string[];
   benefits: string[];
   workSteps: { number: string; title: string; description: string }[];
-}> = {
-  "faucet-leak-repairs": {
-    title: "Faucet & Leak Repairs",
-    description: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Vivamus ut vulputesql imperdiet quis ut pellentesque risus commodo tincidunt.",
-    image: faucetRepair,
-    aboutTitle: "About this Service",
-    aboutDescription: "At risus viverra adipiscing at in tellus integer feugiat. Nisl pretium fusce id velit ut tortor. Sagittis eu a odio aliquam ata. Pretium aenean pharetra magna ac placeat vestibulum. Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique. Vivamus at augue eget arcu dictum varius duis at.",
-    included: [
-      "Neque sodales ut etiam sit amet nisl purus. Non tellus cras ac auctor, Et id et lobortis tristique. Mi tellus volutpat ac a duis",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum",
-      "Non tellus cras ac auctor. Ut blandit lorem t bibendum aliquam Blanm neque dui. Et id et lobortis tristique."
-    ],
-    benefits: [
-      "Neque sodales ut etiam sit amet nisl purus. Non tellus cras ac auctor, Et id et lobortis tristique. Mi tellus volutpat ac a duis",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum",
-      "Non tellus cras ac auctor Ut blandit lorem t bibendum aliquam Blanm neque dui. Et id et lobortis tristique.",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum"
-    ],
-    workSteps: [
-      { number: "01", title: "Booking & Inspection", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "02", title: "Work Planning", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "03", title: "Fix And Install", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "04", title: "Works Completed", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." }
-    ]
-  },
-  "remodeling-service": {
-    title: "Remodelling Service",
-    description: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Vivamus ut vulputesql imperdiet quis ut pellentesque risus commodo tincidunt.",
-    image: bathroomRemodel,
-    aboutTitle: "About this Service",
-    aboutDescription: "At risus viverra adipiscing at in tellus integer feugiat. Nisl pretium fusce id velit ut tortor. Sagittis eu a odio aliquam ata. Pretium aenean pharetra magna ac placeat vestibulum. Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique. Vivamus at augue eget arcu dictum varius duis at.\n\nLaureet ut elementum nisi quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus urna neque. Magna non augue lectus consequat sit at fringilla bibendum. Elit id sed lobortis tristique. Mi tellus volutpat",
-    included: [
-      "Neque sodales ut etiam sit amet nisl purus. Non tellus cras ac auctor, Et id et lobortis tristique. Mi tellus volutpat ac a duis",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum",
-      "Non tellus cras ac auctor. Ut blandit lorem t bibendum aliquam Blanm neque dui. Et id et lobortis tristique."
-    ],
-    benefits: [
-      "Neque sodales ut etiam sit amet nisl purus. Non tellus cras ac auctor, Et id et lobortis tristique. Mi tellus volutpat ac a duis",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum",
-      "Non tellus cras ac auctor Ut blandit lorem t bibendum aliquam Blanm neque dui. Et id et lobortis tristique.",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum"
-    ],
-    workSteps: [
-      { number: "01", title: "Booking & Inspection", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "02", title: "Work Planning", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "03", title: "Fix And Install", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "04", title: "Works Completed", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." }
-    ]
-  },
-  "sewer-repair-cleaning": {
-    title: "Sewer Repair & Cleaning",
-    description: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Vivamus ut vulputesql imperdiet quis ut pellentesque risus commodo tincidunt.",
-    image: drainCleaning,
-    aboutTitle: "About this Service",
-    aboutDescription: "At risus viverra adipiscing at in tellus integer feugiat. Nisl pretium fusce id velit ut tortor. Sagittis eu a odio aliquam ata. Pretium aenean pharetra magna ac placeat vestibulum. Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique. Vivamus at augue eget arcu dictum varius duis at.\n\nLaureet ut elementum nisi quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus urna neque. Magna non augue lectus consequat sit at fringilla bibendum. Elit id sed lobortis tristique. Mi tellus volutpat",
-    included: [
-      "Neque sodales ut etiam sit amet nisl purus. Non tellus cras ac auctor, Et id et lobortis tristique. Mi tellus volutpat ac a duis",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum",
-      "Non tellus cras ac auctor. Ut blandit lorem t bibendum aliquam Blanm neque dui. Et id et lobortis tristique."
-    ],
-    benefits: [
-      "Neque sodales ut etiam sit amet nisl purus. Non tellus cras ac auctor, Et id et lobortis tristique. Mi tellus volutpat ac a duis",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum",
-      "Non tellus cras ac auctor Ut blandit lorem t bibendum aliquam Blanm neque dui. Et id et lobortis tristique.",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum"
-    ],
-    workSteps: [
-      { number: "01", title: "Booking & Inspection", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "02", title: "Work Planning", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "03", title: "Fix And Install", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "04", title: "Works Completed", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." }
-    ]
-  },
-  "drain-cleaning-repairs": {
-    title: "Drain Cleaning & Repairs",
-    description: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Vivamus ut vulputesql imperdiet quis ut pellentesque risus commodo tincidunt.",
-    image: heroGrid1,
-    aboutTitle: "About this Service",
-    aboutDescription: "At risus viverra adipiscing at in tellus integer feugiat. Nisl pretium fusce id velit ut tortor. Sagittis eu a odio aliquam ata. Pretium aenean pharetra magna ac placeat vestibulum. Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique. Vivamus at augue eget arcu dictum varius duis at.\n\nLaureet ut elementum nisi quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus urna neque. Magna non augue lectus consequat sit at fringilla bibendum. Elit id sed lobortis tristique. Mi tellus volutpat",
-    included: [
-      "Neque sodales ut etiam sit amet nisl purus. Non tellus cras ac auctor, Et id et lobortis tristique. Mi tellus volutpat ac a duis",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum",
-      "Non tellus cras ac auctor. Ut blandit lorem t bibendum aliquam Blanm neque dui. Et id et lobortis tristique."
-    ],
-    benefits: [
-      "Neque sodales ut etiam sit amet nisl purus. Non tellus cras ac auctor, Et id et lobortis tristique. Mi tellus volutpat ac a duis",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum",
-      "Non tellus cras ac auctor Ut blandit lorem t bibendum aliquam Blanm neque dui. Et id et lobortis tristique.",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum"
-    ],
-    workSteps: [
-      { number: "01", title: "Booking & Inspection", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "02", title: "Work Planning", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "03", title: "Fix And Install", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "04", title: "Works Completed", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." }
-    ]
-  },
-  "water-line-repair": {
-    title: "Water Line Repair",
-    description: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Vivamus ut vulputesql imperdiet quis ut pellentesque risus commodo tincidunt.",
-    image: heroGrid2,
-    aboutTitle: "About this Service",
-    aboutDescription: "At risus viverra adipiscing at in tellus integer feugiat. Nisl pretium fusce id velit ut tortor. Sagittis eu a odio aliquam ata. Pretium aenean pharetra magna ac placeat vestibulum. Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique. Vivamus at augue eget arcu dictum varius duis at.\n\nLaureet ut elementum nisi quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus urna neque. Magna non augue lectus consequat sit at fringilla bibendum. Elit id sed lobortis tristique. Mi tellus volutpat",
-    included: [
-      "Neque sodales ut etiam sit amet nisl purus. Non tellus cras ac auctor, Et id et lobortis tristique. Mi tellus volutpat ac a duis",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum",
-      "Non tellus cras ac auctor. Ut blandit lorem t bibendum aliquam Blanm neque dui. Et id et lobortis tristique."
-    ],
-    benefits: [
-      "Neque sodales ut etiam sit amet nisl purus. Non tellus cras ac auctor, Et id et lobortis tristique. Mi tellus volutpat ac a duis",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum",
-      "Non tellus cras ac auctor Ut blandit lorem t bibendum aliquam Blanm neque dui. Et id et lobortis tristique.",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum"
-    ],
-    workSteps: [
-      { number: "01", title: "Booking & Inspection", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "02", title: "Work Planning", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "03", title: "Fix And Install", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "04", title: "Works Completed", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." }
-    ]
-  },
-  "gas-line-services": {
-    title: "Gas Line Services",
-    description: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Vivamus ut vulputesql imperdiet quis ut pellentesque risus commodo tincidunt.",
-    image: heroGrid3,
-    aboutTitle: "About this Service",
-    aboutDescription: "At risus viverra adipiscing at in tellus integer feugiat. Nisl pretium fusce id velit ut tortor. Sagittis eu a odio aliquam ata. Pretium aenean pharetra magna ac placeat vestibulum. Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique. Vivamus at augue eget arcu dictum varius duis at.\n\nLaureet ut elementum nisi quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus urna neque. Magna non augue lectus consequat sit at fringilla bibendum. Elit id sed lobortis tristique. Mi tellus volutpat",
-    included: [
-      "Neque sodales ut etiam sit amet nisl purus. Non tellus cras ac auctor, Et id et lobortis tristique. Mi tellus volutpat ac a duis",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum",
-      "Non tellus cras ac auctor. Ut blandit lorem t bibendum aliquam Blanm neque dui. Et id et lobortis tristique."
-    ],
-    benefits: [
-      "Neque sodales ut etiam sit amet nisl purus. Non tellus cras ac auctor, Et id et lobortis tristique. Mi tellus volutpat ac a duis",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum",
-      "Non tellus cras ac auctor Ut blandit lorem t bibendum aliquam Blanm neque dui. Et id et lobortis tristique.",
-      "Non tellus vulputate lectus consequat sit at fringilla bibendum"
-    ],
-    workSteps: [
-      { number: "01", title: "Booking & Inspection", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "02", title: "Work Planning", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "03", title: "Fix And Install", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." },
-      { number: "04", title: "Works Completed", description: "Amet cras vulputate in mi elit dapibus. Et odio facilisi posuere eros sem facilisi eget et enim." }
-    ]
-  }
-};
+}
 
-// FlipButton component
-const FlipButton = ({
-  children,
-  variant = "primary"
-}: {
-  children: React.ReactNode;
-  variant?: "primary" | "secondary";
-}) => {
-  const bgClass = variant === "primary" ? "bg-primary" : "bg-secondary";
-  return (
-    <button className={`group relative px-8 py-4 ${bgClass} rounded-full overflow-hidden`}>
-      <span className="relative block overflow-hidden h-6">
-        <span className="block transition-transform duration-300 group-hover:-translate-y-full text-white font-semibold">
-          {children}
-        </span>
-        <span className="absolute top-full left-0 block transition-transform duration-300 group-hover:-translate-y-full text-white font-semibold">
-          {children}
-        </span>
-      </span>
-    </button>
-  );
+const detailedServices: Record<string, ServiceDetailData> = {
+  "power-washing": {
+    title: "Power Washing & Pressure Cleaning",
+    tagline: "Heavy-duty exterior cleaning for driveways, patios, facades, roofs, and decking.",
+    image: heroGrid1,
+    aboutTitle: "High-Performance Power Washing Services",
+    aboutDescription:
+      "Restore the beauty and curb appeal of your property with Force Services' professional power washing.\n\nOver time, Irish weather causes moss, black lichen, algae, and grime to build up on driveways, patios, and building exteriors. Using commercial-grade pressure washing equipment and targeted surface treatments, we safely eliminate years of dirt without causing damage to mortar, stone, or tarmac.",
+    included: [
+      "Driveways, concrete, paving, and tarmac cleaning",
+      "Patios, sandstone, limestone, and natural stone restoration",
+      "Building facades, render, and exterior wall washing",
+      "Roof moss removal and soft-wash treatments",
+      "Timber decking restoration and algae removal",
+      "Commercial forecourts, carparks, and loading bays",
+    ],
+    benefits: [
+      "Instantly restores curb appeal and property value",
+      "Eliminates slippery algae and hazardous surfaces",
+      "Protects exterior surfaces from long-term weather degradation",
+      "Safe, eco-friendly detergents and high-grade pressure control",
+    ],
+    workSteps: [
+      { number: "01", title: "Site Assessment", description: "We inspect the surface type, stains, and drainage to select optimal pressure levels." },
+      { number: "02", title: "Surface Preparation", description: "We protect surrounding landscaping and apply pre-treatment solutions where needed." },
+      { number: "03", title: "Precision Power Wash", description: "Using commercial rotary surface cleaners and wand attachments, we blast away grime." },
+      { number: "04", title: "Rinse & Final Inspection", description: "Thorough washdown and final check ensuring spotless results." },
+    ],
+  },
+  "commercial-cleaning": {
+    title: "Commercial & Office Cleaning",
+    tagline: "Professional, hygienic, and flexible contract cleaning for businesses and retail.",
+    image: heroGrid2,
+    aboutTitle: "Spotless Workspaces for Productive Teams",
+    aboutDescription:
+      "A clean working environment improves productivity, employee wellbeing, and creates a positive impression on your clients.\n\nForce Services provides tailored commercial cleaning contracts across Ennis, Limerick, and Galway. We work around your operational schedule — whether you require early morning, evening, or weekend service.",
+    included: [
+      "Desk, workstation, and high-touch point sanitization",
+      "Commercial floor vacuuming, mopping, and machine scrubbing",
+      "Kitchen, canteen, and staff breakroom deep cleaning",
+      "Restroom hygiene, sanitization, and consumable restocking",
+      "Waste, recycling management, and bin liner replacement",
+      "Internal glass, partitions, and entryway polishing",
+    ],
+    benefits: [
+      "Promotes a healthier workplace and reduces sick leave",
+      "Creates an impressive, professional impression for visiting clients",
+      "Flexible contracts (daily, weekly, fortnightly, or monthly)",
+      "Vetted, trained, and fully insured commercial cleaners",
+    ],
+    workSteps: [
+      { number: "01", title: "Premises Walkthrough", description: "We evaluate your space and create a customized commercial cleaning checklist." },
+      { number: "02", title: "Schedule Agreement", description: "We align cleaning hours with your operational preferences to avoid business disruption." },
+      { number: "03", title: "Dedicated Team Deployment", description: "Our trained cleaning crew carries out thorough, checklist-driven cleaning." },
+      { number: "04", title: "Quality Auditing", description: "Regular supervisor checks to maintain consistently high hygiene standards." },
+    ],
+  },
+  "industrial-cleaning": {
+    title: "Industrial & Warehouse Cleaning",
+    tagline: "Heavy-duty cleaning for warehouses, factories, manufacturing plants, and industrial units.",
+    image: heroGrid3,
+    aboutTitle: "Heavy-Duty Industrial Cleaning Solutions",
+    aboutDescription:
+      "Industrial facilities demand specialized cleaning machinery, heavy degreasing chemicals, and stringent health and safety adherence.\n\nForce Services brings 5 years of hands-on experience and industrial-grade equipment to tackle heavy oil, grease, tyre marks, dust accumulation, and overhead structural cleaning in factories and warehouses across Ireland.",
+    included: [
+      "Warehouse floor scrubbing, sweeping, and oil degreasing",
+      "High-level dust removal from rafters, pipes, and beams",
+      "Factory production floor and workshop sanitization",
+      "Machinery exterior degreasing and surface wiping",
+      "Loading bays, roller shutter, and industrial entryway cleans",
+      "Post-spill and heavy residue decontamination",
+    ],
+    benefits: [
+      "Improves facility safety and prevents slip & fall hazards",
+      "Ensures full compliance with health, safety, and hygiene regulations",
+      "Extends the lifespan of industrial flooring and machinery",
+      "Full adherence to Irish Health & Safety standards (CRO: " + COMPANY.cro + ")",
+    ],
+    workSteps: [
+      { number: "01", title: "Safety & Hazard Assessment", description: "Comprehensive risk assessment and identification of specialized cleaning zones." },
+      { number: "02", title: "Industrial Equipment Setup", description: "Deployment of heavy-duty floor scrubbers, industrial vacuums, and degreasers." },
+      { number: "03", title: "Deep Clean Execution", description: "High-level dusting followed by intense floor scrubbing and degreasing." },
+      { number: "04", title: "Safety Clearance", description: "Dry-off verification and formal completion sign-off with facility managers." },
+    ],
+  },
+  "post-construction-cleaning": {
+    title: "Post-Construction & Builders Cleaning",
+    tagline: "Comprehensive after-build sparkle cleans for new builds, fit-outs, and renovations.",
+    image: heroGrid4,
+    aboutTitle: "Turn Construction Sites into Move-In Ready Spaces",
+    aboutDescription:
+      "After construction or remodeling, properties are left covered in fine plaster dust, paint splatters, silicon residue, and building debris.\n\nForce Services specializes in multi-phase post-construction cleaning — from initial rough cleans to final sparkle cleans that prepare homes, offices, and retail units for immediate handover to owners or tenants.",
+    included: [
+      "Removal of fine drywall dust from all walls, ceilings, and ledges",
+      "Paint overspray, plaster, and adhesive removal from glass and tiles",
+      "Window, frame, sill, and track deep detailing (interior & exterior)",
+      "Polishing of all bathroom fittings, sanitary ware, and chrome",
+      "Cabinet, wardrobe, and drawer interior vacuuming and wiping",
+      "Floor stripping, scrubbing, and final sparkle buffing",
+    ],
+    benefits: [
+      "Guarantees seamless handover to landlords, buyers, or letting agents",
+      "Eliminates airborne dust particles for improved indoor air quality",
+      "Fast turnaround times to meet project completion deadlines",
+      "Experienced with large residential developments and commercial fit-outs",
+    ],
+    workSteps: [
+      { number: "01", title: "Rough Debris Clean", description: "Removal of leftover packaging, large debris, and heavy construction dust." },
+      { number: "02", title: "Detail & Paint Removal", description: "Meticulous removal of tape, paint specks, mortar, and silicon residue." },
+      { number: "03", title: "Sparkle Deep Clean", description: "Polishing fixtures, windows, tiles, appliances, and all surfaces." },
+      { number: "04", title: "Handover Inspection", description: "White-glove inspection ensuring the property is 100% move-in ready." },
+    ],
+  },
+  "residential-deep-cleaning": {
+    title: "Residential & Deep Cleaning",
+    tagline: "Top-to-bottom domestic cleaning, move-in/move-out, and routine house care.",
+    image: cleaningKitchen,
+    aboutTitle: "Deep Cleaning for Spotless, Fresh Homes",
+    aboutDescription:
+      "Whether you are moving home, preparing for a special event, or simply need a thorough seasonal reset, Force Services delivers unrivaled residential deep cleaning.\n\nOur vetted and trained team gets into every hard-to-reach corner, tackling built-up grease in kitchens, limescale in bathrooms, and dust behind furniture so you can enjoy a spotless living space.",
+    included: [
+      "Kitchen deep clean: oven, hob, extractor, countertops, and exterior cupboards",
+      "Bathroom descaling, tile scrubbing, and fixture sanitization",
+      "Skirting boards, door frames, switches, and sockets detailed",
+      "Floor vacuuming and deep mopping of all hard flooring",
+      "End of tenancy and move-in / move-out full sanitization",
+      "Eco-friendly, safe products suitable for families and pets",
+    ],
+    benefits: [
+      "Secures rental deposits on end-of-tenancy inspections",
+      "Eliminates built-up bacteria, allergens, and limescale",
+      "Saves you hours of demanding physical labor",
+      "Trusted, vetted, and insured cleaners in your home",
+    ],
+    workSteps: [
+      { number: "01", title: "Room-by-Room Checklist", description: "Customizing tasks based on your home priorities and special requests." },
+      { number: "02", title: "Top-to-Bottom Dusting", description: "Starting with ceiling fixtures, cobwebs, and high ledges down to floor level." },
+      { number: "03", title: "Deep Scrub & Sanitize", description: "Intense descaling of bathrooms and degreasing of kitchen surfaces." },
+      { number: "04", title: "Final Walkthrough", description: "Ensuring every room smells fresh, feels hygienic, and looks spotless." },
+    ],
+  },
+  "custom-cleaning": {
+    title: "Custom Tailored Cleaning",
+    tagline: "Bespoke cleaning packages designed specifically around your unique requirements.",
+    image: cleaningTeam,
+    aboutTitle: "Tailored Solutions for Specialized Projects",
+    aboutDescription:
+      "Every property and project has unique demands. If your cleaning requirements don't fit standard categories, Force Services will design a personalized cleaning package for you.\n\nFrom emergency cleanups to specialized surface restoration, we bring the right manpower, tools, and materials to get the job done right.",
+    included: [
+      "Custom checklist created specifically for your property",
+      "Flexible staffing options for large or fast-turnaround jobs",
+      "One-off deep cleans, post-event cleanups, or emergency response",
+      "Specialized surface care and stain treatment",
+      "Free on-site survey and tailored quote across Co. Clare, Limerick & Galway",
+    ],
+    benefits: [
+      "Complete flexibility in scope, timing, and budget",
+      "No unnecessary charges for services you don't need",
+      "Direct communication with our management team",
+      "Quick response time throughout our service area",
+    ],
+    workSteps: [
+      { number: "01", title: "Consultation & Scope", description: "We discuss your specific needs and timeline over phone, WhatsApp, or in person." },
+      { number: "02", title: "Custom Proposal", description: "You receive a transparent, itemized quote tailored to your exact project." },
+      { number: "03", title: "Expert Execution", description: "Our trained crew arrives fully equipped to complete the agreed tasks." },
+      { number: "04", title: "Customer Sign-Off", description: "We ensure you are 100% satisfied before concluding the work." },
+    ],
+  },
 };
 
 const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const service = servicesData[slug || ""] || servicesData["remodeling-service"];
+  const serviceKey = slug && detailedServices[slug] ? slug : "power-washing";
+  const service = detailedServices[serviceKey];
   const { user } = useAuth();
   const { data: profile } = useUserProfile(user?.id);
 
-  // Form state
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
-  const [selectedService, setSelectedService] = useState(slug || "remodeling");
+  const [selectedService, setSelectedService] = useState(serviceKey);
   const [note, setNote] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const createInquiry = useCreateServiceInquiry();
 
-  // Auto-fill form when user is logged in
   useEffect(() => {
     if (user) {
-      // Set full name from profile or user metadata
       if (!fullName) {
         const name = profile?.full_name || user.user_metadata?.full_name || "";
         setFullName(name);
       }
-
-      // Set phone from profile or user metadata
       if (!phone) {
         const userPhone = profile?.phone || user.user_metadata?.phone || "";
         setPhone(userPhone);
@@ -239,29 +236,31 @@ const ServiceDetail = () => {
     }
   }, [user, profile, fullName, phone]);
 
+  useEffect(() => {
+    if (slug && detailedServices[slug]) {
+      setSelectedService(slug);
+    }
+  }, [slug]);
+
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
-
     const nameResult = nameSchema.safeParse(fullName);
     if (!nameResult.success) {
       newErrors.fullName = nameResult.error.errors[0].message;
     }
-
     const phoneResult = phoneSchema.safeParse(phone);
     if (!phoneResult.success) {
       newErrors.phone = phoneResult.error.errors[0].message;
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!validateForm()) return;
 
-    const serviceName = servicesData[selectedService]?.title || service.title;
+    const serviceName = detailedServices[selectedService]?.title || service.title;
 
     await createInquiry.mutateAsync({
       service_name: serviceName,
@@ -271,8 +270,6 @@ const ServiceDetail = () => {
       user_id: user?.id || null,
     });
 
-
-    // Reset form on success
     setFullName("");
     setPhone("");
     setNote("");
@@ -280,203 +277,220 @@ const ServiceDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Service Title Section */}
-      <section className="bg-transparent py-12">
-        <div className="container-custom section-padding py-12">
-          {/* Breadcrumb */}
+      {/* Service Header Section */}
+      <section className="pt-32 pb-12 bg-secondary">
+        <div className="container-custom section-padding">
           <div className="text-muted-foreground text-sm mb-6">
-            <Link to="/" className="hover:text-primary transition-colors">Home</Link>
+            <Link to="/" className="hover:text-primary transition-colors">
+              Home
+            </Link>
             <span className="mx-2">/</span>
-            <Link to="/services" className="hover:text-primary transition-colors">Service</Link>
+            <Link to="/services" className="hover:text-primary transition-colors">
+              Services
+            </Link>
+            <span className="mx-2">/</span>
+            <span className="text-primary font-medium">{service.title}</span>
           </div>
 
           <FadeIn>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-4">
-              <h2 className="text-black text-5xl md:text-7xl font-bold">{service.title}</h2>
-              <Link to="/quote">
-                <FlipButton variant="primary">Get A Quote</FlipButton>
-              </Link>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-6">
+              <div>
+                <h1 className="text-foreground text-4xl md:text-5xl lg:text-6xl font-bold">
+                  {service.title}
+                </h1>
+                <p className="text-muted-foreground text-lg md:text-xl mt-3 max-w-2xl">
+                  {service.tagline}
+                </p>
+              </div>
+              <div className="flex gap-4">
+                <Link to="/quote">
+                  <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                    Get a Quote
+                  </Button>
+                </Link>
+                <a href={`tel:${COMPANY.phone}`}>
+                  <Button size="lg" variant="outline" className="gap-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                    <Phone className="h-4 w-4" />
+                    Call Us
+                  </Button>
+                </a>
+              </div>
             </div>
           </FadeIn>
 
-          <FadeIn delay={100}>
-            <p className="text-muted-foreground text-lg max-w-xl mb-12">{service.description}</p>
-          </FadeIn>
-
-          {/* Hero Image */}
-          <FadeIn delay={200}>
-            <div className="rounded-xl overflow-hidden">
+          <FadeIn delay={150}>
+            <div className="rounded-2xl overflow-hidden shadow-card mt-8">
               <img
                 src={service.image}
                 alt={service.title}
-                className="w-full h-[400px] md:h-[500px] object-cover"
+                className="w-full h-[360px] md:h-[480px] object-cover"
               />
             </div>
           </FadeIn>
         </div>
       </section>
 
-      {/* About Section with Contact Form */}
-      <section className="pt-16">
+      {/* Main Content & Sidebar Form */}
+      <section className="py-16 lg:py-24 bg-background">
         <div className="container-custom section-padding">
-          <div className="flex lg:flex-row flex-col gap-24">
-            {/* Left - About Content */}
-            <div className="w-full max-w-[640px]">
+          <div className="grid lg:grid-cols-3 gap-12">
+            {/* Left Content (2 cols) */}
+            <div className="lg:col-span-2 space-y-16">
+              {/* About this service */}
               <FadeIn>
-                <p className="text-primary font-semibold mb-4">Service Details</p>
-                <h3 className="text-4xl md:text-5xl font-bold text-black mb-6">{service.aboutTitle}</h3>
+                <div>
+                  <div className="inline-flex items-center gap-2 rounded-full bg-tertiary/10 px-4 py-2 text-sm font-semibold text-tertiary mb-4">
+                    <Sparkles className="h-4 w-4" />
+                    Service Overview
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                    {service.aboutTitle}
+                  </h2>
+                  <p className="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">
+                    {service.aboutDescription}
+                  </p>
+                </div>
               </FadeIn>
 
+              {/* What is included */}
               <FadeIn delay={100}>
-                <div className="text-muted-foreground font-medium leading-relaxed mb-8 whitespace-pre-line">
-                  {service.aboutDescription}
-                </div>
-              </FadeIn>
-
-              <FadeIn delay={200}>
-                <h4 className="text-2xl font-bold text-black mb-4">What is included?</h4>
-                <div className="space-y-4">
-                  {service.included.map((item, index) => (
-                    <div key={index} className="flex gap-3">
-                      <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1">
-                        <Check className="w-3 h-3 text-white" />
-                      </div>
-                      <p className="text-muted-foreground">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </FadeIn>
-              <section className=" py-16 lg:py-32">
-                <div className="container-custom">
-                  <FadeIn>
-                    <p className="text-primary font-bold mb-4">Working Process</p>
-                    <h3 className="text-4xl md:text-5xl font-bold text-black mb-4">How We Work</h3>
-                    <p className="text-muted-foreground max-w-2xl mb-12">
-                      Sagittis cras et auctor neque purus amet. At tellus ura duis convallis. Porta ultrices orci cras sed fells eget. Neque lorem!
-                    </p>
-                  </FadeIn>
-
-                  <div className="grid md:grid-cols-2 gap-12">
-                    {service.workSteps.map((step, index) => (
-                      <FadeIn key={index} delay={index * 100}>
-                        <div className="flex flex-col gap-4">
-                          <div className="w-14 h-14 rounded-full border border-secondary flex items-center justify-center flex-shrink-0">
-                            <span className="text-secondary font-bold">{step.number}</span>
-                          </div>
-                          <div>
-                            <h5 className="text-2xl font-bold text-black mb-2">{step.title}</h5>
-                            <p className="text-muted-foreground font-medium">{step.description}</p>
-                          </div>
+                <div className="bg-secondary rounded-2xl p-8 border border-border">
+                  <h3 className="text-2xl font-bold text-primary mb-6">
+                    What Is Included?
+                  </h3>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {service.included.map((item, index) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Check className="w-3 h-3 text-primary-foreground" />
                         </div>
-                      </FadeIn>
+                        <span className="text-foreground text-sm font-medium">{item}</span>
+                      </div>
                     ))}
                   </div>
                 </div>
-              </section>
+              </FadeIn>
 
-              {/* Service Benefits Section */}
-              <section className="pt-16">
-                <div className="container-custom">
-                  <div className="grid gap-16 items-center">
-                    {/* Left - Benefits Content */}
-                    <div>
-                      <FadeIn>
-                        <p className="text-primary font-bold mb-4">Benefits</p>
-                        <h3 className="text-3xl md:text-5xl font-bold text-black mb-6">Service Benefits</h3>
-                        <p className="text-muted-foreground font-medium mb-8">
-                          At risus viverra adipiscing at in tellus integer feugiat. Nisl pretium fusce id velit ut
-                          tortor. Sagittis eu a odio aliquam ata semper eget. At tellus ura duis convallis.
-                          Porta ultrices orci cras sed fells eget. Neque lorem!
-                        </p>
-                      </FadeIn>
-
-                      <FadeIn delay={100}>
-                        <div className="space-y-4">
-                          {service.benefits.map((benefit, index) => (
-                            <div key={index} className="flex gap-3">
-                              <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1">
-                                <Check className="w-3 h-3 text-white" />
-                              </div>
-                              <p className="text-muted-foreground font-medium">{benefit}</p>
-                            </div>
-                          ))}
+              {/* How We Work */}
+              <FadeIn delay={150}>
+                <div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                    Our Working Process
+                  </h3>
+                  <p className="text-muted-foreground text-base mb-8">
+                    We follow a structured 4-step process to guarantee high quality, safety, and customer satisfaction on every job.
+                  </p>
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    {service.workSteps.map((step, index) => (
+                      <div key={index} className="bg-card rounded-2xl p-6 border border-border">
+                        <div className="w-12 h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg mb-4">
+                          {step.number}
                         </div>
-                      </FadeIn>
-                    </div>
-
-                    {/* Right - Image */}
-                    <FadeIn delay={200}>
-                      <div className="rounded-xl overflow-hidden">
-                        <img
-                          src={plumberTeam}
-                          alt="Service Benefits"
-                          className="w-full h-[400px] object-cover"
-                        />
+                        <h4 className="text-lg font-bold text-foreground mb-2">
+                          {step.title}
+                        </h4>
+                        <p className="text-muted-foreground text-sm leading-relaxed">
+                          {step.description}
+                        </p>
                       </div>
-                    </FadeIn>
+                    ))}
                   </div>
                 </div>
-              </section>
+              </FadeIn>
+
+              {/* Service Benefits */}
+              <FadeIn delay={200}>
+                <div className="border-t border-border pt-12">
+                  <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
+                    Key Benefits of Choosing {COMPANY.name}
+                  </h3>
+                  <div className="space-y-4">
+                    {service.benefits.map((benefit, index) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <div className="w-6 h-6 rounded-full bg-tertiary flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Check className="w-3.5 h-3.5 text-white" />
+                        </div>
+                        <p className="text-muted-foreground font-medium">{benefit}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </FadeIn>
             </div>
 
-            {/* Right - Contact Form */}
-            <div className="flex sticky top-10 h-fit justify-end">
-              <FadeIn className="w-[460px]" delay={300}>
-                <div className="bg-[#f4f4f7]  p-8 rounded-xl">
-                  <h4 className="text-3xl font-bold text-black mb-6">Get In Touch</h4>
+            {/* Right Sticky Inquiry Form */}
+            <div className="lg:col-span-1">
+              <FadeIn delay={250} className="sticky top-28">
+                <div className="bg-secondary rounded-2xl p-8 border border-border shadow-sm">
+                  <h3 className="text-2xl font-bold text-primary mb-2">
+                    Request a Service
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-6">
+                    Leave your details and we will get back to you promptly with a free quote.
+                  </p>
 
-                  <form className="space-y-8" onSubmit={handleSubmit}>
+                  <form className="space-y-4" onSubmit={handleSubmit}>
                     <div>
-                      <label className=" font-bold text-black mb-2 block">Full Name</label>
+                      <label className="block text-sm font-medium text-foreground mb-1">
+                        Full Name <span className="text-destructive">*</span>
+                      </label>
                       <Input
-                        className="bg-transparent h-12"
+                        className="bg-background h-11"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        placeholder="Enter your name"
+                        placeholder="Your full name"
                       />
                       {errors.fullName && (
-                        <p className="text-destructive text-sm mt-1">{errors.fullName}</p>
+                        <p className="text-destructive text-xs mt-1">{errors.fullName}</p>
                       )}
                     </div>
 
                     <div>
-                      <label className=" font-bold text-black mb-2 block">Phone</label>
+                      <label className="block text-sm font-medium text-foreground mb-1">
+                        Phone Number <span className="text-destructive">*</span>
+                      </label>
                       <Input
-                        className="bg-transparent border-border h-12"
+                        className="bg-background h-11"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        placeholder="Enter your phone number"
+                        placeholder="e.g. +353 87 494 5684"
                       />
                       {errors.phone && (
-                        <p className="text-destructive text-sm mt-1">{errors.phone}</p>
+                        <p className="text-destructive text-xs mt-1">{errors.phone}</p>
                       )}
                     </div>
 
                     <div>
-                      <label className=" font-bold text-black mb-2 block">Select A Service</label>
-                      <Select value={selectedService} onValueChange={setSelectedService}>
-                        <SelectTrigger className="bg-transparent h-12 border-border">
+                      <label className="block text-sm font-medium text-foreground mb-1">
+                        Service
+                      </label>
+                      <Select
+                        value={selectedService}
+                        onValueChange={(val) => setSelectedService(val)}
+                      >
+                        <SelectTrigger className="bg-background h-11">
                           <SelectValue placeholder="Select a service" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="remodeling-service">Remodelling Service</SelectItem>
-                          <SelectItem value="faucet-leak-repairs">Faucet & Leak Repairs</SelectItem>
-                          <SelectItem value="sewer-repair-cleaning">Sewer Repair & Cleaning</SelectItem>
-                          <SelectItem value="drain-cleaning-repairs">Drain Cleaning & Repairs</SelectItem>
-                          <SelectItem value="water-line-repair">Water Line Repair</SelectItem>
-                          <SelectItem value="gas-line-services">Gas Line Services</SelectItem>
+                          {CLEANING_SERVICES.map((s) => (
+                            <SelectItem key={s.slug} value={s.slug}>
+                              {s.title}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div>
-                      <label className=" font-bold text-black mb-2 block">Short Note</label>
+                      <label className="block text-sm font-medium text-foreground mb-1">
+                        Project Details / Notes
+                      </label>
                       <Textarea
-                        placeholder="Type here.."
-                        className="bg-transparent border-border min-h-[100px]"
+                        placeholder="Tell us about the property size, location (Ennis, Limerick, Galway, etc.), and timing..."
+                        className="bg-background min-h-[90px]"
                         value={note}
                         onChange={(e) => setNote(e.target.value)}
                       />
@@ -484,7 +498,7 @@ const ServiceDetail = () => {
 
                     <Button
                       type="submit"
-                      className="w-full bg-primary hover:bg-secondary/90 text-white py-6"
+                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12 text-base font-semibold"
                       disabled={createInquiry.isPending}
                     >
                       {createInquiry.isPending ? (
@@ -493,17 +507,28 @@ const ServiceDetail = () => {
                           Submitting...
                         </>
                       ) : (
-                        "Submit"
+                        "Send Inquiry"
                       )}
                     </Button>
                   </form>
+
+                  <div className="mt-6 pt-6 border-t border-border/80 text-center">
+                    <p className="text-xs text-muted-foreground mb-2">Prefer to talk directly?</p>
+                    <a
+                      href={`https://wa.me/${COMPANY.whatsappNumber.replace(/\D/g, "")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-bold text-tertiary hover:underline"
+                    >
+                      Chat on WhatsApp: {COMPANY.phone}
+                    </a>
+                  </div>
                 </div>
               </FadeIn>
             </div>
           </div>
         </div>
       </section>
-
 
       <CTA />
       <Footer />

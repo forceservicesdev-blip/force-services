@@ -67,10 +67,14 @@ export function DashboardSidebar() {
       className={`${collapsed ? "w-14" : "w-60"} border-r border-gray-200 transition-all duration-300`}
       collapsible="icon"
     >
-      <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-white">
-        {!collapsed && (
-          <Link to="/">
-            <Logo />
+      <div className={`flex items-center ${collapsed ? "flex-col gap-2 p-2" : "justify-between p-4"} border-b border-gray-200 bg-white`}>
+        {!collapsed ? (
+          <Link to="/" className="flex items-center">
+            <Logo size="md" />
+          </Link>
+        ) : (
+          <Link to="/" className="flex items-center justify-center mb-1" title="Force Services">
+            <Logo iconOnly size="sm" />
           </Link>
         )}
         <SidebarTrigger className={collapsed ? "mx-auto" : ""} />

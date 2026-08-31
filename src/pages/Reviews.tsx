@@ -1,6 +1,6 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { TESTIMONIALS } from "@/lib/config";
+import { COMPANY, TESTIMONIALS } from "@/lib/config";
 import { Star } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -20,7 +20,7 @@ const Reviews = () => {
               What Our Customers Say
             </h1>
             <p className="text-muted-foreground">
-              Trusted by homeowners and businesses across [SERVICE AREA] for reliable, professional cleaning.
+              Trusted by homeowners, builders, and businesses across {COMPANY.serviceArea} for reliable, professional cleaning.
             </p>
           </div>
 
@@ -28,17 +28,24 @@ const Reviews = () => {
             {TESTIMONIALS.map((review, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl p-6 shadow-soft border border-border hover:shadow-card transition-shadow"
+                className="bg-card rounded-2xl p-6 shadow-soft border border-border hover:shadow-card transition-shadow flex flex-col justify-between"
               >
-                <div className="flex gap-1 mb-4">
-                  {Array.from({ length: review.rating }).map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-fresh-green text-fresh-green" />
-                  ))}
+                <div>
+                  <div className="flex gap-1 mb-4">
+                    {Array.from({ length: review.rating }).map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-tertiary text-tertiary" />
+                    ))}
+                  </div>
+                  <p className="text-foreground mb-6 text-base leading-relaxed">
+                    "{review.text}"
+                  </p>
                 </div>
-                <p className="text-foreground mb-6 text-base leading-relaxed">
-                  "{review.text}"
-                </p>
-                <p className="font-semibold text-primary">{review.name}</p>
+                <div>
+                  <p className="font-semibold text-primary">{review.name}</p>
+                  {review.location && (
+                    <p className="text-xs text-muted-foreground">{review.location}</p>
+                  )}
+                </div>
               </div>
             ))}
           </div>

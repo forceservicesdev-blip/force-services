@@ -2,296 +2,215 @@ import CTA from "@/components/CTA";
 import FadeIn from "@/components/FadeIn";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { Check, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { COMPANY, FAQS } from "@/lib/config";
+import { Check, Phone, Sparkles, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+interface Plan {
+  name: string;
+  price: number;
+  unit: string;
+  description: string;
+  features: string[];
+  recommended: boolean;
+}
 
-// FlipButton component
-const FlipButton = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  return <button className="group w-full relative px-8 py-4 bg-white border-secondary rounded-full overflow-hidden border">
-    <span className="relative block overflow-hidden h-6">
-      <span className="block transition-transform text-center duration-300 group-hover:-translate-y-full text-secondary font-semibold">
-        {children}
-      </span>
-      <span className="text-center block transition-transform duration-300 group-hover:-translate-y-full text-secondary font-semibold">
-        {children}
-      </span>
-    </span>
-  </button>;
-};
-
-const pricingPlans = {
+const pricingPlans: Record<"residential" | "commercial" | "powerWashing", Plan[]> = {
   residential: [
     {
-      name: "Basic Plan",
+      name: "Essential Clean",
       price: 50,
-      billing: "Billed per hour",
+      unit: "Starting from",
+      description: "Ideal for routine house cleaning and maintenance.",
       features: [
-        "10% off All Service",
-        "Leaking Pipes",
-        "Gas Line Repair",
-        "Water Heater Repair",
-        "Toilet Installation",
+        "Dusting & vacuuming all rooms",
+        "Kitchen countertops & sink cleaning",
+        "Bathroom sanitization & mirrors",
+        "Floor mopping & surface wiping",
+        "Eco-friendly cleaning supplies",
       ],
       recommended: false,
     },
     {
-      name: "Advanced Plan",
-      price: 150,
-      billing: "Billed per hour",
+      name: "Deep Clean & Sanitize",
+      price: 120,
+      unit: "Starting from",
+      description: "Thorough top-to-bottom clean for homes needing a reset.",
       features: [
-        "15% off All Service",
-        "Leaking Pipes",
-        "Gas Line Repair",
-        "Water Heater Repair",
-        "Toilet Installation",
-        "Burst Pipes",
+        "Everything in Essential Clean",
+        "Skirting boards, doors & light switches",
+        "Inside microwave & exterior oven detailing",
+        "Bathroom tile descaling & grout cleaning",
+        "Deep carpet/rug vacuuming",
+        "Limescale & stain removal",
       ],
       recommended: true,
     },
     {
-      name: "Special Plan",
-      price: 200,
-      billing: "Billed per hour",
+      name: "End of Tenancy / Move-In",
+      price: 180,
+      unit: "Starting from",
+      description: "Guaranteed deposit-return standard clean for tenants & landlords.",
       features: [
-        "All from Advanced",
-        "Leaking Pipes",
-        "Gas Line Repair & Installation",
-        "Water Heater Installation",
-        "Remodelling Washroom",
+        "Complete deep property sanitization",
+        "Internal window & sill cleaning",
+        "Cupboard & drawer interior wiping",
+        "Appliance deep clean (oven, fridge)",
+        "Handover inspection checklist",
+        "Receipt provided for landlords/agents",
       ],
       recommended: false,
     },
   ],
   commercial: [
     {
-      name: "Starter Plan",
-      price: 100,
-      billing: "Billed per hour",
+      name: "Office & Retail Regular",
+      price: 65,
+      unit: "per visit / from",
+      description: "Weekly or daily maintenance for offices and storefronts.",
       features: [
-        "10% off All Service",
-        "Commercial Pipe Repair",
-        "Gas Line Inspection",
-        "Water System Maintenance",
-        "Emergency Response",
+        "Workstations, desks & phones sanitized",
+        "Staff kitchen & breakroom cleaning",
+        "Restroom sanitizing & consumable restocking",
+        "Commercial floor vacuuming & mopping",
+        "Trash & recycling disposal",
+        "Flexible after-hours scheduling",
       ],
       recommended: false,
     },
     {
-      name: "Business Plan",
-      price: 250,
-      billing: "Billed per hour",
+      name: "Commercial Comprehensive",
+      price: 150,
+      unit: "per visit / from",
+      description: "Full facility hygiene for multi-room offices, clinics, and showrooms.",
       features: [
-        "20% off All Service",
-        "Full System Maintenance",
-        "Gas Line Installation",
-        "Water Heater Systems",
-        "24/7 Priority Support",
-        "Preventive Maintenance",
+        "All Office Regular features included",
+        "Internal glass & partition streak-free polish",
+        "High-touch point anti-bacterial fogging",
+        "Deep carpet cleaning & hard floor buffing",
+        "Dedicated supervisor inspection",
+        "Emergency callout priority",
       ],
       recommended: true,
     },
     {
-      name: "Enterprise Plan",
-      price: 400,
-      billing: "Billed per hour",
+      name: "Industrial & Warehouse",
+      price: 250,
+      unit: "Starting from",
+      description: "Heavy-duty factory, warehouse, and workshop degreasing.",
       features: [
-        "All from Business",
-        "Dedicated Account Manager",
-        "Custom Solutions",
-        "Full Building Systems",
-        "Annual Inspection",
+        "Industrial floor machine scrubbing",
+        "Heavy oil, tyre & grease removal",
+        "High-level dust & rafter extraction",
+        "Loading bay & roller shutter cleans",
+        "Health & Safety compliance verification",
+        "Hazardous waste clearance assistance",
+      ],
+      recommended: false,
+    },
+  ],
+  powerWashing: [
+    {
+      name: "Driveway & Patio Refresh",
+      price: 80,
+      unit: "Starting from",
+      description: "High-pressure clean for residential driveways and garden patios.",
+      features: [
+        "Concrete, paving & tarmac power wash",
+        "Moss, algae & weed removal",
+        "Sandstone & natural stone detailing",
+        "Eco-friendly anti-fungal wash",
+        "Free surface condition survey",
+      ],
+      recommended: false,
+    },
+    {
+      name: "Full Exterior Package",
+      price: 180,
+      unit: "Starting from",
+      description: "Complete home exterior makeover: driveway, patio, walls & decking.",
+      features: [
+        "Driveway + front & rear patio washing",
+        "Timber decking gentle clean & algae strip",
+        "Exterior wall & render soft-wash",
+        "Footpaths & perimeter washdown",
+        "Long-lasting moss prevention treatment",
+      ],
+      recommended: true,
+    },
+    {
+      name: "Post-Construction Clean",
+      price: 220,
+      unit: "Starting from",
+      description: "After-build sparkle cleaning for renovations and new constructions.",
+      features: [
+        "Rough debris & fine drywall dust removal",
+        "Paint overspray & silicone removal",
+        "Window glass, frame & sill detailing",
+        "Kitchen & sanitary ware sparkle polish",
+        "100% Move-in handover ready",
       ],
       recommended: false,
     },
   ],
 };
 
-const faqs = [
-  {
-    question: "What types of services do you offer?",
-    answer:
-      "We offer a wide range of plumbing services including pipe repair, drain cleaning, water heater installation, bathroom remodeling, gas line repair, and emergency plumbing services for both residential and commercial properties.",
-  },
-  {
-    question: "How Much Does A Plumber Charge Per Hour?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.\n\nAenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.",
-  },
-  {
-    question: "What Kind Of Work Can A Handyman Do?",
-    answer:
-      "A handyman can handle various tasks including minor plumbing repairs, fixture installations, pipe replacements, drain cleaning, and general maintenance work around your home or business.",
-  },
-  {
-    question: "Does A Handyman Need Insurance?",
-    answer:
-      "Yes, professional handymen should carry liability insurance and be properly licensed. All our technicians are fully insured and bonded for your protection.",
-  },
-  {
-    question: "Are your prices competitive, and do you provide estimates?",
-    answer:
-      "Yes, we offer competitive pricing and provide free estimates for all our services. Contact us to schedule an appointment with one of our experienced plumbers.",
-  },
-];
-
-const PricingCard = ({
-  plan,
-  index,
-  planType,
-  onSelectPlan,
-}: {
-  plan: (typeof pricingPlans.residential)[0];
-  index: number;
-  planType: "residential" | "commercial";
-  onSelectPlan: (plan: typeof pricingPlans.residential[0], planType: "residential" | "commercial") => void;
-}) => {
-  const isRecommended = plan.recommended;
-
-  return (
-    <FadeIn className="h-full" delay={index * 100}>
-      <div className="relative h-full">
-        {isRecommended && (
-          <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-            <span className="bg-accent text-accent-foreground px-4 py-1.5 rounded-full text-sm font-medium">
-              Recommended
-            </span>
-          </div>
-        )}
-        <div
-          className={`rounded-2xl p-8 h-full flex flex-col ${isRecommended
-            ? "bg-primary text-primary-foreground"
-            : "bg-[#f4f4f7]"
-            }`}
-        >
-          <p
-            className={`font-medium ${isRecommended ? "text-white" : "text-muted-foreground"
-              }`}
-          >
-            {plan.name}
-          </p>
-
-          <div className="mt-4 mb-2">
-            <span className="text-5xl font-bold">${plan.price}</span>
-            <span
-              className={`text-base ${isRecommended ? "text-white" : "text-muted-foreground"
-                }`}
-            >
-              /Hour
-            </span>
-          </div>
-
-          <p
-            className={`text-sm pb-6 border-b ${isRecommended
-              ? "text-primary-foreground/70 border-primary-foreground/20"
-              : "text-muted-foreground border-border"
-              }`}
-          >
-            {plan.billing}
-          </p>
-
-          <div className="mt-6">
-            <h4
-              className={`font-bold text-xl mb-4 ${isRecommended ? "text-accent" : "text-black"
-                }`}
-            >
-              What's included
-            </h4>
-
-            <ul className="space-y-3">
-              {plan.features.map((feature, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  <div
-                    className={`w-5 h-5 rounded-full flex items-center justify-center ${isRecommended ? "bg-accent" : "bg-primary"
-                      }`}
-                  >
-                    <Check
-                      className={`w-3 h-3 ${isRecommended
-                        ? "text-accent-foreground"
-                        : "text-primary-foreground"
-                        }`}
-                    />
-                  </div>
-                  <span
-                    className={`text-sm ${isRecommended ? "text-primary-foreground/90" : "text-black"
-                      }`}
-                  >
-                    {feature}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="mt-auto pt-8">
-            <button
-              onClick={() => onSelectPlan(plan, planType)}
-              className="w-full py-3 rounded-lg font-medium text-center block transition-all"
-            >
-              <FlipButton>Get Started</FlipButton>
-            </button>
-          </div>
-        </div>
-      </div>
-    </FadeIn>
-  );
-};
 const FAQItem = ({
   faq,
   isOpen,
   onToggle,
 }: {
-  faq: (typeof faqs)[0];
+  faq: (typeof FAQS)[0];
   isOpen: boolean;
   onToggle: () => void;
 }) => {
   return (
     <div
-      className={`rounded-xl mb-3 transition-all duration-300 ${isOpen ? "bg-accent" : "bg-[#f4f4f7]"
-        }`}
+      className={`rounded-2xl mb-4 border transition-all duration-300 ${
+        isOpen ? "bg-secondary border-primary/30" : "bg-card border-border"
+      }`}
     >
       <button
         onClick={onToggle}
         className="w-full px-6 py-5 flex items-center justify-between text-left"
       >
-        <span
-          className={`font-bold text-2xl ${isOpen ? "text-accent-foreground" : "text-black"
-            }`}
-        >
+        <span className="font-bold text-lg md:text-xl text-foreground">
           {faq.question}
         </span>
         <div className="flex-shrink-0 ml-4">
-          <X className={`w-5 h-5 text-accent-foreground transition-transform ${isOpen ? "" : "rotate-45"}`} />
+          <span
+            className={`flex h-8 w-8 items-center justify-center rounded-full text-lg font-bold transition-transform ${
+              isOpen ? "bg-primary text-primary-foreground rotate-45" : "bg-secondary text-primary"
+            }`}
+          >
+            +
+          </span>
         </div>
       </button>
-      <div
-        className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-60 pb-6 px-6" : "max-h-0"
-          }`}
-      >
-        <p className="text-accent-foreground/80 font-medium whitespace-pre-line">{faq.answer}</p>
-      </div>
+      {isOpen && (
+        <div className="px-6 pb-6 pt-1 text-muted-foreground leading-relaxed text-base">
+          <p>{faq.answer}</p>
+        </div>
+      )}
     </div>
   );
 };
 
 const Pricing = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<"residential" | "commercial">(
-    "residential"
+  const [activeTab, setActiveTab] = useState<"residential" | "commercial" | "powerWashing">(
+    "powerWashing"
   );
   const [openFAQ, setOpenFAQ] = useState<number | null>(0);
 
-  const handleSelectPlan = (plan: typeof pricingPlans.residential[0], planType: "residential" | "commercial") => {
+  const handleSelectPlan = (plan: Plan) => {
     navigate("/contact", {
       state: {
         planData: {
           planName: plan.name,
-          planType,
+          planType: activeTab,
           price: plan.price,
         },
       },
@@ -299,11 +218,11 @@ const Pricing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-white">
+      <section className="pt-32 pb-16 bg-secondary">
         <div className="container-custom section-padding text-center">
           <FadeIn>
             <div className="flex items-center justify-center gap-2 text-sm mb-6">
@@ -311,40 +230,50 @@ const Pricing = () => {
                 Home
               </Link>
               <span className="text-muted-foreground">/</span>
-              <span className="text-primary font-medium">Pricing</span>
+              <span className="text-primary font-medium">Pricing Plans</span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6">
-              Pricing Plan
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground">
+              Transparent, Competitive Pricing
             </h1>
 
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Expert and Reliable Solutions Tailored to Meet Your Home Repair and
-              Maintenance Needs, Ensuring Quality, Efficiency, and Complete Customer
-              Satisfaction.
+              Reliable, professional cleaning packages tailored to your property across Ennis, Limerick, and Galway. No hidden fees.
             </p>
           </FadeIn>
 
           {/* Toggle */}
           <FadeIn delay={100}>
-            <div className="inline-flex bg-card rounded-full p-1.5 mt-10">
+            <div className="inline-flex bg-background rounded-full p-1.5 mt-8 border border-border shadow-sm">
               <button
-                onClick={() => setActiveTab("residential")}
-                className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${activeTab === "residential"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground"
-                  }`}
+                onClick={() => setActiveTab("powerWashing")}
+                className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                  activeTab === "powerWashing"
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
               >
-                Residential Service
+                Power Washing & Builders
               </button>
               <button
                 onClick={() => setActiveTab("commercial")}
-                className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${activeTab === "commercial"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground "
-                  }`}
+                className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                  activeTab === "commercial"
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
               >
-                Commercial Service
+                Commercial & Industrial
+              </button>
+              <button
+                onClick={() => setActiveTab("residential")}
+                className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                  activeTab === "residential"
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Residential Cleans
               </button>
             </div>
           </FadeIn>
@@ -352,34 +281,135 @@ const Pricing = () => {
       </section>
 
       {/* Pricing Cards */}
-      <section className="py-16 bg-white">
+      <section className="py-16 lg:py-24 bg-background">
         <div className="container-custom section-padding">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {pricingPlans[activeTab].map((plan, index) => (
-              <PricingCard
-                key={plan.name}
-                plan={plan}
-                index={index}
-                planType={activeTab}
-                onSelectPlan={handleSelectPlan}
-              />
-            ))}
+            {pricingPlans[activeTab].map((plan, index) => {
+              const isRecommended = plan.recommended;
+              return (
+                <FadeIn key={plan.name} delay={index * 100} className="h-full">
+                  <div className="relative h-full">
+                    {isRecommended && (
+                      <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                        <span className="bg-tertiary text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-md">
+                          Most Popular
+                        </span>
+                      </div>
+                    )}
+                    <div
+                      className={`rounded-2xl p-8 h-full flex flex-col border ${
+                        isRecommended
+                          ? "bg-primary text-primary-foreground border-primary shadow-xl"
+                          : "bg-secondary border-border"
+                      }`}
+                    >
+                      <h3
+                        className={`text-xl font-bold ${
+                          isRecommended ? "text-primary-foreground" : "text-foreground"
+                        }`}
+                      >
+                        {plan.name}
+                      </h3>
+
+                      <p
+                        className={`text-sm mt-2 mb-6 ${
+                          isRecommended ? "text-primary-foreground/80" : "text-muted-foreground"
+                        }`}
+                      >
+                        {plan.description}
+                      </p>
+
+                      <div className="mt-auto mb-6 pb-6 border-b border-border/40">
+                        <span
+                          className={`text-xs uppercase font-semibold block mb-1 ${
+                            isRecommended ? "text-primary-foreground/70" : "text-muted-foreground"
+                          }`}
+                        >
+                          {plan.unit}
+                        </span>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-4xl md:text-5xl font-bold">€{plan.price}</span>
+                          <span
+                            className={`text-sm ${
+                              isRecommended ? "text-primary-foreground/70" : "text-muted-foreground"
+                            }`}
+                          >
+                            + VAT / estimate
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="mb-8 flex-1">
+                        <h4
+                          className={`font-bold text-sm uppercase tracking-wider mb-4 ${
+                            isRecommended ? "text-tertiary" : "text-primary"
+                          }`}
+                        >
+                          What's included:
+                        </h4>
+
+                        <ul className="space-y-3">
+                          {plan.features.map((feature, i) => (
+                            <li key={i} className="flex items-start gap-3 text-sm">
+                              <div
+                                className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                                  isRecommended ? "bg-tertiary text-white" : "bg-primary text-primary-foreground"
+                                }`}
+                              >
+                                <Check className="w-3 h-3" />
+                              </div>
+                              <span
+                                className={
+                                  isRecommended
+                                    ? "text-primary-foreground/90 font-medium"
+                                    : "text-foreground"
+                                }
+                              >
+                                {feature}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="mt-auto">
+                        <Button
+                          onClick={() => handleSelectPlan(plan)}
+                          className={`w-full py-6 rounded-xl font-bold ${
+                            isRecommended
+                              ? "bg-tertiary text-white hover:bg-tertiary/90"
+                              : "bg-primary text-primary-foreground hover:bg-primary/90"
+                          }`}
+                        >
+                          Get Started / Book
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </FadeIn>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="pt-16 lg:pt-24 bg-white">
+      <section className="py-16 lg:py-24 bg-secondary">
         <div className="container-custom section-padding">
           <FadeIn>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-12">
-              Still have questions?
-            </h2>
+            <div className="text-center max-w-2xl mx-auto mb-14">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-muted-foreground text-lg">
+                Have questions about pricing or service terms? Find answers below.
+              </p>
+            </div>
           </FadeIn>
 
           <FadeIn delay={100}>
-            <div className="max-w-5xl mx-auto">
-              {faqs.map((faq, index) => (
+            <div className="max-w-4xl mx-auto">
+              {FAQS.slice(0, 6).map((faq, index) => (
                 <FAQItem
                   key={index}
                   faq={faq}
@@ -392,9 +422,7 @@ const Pricing = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <CTA />
-
       <Footer />
     </div>
   );

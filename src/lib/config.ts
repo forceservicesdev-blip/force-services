@@ -1,16 +1,20 @@
 export const COMPANY = {
-  name: "[COMPANY NAME]",
-  tagline: "Professional Cleaning Services You Can Trust",
+  name: "Force Services",
+  legalName: "Force Services",
+  cro: "IT00026659BB",
+  tagline: "Professional Power Washing, Commercial, Industrial & Post-Construction Cleaning",
   description:
-    "Reliable, professional and affordable cleaning services for homes and businesses across [SERVICE AREA].",
-  phone: "[PHONE NUMBER]",
-  email: "[EMAIL ADDRESS]",
-  whatsappNumber: "[WHATSAPP NUMBER]",
-  address: "[BUSINESS ADDRESS]",
-  serviceArea: "[SERVICE AREA]",
-  county: "[COUNTY]",
+    "Professional power washing, commercial, industrial, and post-construction cleaning services across Ennis, Limerick, Galway, and surrounding areas.",
+  phone: "+353 87 494 5684",
+  email: "Forceservicesie@gmail.com",
+  whatsappNumber: "+353874945684",
+  address: "Apartment 1, Limerick Road, Newmarket-on-Fergus, Ennis, Co. Clare",
+  serviceArea: "Ennis, Limerick & Galway",
+  county: "Co. Clare, Limerick & Galway",
+  country: "Ireland",
+  yearsInBusiness: 5,
   year: new Date().getFullYear(),
-  openingHours: "Mon–Fri: 8:00–18:00 | Sat: 9:00–14:00",
+  openingHours: "Mon–Fri: 8:00–18:00 | Sat: 8:00–16:00",
   social: {
     facebook: "#",
     instagram: "#",
@@ -20,174 +24,233 @@ export const COMPANY = {
 };
 
 export const WHATSAPP_MESSAGE =
-  "Hi, I'd like to get a quote for your cleaning services.";
+  "Hi Force Services, I would like to get a free quote for your cleaning services.";
 
 export const SERVICE_AREAS = [
-  "[Town 1]",
-  "[Town 2]",
-  "[Town 3]",
-  "[Town 4]",
-  "[Town 5]",
-  "[Town 6]",
-  "[Town 7]",
-  "[Town 8]",
+  "Ennis",
+  "Limerick",
+  "Galway",
+  "Newmarket-on-Fergus",
+  "Shannon",
+  "Sixmilebridge",
+  "Clarecastle",
+  "Gort",
+  "Oranmore",
+  "Castletroy",
+  "Raheen",
+  "Co. Clare",
 ];
 
 export const CLEANING_SERVICES = [
   {
-    slug: "regular-house-cleaning",
-    title: "Regular House Cleaning",
-    shortDescription: "Weekly, fortnightly or monthly cleaning perfect for busy households.",
+    slug: "power-washing",
+    title: "Power Washing & Pressure Cleaning",
+    shortDescription:
+      "High-pressure washing for driveways, patios, facades, roofs, decking, and exterior walls.",
     description:
-      "Keep your home consistently fresh with our regular house cleaning service. We tailor each visit to your priorities, using eco-friendly products and a detailed checklist so nothing is missed.",
-    basePrice: 35,
+      "Revitalize your property's exterior with our heavy-duty power washing service. We remove moss, algae, stubborn stains, dirt, and grime from driveways, patios, building exteriors, stone, concrete, and timber decking with precision and care.",
+    basePrice: 80,
+    features: [
+      "Driveways, Patios & Footpaths",
+      "Building Facades & Exterior Walls",
+      "Roof Moss Removal & Gutter Cleaning",
+      "Decking & Timber Restoration",
+      "Commercial Forecourts & Car Parks",
+    ],
   },
   {
-    slug: "deep-cleaning",
-    title: "Deep Cleaning",
-    shortDescription: "Detailed cleaning for kitchens, bathrooms, bedrooms and living areas.",
+    slug: "commercial-cleaning",
+    title: "Commercial & Office Cleaning",
+    shortDescription:
+      "Flexible and reliable contract cleaning for offices, shops, retail stores, and commercial premises.",
     description:
-      "Our deep cleaning service reaches the grime that daily cleans miss. We scrub, sanitize and polish every surface, leaving your space spotless and refreshed.",
+      "Maintain a spotless, welcoming, and hygienic environment for your employees and clients. Our commercial cleaning services are customized to your business hours and industry standards.",
+    basePrice: 65,
+    features: [
+      "Offices, Workspaces & Boardrooms",
+      "Retail Shops & Showrooms",
+      "Daily, Weekly & Fortnightly Contracts",
+      "Sanitization & Hygiene Supplies",
+      "Flexible After-Hours Scheduling",
+    ],
+  },
+  {
+    slug: "industrial-cleaning",
+    title: "Industrial & Warehouse Cleaning",
+    shortDescription:
+      "Heavy-duty cleaning for factories, warehouses, workshops, and industrial facilities.",
+    description:
+      "Comprehensive industrial cleaning using superior equipment and high-performance materials. We handle large surface degreasing, high-level dusting, factory floor scrubbing, and industrial machinery area sanitization.",
     basePrice: 120,
+    features: [
+      "Warehouse Floor Scrubbing & Degreasing",
+      "High-Level Dust & Rafter Cleaning",
+      "Factory & Production Facility Cleans",
+      "Waste & Debris Management",
+      "Health & Safety Compliant Operations",
+    ],
   },
   {
-    slug: "end-of-tenancy-cleaning",
-    title: "End of Tenancy Cleaning",
-    shortDescription: "Thorough cleaning for tenants, landlords and property managers.",
+    slug: "post-construction-cleaning",
+    title: "Post-Construction & Builders Cleaning",
+    shortDescription:
+      "Thorough after-build sparkle cleaning for new developments, home renovations, and fit-outs.",
     description:
-      "Moving out? We provide a comprehensive end-of-tenancy clean designed to help secure your deposit and hand the property back in top condition.",
-    basePrice: 180,
+      "Transition from construction site to move-in ready. We eliminate fine drywall dust, plaster residue, paint splatters, adhesive tags, and construction debris from all surfaces, windows, and floors.",
+    basePrice: 150,
+    features: [
+      "Initial Rough Clean & Final Sparkle Clean",
+      "Dust Extraction & Air Quality Improvement",
+      "Window, Frame & Sill Paint Removal",
+      "Sanitary Ware & Kitchen Polishing",
+      "Developer & Landlord Handover Ready",
+    ],
   },
   {
-    slug: "office-commercial-cleaning",
-    title: "Office & Commercial Cleaning",
-    shortDescription: "Professional cleaning for offices, shops and small businesses.",
+    slug: "residential-deep-cleaning",
+    title: "Residential & Deep Cleaning",
+    shortDescription:
+      "Comprehensive deep cleaning, move-in/move-out, and routine maintenance for homes.",
     description:
-      "Create a healthier, more productive workplace with our flexible commercial cleaning plans. We work around your hours and maintain the highest hygiene standards.",
-    basePrice: 60,
-  },
-  {
-    slug: "move-in-move-out-cleaning",
-    title: "Move-In / Move-Out Cleaning",
-    shortDescription: "Complete cleaning before or after moving.",
-    description:
-      "Start fresh in your new home or leave your old one spotless. Our move-in/move-out cleaning covers cabinets, appliances, floors and every corner.",
-    basePrice: 200,
+      "A complete top-to-bottom clean for your home. We scrub, sanitize, and polish every room, reaching areas often overlooked during everyday cleaning.",
+    basePrice: 50,
+    features: [
+      "Full Kitchen & Bathroom Deep Sanitization",
+      "Skirting Boards, Doors & Light Fixtures",
+      "Move-In / Move-Out / End-of-Tenancy",
+      "Eco-Friendly & Safe Products",
+      "Experienced & Vetted Cleaners",
+    ],
   },
   {
     slug: "custom-cleaning",
-    title: "Custom Cleaning Services",
-    shortDescription: "Cleaning packages tailored to the customer's needs.",
+    title: "Custom Tailored Cleaning",
+    shortDescription:
+      "Bespoke cleaning solutions tailored specifically to your project requirements.",
     description:
-      "Need something specific? We build custom cleaning packages for one-off events, post-renovation cleans, spring cleaning and more.",
-    basePrice: 50,
+      "Have a unique space, one-off event, or specialized requirement? We design custom cleaning packages to match your exact timeline, scope, and specifications.",
+    basePrice: 70,
+    features: [
+      "One-Off Deep Cleans & Event Cleanups",
+      "Emergency & Fast Response Availability",
+      "Specialized Surface Treatments",
+      "Custom Checklists & Schedules",
+      "Free On-Site Assessment & Quote",
+    ],
   },
 ];
 
 export const WHY_CHOOSE_US = [
   {
-    title: "Trusted Professionals",
-    description: "Experienced cleaners who take pride in their work.",
+    title: "Qualified Professionals",
+    description:
+      "Our team consists of vetted, highly trained specialists who take pride in their craft and respect your property.",
   },
   {
-    title: "Reliable & Punctual",
-    description: "We respect your time and always aim to arrive when promised.",
+    title: "5 Years of Experience",
+    description:
+      "With 5 years in Ireland, we have the proven expertise to handle complex residential, commercial, industrial, and builder projects.",
   },
   {
-    title: "Fully Insured",
-    description: "Customers can book with confidence.",
+    title: "Superior Equipment & Materials",
+    description:
+      "We invest in high-performance pressure washers, industrial machinery, and professional-grade products for maximum results.",
   },
   {
-    title: "Attention to Detail",
-    description: "We don't just clean — we make your space feel fresh and spotless.",
+    title: "Quality & Attention to Detail",
+    description:
+      "We don't cut corners. From stubborn exterior stains to post-construction dust, every detail is handled with precision.",
   },
   {
-    title: "Flexible Scheduling",
-    description: "Cleaning services available around your schedule.",
+    title: "100% Customer Satisfaction",
+    description:
+      "Our goal is to exceed your expectations on every job. We ensure you are completely satisfied before we consider the work done.",
   },
   {
-    title: "Competitive Pricing",
-    description: "High-quality cleaning without unnecessary costs.",
+    title: "Tailored & Flexible Solutions",
+    description:
+      "Every property and project is unique. We adapt our schedules, scope, and methods to your specific needs.",
   },
 ];
 
 export const TESTIMONIALS = [
   {
-    name: "Sarah O'Brien",
+    name: "Michael O'Connor",
+    location: "Ennis, Co. Clare",
     rating: 5,
-    text: "The team arrived on time and did a fantastic job. The kitchen and bathrooms have never looked better. Highly recommended.",
+    text: "Force Services did an incredible power wash on our driveway and patio. Decades of moss and grime disappeared in a few hours. Fantastic attention to detail and very punctual.",
   },
   {
-    name: "Mark Doyle",
+    name: "David Ryan",
+    location: "Limerick",
     rating: 5,
-    text: "Very professional service from start to finish. The quote was clear and the clean was thorough. Will book again.",
+    text: "We hired Force Services for a commercial post-construction clean after renovating our retail unit in Limerick. The team left the premises immaculate and ready for opening day. Highly recommended!",
   },
   {
-    name: "Emily Murphy",
+    name: "Sarah Gallagher",
+    location: "Galway",
     rating: 5,
-    text: "I booked the end-of-tenancy clean and the property was left spotless. Great communication throughout.",
+    text: "Reliable, professional, and great value. They manage our warehouse and office cleaning on a regular schedule. The standards are always consistently top quality.",
   },
   {
-    name: "David Kelly",
+    name: "Patrick McMahon",
+    location: "Shannon",
     rating: 5,
-    text: "Reliable, friendly and great value. Our office is cleaned twice a week and the standard is consistently high.",
+    text: "Our house exterior and roof look brand new after their power washing service. Very professional crew, friendly communication, and no mess left behind.",
   },
   {
-    name: "Niamh Byrne",
+    name: "Emma Fitzgerald",
+    location: "Newmarket-on-Fergus",
     rating: 5,
-    text: "They made the whole house feel fresh. Even small details like skirting boards and light switches were cleaned.",
+    text: "Booked a deep clean before moving into our new home. The Force Services team was meticulous, friendly, and did an outstanding job on the kitchen and bathrooms.",
   },
   {
-    name: "Paul Ryan",
+    name: "John Higgins",
+    location: "Ennis, Co. Clare",
     rating: 5,
-    text: "Excellent deep clean before we moved in. Professional team and very easy to deal with.",
+    text: "Superb industrial floor cleaning for our workshop. Top tier equipment and great work ethic. We will definitely continue working with them.",
   },
 ];
 
 export const FAQS = [
   {
-    question: "How much does cleaning cost?",
+    question: "What areas do Force Services cover?",
     answer:
-      "Costs depend on the size of your property, the type of clean and how often you need us. We provide a clear, no-obligation quote before any work begins.",
+      "We are based in Newmarket-on-Fergus / Ennis, Co. Clare and proudly serve Ennis, Limerick, Galway, Shannon, and surrounding towns throughout the Mid-West of Ireland.",
   },
   {
-    question: "Do I need to provide cleaning products?",
+    question: "What types of cleaning services do you specialize in?",
     answer:
-      "No. We bring our own high-quality, eco-friendly cleaning products and equipment. If you prefer us to use your own supplies, just let us know.",
+      "We specialize in high-pressure power washing (driveways, patios, facades, roofs), commercial and office cleaning, industrial and warehouse cleaning, post-construction / after-build cleans, and residential deep cleaning.",
   },
   {
-    question: "Do you bring your own equipment?",
+    question: "How do I get a quote?",
     answer:
-      "Yes, our team arrives fully equipped with everything needed to complete the clean to a professional standard.",
+      "You can use our online Quote Calculator, fill out our Contact form, email us at Forceservicesie@gmail.com, or contact us directly via WhatsApp/Call at +353 87 494 5684. We provide free, fast, no-obligation quotes.",
   },
   {
-    question: "Are you insured?",
+    question: "Do you bring your own equipment and materials?",
     answer:
-      "Yes, we are fully insured for both domestic and commercial cleaning work, giving you complete peace of mind.",
+      "Yes, our team arrives fully equipped with high-performance power washers, industrial cleaning machinery, and professional-grade, eco-friendly cleaning solutions.",
   },
   {
-    question: "Do you offer regular cleaning?",
+    question: "Are you fully insured and registered?",
     answer:
-      "Yes. We offer weekly, fortnightly and monthly cleaning schedules to keep your home or workplace consistently clean.",
+      "Yes, Force Services is fully insured for public liability and commercial operations (CRO: IT00026659BB), giving you complete peace of mind for every project.",
   },
   {
-    question: "Do you provide end-of-tenancy cleaning?",
+    question: "How long has Force Services been in business?",
     answer:
-      "Yes. Our end-of-tenancy clean is thorough and designed to meet landlord and letting-agent standards.",
+      "We have been operating in Ireland for 5 years, building our reputation through quality workmanship, reliable service, and strong customer relationships.",
   },
   {
-    question: "How far in advance should I book?",
+    question: "Can you accommodate out-of-hours commercial cleaning?",
     answer:
-      "We recommend booking at least a few days in advance. For end-of-tenancy and deep cleans, one to two weeks' notice is ideal.",
+      "Yes. For commercial and industrial clients, we offer flexible scheduling including early mornings, evenings, and weekends to minimize disruption to your business operations.",
   },
   {
-    question: "Can I request a customised cleaning service?",
+    question: "What is included in a post-construction clean?",
     answer:
-      "Absolutely. We can tailor the clean to focus on specific rooms, tasks or events. Just tell us what you need.",
-  },
-  {
-    question: "What areas do you cover?",
-    answer:
-      "We provide cleaning services across [SERVICE AREA] and surrounding towns. Contact us if your area is not listed and we'll do our best to help.",
+      "Our post-construction cleaning includes thorough removal of fine dust, plaster, paint splatters, window and frame detailing, deep floor scrubbing, and sanitizing all fixtures so the property is ready for immediate handover.",
   },
 ];

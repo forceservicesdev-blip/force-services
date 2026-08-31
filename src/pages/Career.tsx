@@ -175,8 +175,8 @@ const Career = () => {
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
               Join our team and make a difference. We're looking for passionate
-              individuals who are ready to grow their career in the plumbing
-              industry.
+              individuals who are ready to grow their career with Force Services in the
+              professional cleaning, power washing, and facility maintenance industry across Ireland.
             </p>
             <a
               href="#openings"
