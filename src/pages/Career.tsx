@@ -13,7 +13,6 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { z } from "zod";
 
-// Validation schemas
 const nameSchema = z.string().trim().min(1, "Name is required").max(100);
 const emailSchema = z.string().trim().email("Invalid email address").max(255);
 const phoneSchema = z.string().trim().min(1, "Phone is required").max(20);
@@ -24,7 +23,6 @@ const Career = () => {
 
   const { data: currentCareer, isLoading: careerLoading } = useCareerBySlug(slug);
 
-  // Form state
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [currentCompany, setCurrentCompany] = useState("");
