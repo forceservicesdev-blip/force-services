@@ -1,59 +1,16 @@
-import { supabase } from "@/integrations/supabase/client";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
+import { CAREERS_DATA, type Career } from "@/data/careers";
 
-export interface Career {
-  id: string;
-  slug: string;
-  title: string;
-  type: string;
-  location: string;
-  about_the_role: string[];
-  short_term_goals: string[];
-  what_you_bring: string[];
-  why_you_might_love: string[];
-  is_active: boolean;
-  created_at: string;
-  updated_at: string;
-}
+export type { Career };
+export type CareerInsert = Omit<Career, "id" | "created_at" | "updated_at">;
+export type CareerUpdate = Partial<CareerInsert>;
 
-export interface CareerInsert {
-  slug: string;
-  title: string;
-  type?: string;
-  location: string;
-  about_the_role?: string[];
-  short_term_goals?: string[];
-  what_you_bring?: string[];
-  why_you_might_love?: string[];
-  is_active?: boolean;
-}
-
-export interface CareerUpdate {
-  slug?: string;
-  title?: string;
-  type?: string;
-  location?: string;
-  about_the_role?: string[];
-  short_term_goals?: string[];
-  what_you_bring?: string[];
-  why_you_might_love?: string[];
-  is_active?: boolean;
-}
-
-// Fetch all active careers (public)
+// Fetch all active careers (static data / offline-ready)
 export const useCareers = () => {
   return useQuery({
-    queryKey: ["careers"],
+    queryKey: ["careers", "active"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("careers")
-        .select("*")
-        .eq("is_active", true)
-        .order("created_at", { ascending: false });
-
-      if (error) throw error;
-      return data as Career[];
+      return CAREERS_DATA.filter((c) => c.is_active !== false);
     },
   });
 };
@@ -61,108 +18,34 @@ export const useCareers = () => {
 // Fetch single career by slug
 export const useCareerBySlug = (slug: string | undefined) => {
   return useQuery({
-    queryKey: ["career", slug],
+    queryKey: ["careers", "slug", slug],
     queryFn: async () => {
       if (!slug) return null;
-      const { data, error } = await supabase
-        .from("careers")
-        .select("*")
-        .eq("slug", slug)
-        .maybeSingle();
-
-      if (error) throw error;
-      return data as Career | null;
+      const job = CAREERS_DATA.find((c) => c.slug === slug);
+      return job || null;
     },
     enabled: !!slug,
   });
 };
 
-// Fetch all careers for admin (including inactive)
-export const useAdminCareers = () => {
+// Fetch single career by ID
+export const useCareer = (id: string) => {
   return useQuery({
-    queryKey: ["admin-careers"],
+    queryKey: ["careers", id],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("careers")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (error) throw error;
-      return data as Career[];
+      const job = CAREERS_DATA.find((c) => c.id === id);
+      return job || null;
     },
+    enabled: !!id,
   });
 };
 
-// Create career
-export const useCreateCareer = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async (career: CareerInsert) => {
-      const { data, error } = await supabase
-        .from("careers")
-        .insert(career)
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["careers"] });
-      queryClient.invalidateQueries({ queryKey: ["admin-careers"] });
-      toast.success("Career opening created successfully");
-    },
-    onError: (error) => {
-      toast.error(`Failed to create career: ${error.message}`);
-    },
-  });
-};
-
-// Update career
-export const useUpdateCareer = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async ({ id, updates }: { id: string; updates: CareerUpdate }) => {
-      const { data, error } = await supabase
-        .from("careers")
-        .update(updates)
-        .eq("id", id)
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["careers"] });
-      queryClient.invalidateQueries({ queryKey: ["admin-careers"] });
-      toast.success("Career opening updated successfully");
-    },
-    onError: (error) => {
-      toast.error(`Failed to update career: ${error.message}`);
-    },
-  });
-};
-
-// Delete career
-export const useDeleteCareer = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async (id: string) => {
-      const { error } = await supabase.from("careers").delete().eq("id", id);
-
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["careers"] });
-      queryClient.invalidateQueries({ queryKey: ["admin-careers"] });
-      toast.success("Career opening deleted successfully");
-    },
-    onError: (error) => {
-      toast.error(`Failed to delete career: ${error.message}`);
+// Fetch all careers
+export const useAllCareers = () => {
+  return useQuery({
+    queryKey: ["careers", "all"],
+    queryFn: async () => {
+      return CAREERS_DATA;
     },
   });
 };

@@ -73,27 +73,25 @@ const About = () => {
         {/* Hero Section */}
         <section className="pt-32 pb-24 lg:pb-32 bg-secondary">
           <div className="container-custom section-padding">
-            <FadeIn>
-              <div className="flex lg:flex-row w-full flex-col gap-8 items-end justify-between mb-12">
-                <div>
-                  <div className="text-muted-foreground text-sm mb-4">
-                    <Link to="/" className="hover:text-primary transition-colors">
-                      Home
-                    </Link>
-                    <span className="mx-2">/</span>
-                    <span className="text-primary font-medium">About Us</span>
-                  </div>
-                  <h1 className="leading-tight text-foreground font-bold text-4xl md:text-5xl lg:text-6xl">
-                    About {COMPANY.name}
-                  </h1>
-                </div>
-                <div className="flex max-w-[500px] items-center">
-                  <p className="text-muted-foreground text-lg">
-                    {COMPANY.description} Founded 5 years ago in Ireland with a commitment to quality, reliability, and honesty.
-                  </p>
-                </div>
+            <div className="max-w-3xl mb-12">
+              <div className="text-muted-foreground text-sm mb-4">
+                <Link to="/" className="hover:text-primary transition-colors">
+                  Home
+                </Link>
+                <span className="mx-2">/</span>
+                <span className="text-primary font-medium">About Us</span>
               </div>
-            </FadeIn>
+              <FadeIn>
+                <h1 className="leading-tight text-foreground font-bold text-4xl md:text-5xl lg:text-6xl mb-6">
+                  About {COMPANY.name}
+                </h1>
+              </FadeIn>
+              <FadeIn delay={100}>
+                <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
+                  {COMPANY.description} Founded 5 years ago in Ireland with a commitment to quality, reliability, and honesty.
+                </p>
+              </FadeIn>
+            </div>
             <FadeIn>
               <div className="relative">
                 <div className="rounded-3xl overflow-hidden shadow-card">

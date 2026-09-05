@@ -5,7 +5,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { sendFormEmail } from "@/lib/email";
 import { CLEANING_SERVICES, SERVICE_AREAS } from "@/lib/config";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import FadeIn from "@/components/FadeIn";
 
@@ -61,25 +60,6 @@ const QuoteForm = () => {
         formData.location && `Town/Location: ${formData.location}`,
         formData.message && `Message: ${formData.message}`,
       ].filter(Boolean);
-
-      const { error } = await supabase.from("quote_requests").insert({
-        full_name: formData.fullName,
-        phone: formData.phone,
-        email: formData.email || null,
-        service_slug: selectedService?.slug || formData.service,
-        service_title: selectedService?.title || formData.service,
-        complexity_label: `${formData.propertyType || "Standard"} • ${formData.location || "Ennis/Limerick/Galway"}`,
-        complexity_multiplier: 1,
-        estimated_hours: 1,
-        urgency: formData.urgency || "standard",
-        base_price: selectedService?.basePrice ?? 0,
-        estimated_min: 0,
-        estimated_max: 0,
-        service_date: formData.preferredDate || null,
-        notes: notesParts.join(" | ") || null,
-      });
-
-      if (error) throw error;
 
       // Send email notification to dhalefdnf@outlook.com
       await sendFormEmail({

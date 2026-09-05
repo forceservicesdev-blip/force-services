@@ -1,7 +1,6 @@
 import Logo from "@/components/Logo";
 import { CLEANING_SERVICES, COMPANY, SERVICE_AREAS, WHATSAPP_MESSAGE } from "@/lib/config";
 import {
-  Clock,
   Facebook,
   Instagram,
   Mail,
@@ -107,10 +106,6 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-tertiary flex-shrink-0 mt-0.5" />
                 <span className="text-primary-foreground/70 text-sm">{COMPANY.address}</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Clock className="h-5 w-5 text-tertiary flex-shrink-0 mt-0.5" />
-                <span className="text-primary-foreground/70 text-sm">{COMPANY.openingHours}</span>
               </li>
             </ul>
           </div>

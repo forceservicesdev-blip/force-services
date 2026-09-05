@@ -5,13 +5,11 @@ import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useAuth } from "@/hooks/useAuth";
 import { useCareerBySlug, useCareers } from "@/hooks/useCareers";
 import { useCreateJobApplication } from "@/hooks/useJobApplications";
-import { useUserProfile } from "@/hooks/useUserProfile";
 import { ArrowUpRight, Briefcase, CheckCircle2, Loader2, MapPin } from "lucide-react";
 import { sendFormEmail } from "@/lib/email";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { z } from "zod";
 
@@ -23,8 +21,6 @@ const phoneSchema = z.string().trim().min(1, "Phone is required").max(20);
 const Career = () => {
   const { slug } = useParams();
   const { data: careers, isLoading: careersLoading } = useCareers();
-  const { user } = useAuth();
-  const { data: profile } = useUserProfile(user?.id);
 
   const { data: currentCareer, isLoading: careerLoading } = useCareerBySlug(slug);
 
@@ -39,28 +35,6 @@ const Career = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const createApplication = useCreateJobApplication();
-
-  // Auto-fill form when user is logged in
-  useEffect(() => {
-    if (user) {
-      // Set email from user auth
-      if (user.email && !email) {
-        setEmail(user.email);
-      }
-
-      // Set full name from profile or user metadata
-      if (!fullName) {
-        const name = profile?.full_name || user.user_metadata?.full_name || "";
-        setFullName(name);
-      }
-
-      // Set phone from profile or user metadata
-      if (!phone) {
-        const userPhone = profile?.phone || user.user_metadata?.phone || "";
-        setPhone(userPhone);
-      }
-    }
-  }, [user, profile, email, fullName, phone]);
 
   // Get first career as default if no slug or career not found
   const job = currentCareer || (careers && careers.length > 0 ? careers[0] : null);

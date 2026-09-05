@@ -15,7 +15,6 @@ export const COMPANY = {
   country: "Ireland",
   yearsInBusiness: 5,
   year: new Date().getFullYear(),
-  openingHours: "Mon–Fri: 8:00–18:00 | Sat: 8:00–16:00",
   social: {
     facebook: "#",
     instagram: "https://www.instagram.com/forceservicesie?utm_source=qr",
@@ -153,45 +152,6 @@ export const WHY_CHOOSE_US = [
     title: "Tailored & Flexible Solutions",
     description:
       "Every property and project is unique. We adapt our schedules, scope, and methods to your specific needs.",
-  },
-];
-
-export const TESTIMONIALS = [
-  {
-    name: "Michael O'Connor",
-    location: "Ennis, Co. Clare",
-    rating: 5,
-    text: "Force Services did an incredible power wash on our driveway and patio. Decades of moss and grime disappeared in a few hours. Fantastic attention to detail and very punctual.",
-  },
-  {
-    name: "David Ryan",
-    location: "Limerick",
-    rating: 5,
-    text: "We hired Force Services for a commercial post-construction clean after renovating our retail unit in Limerick. The team left the premises immaculate and ready for opening day. Highly recommended!",
-  },
-  {
-    name: "Sarah Gallagher",
-    location: "Galway",
-    rating: 5,
-    text: "Reliable, professional, and great value. They manage our warehouse and office cleaning on a regular schedule. The standards are always consistently top quality.",
-  },
-  {
-    name: "Patrick McMahon",
-    location: "Shannon",
-    rating: 5,
-    text: "Our house exterior and roof look brand new after their power washing service. Very professional crew, friendly communication, and no mess left behind.",
-  },
-  {
-    name: "Emma Fitzgerald",
-    location: "Newmarket-on-Fergus",
-    rating: 5,
-    text: "Booked a deep clean before moving into our new home. The Force Services team was meticulous, friendly, and did an outstanding job on the kitchen and bathrooms.",
-  },
-  {
-    name: "John Higgins",
-    location: "Ennis, Co. Clare",
-    rating: 5,
-    text: "Superb industrial floor cleaning for our workshop. Top tier equipment and great work ethic. We will definitely continue working with them.",
   },
 ];
 
