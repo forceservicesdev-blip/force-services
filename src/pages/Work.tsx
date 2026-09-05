@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import { COMPANY } from "@/lib/config";
 import { Link } from "react-router-dom";
 
-// Images for works
 import work1 from "@/assets/work-1.png";
 import work2 from "@/assets/work-2.png";
 import work3 from "@/assets/work-3.png";
