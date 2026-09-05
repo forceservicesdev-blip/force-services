@@ -17,53 +17,7 @@ interface Plan {
   recommended: boolean;
 }
 
-const pricingPlans: Record<"residential" | "commercial" | "powerWashing", Plan[]> = {
-  residential: [
-    {
-      name: "Essential Clean",
-      price: 50,
-      unit: "Starting from",
-      description: "Ideal for routine house cleaning and maintenance.",
-      features: [
-        "Dusting & vacuuming all rooms",
-        "Kitchen countertops & sink cleaning",
-        "Bathroom sanitization & mirrors",
-        "Floor mopping & surface wiping",
-        "Eco-friendly cleaning supplies",
-      ],
-      recommended: false,
-    },
-    {
-      name: "Deep Clean & Sanitize",
-      price: 120,
-      unit: "Starting from",
-      description: "Thorough top-to-bottom clean for homes needing a reset.",
-      features: [
-        "Everything in Essential Clean",
-        "Skirting boards, doors & light switches",
-        "Inside microwave & exterior oven detailing",
-        "Bathroom tile descaling & grout cleaning",
-        "Deep carpet/rug vacuuming",
-        "Limescale & stain removal",
-      ],
-      recommended: true,
-    },
-    {
-      name: "End of Tenancy / Move-In",
-      price: 180,
-      unit: "Starting from",
-      description: "Guaranteed deposit-return standard clean for tenants & landlords.",
-      features: [
-        "Complete deep property sanitization",
-        "Internal window & sill cleaning",
-        "Cupboard & drawer interior wiping",
-        "Appliance deep clean (oven, fridge)",
-        "Handover inspection checklist",
-        "Receipt provided for landlords/agents",
-      ],
-      recommended: false,
-    },
-  ],
+const pricingPlans: Record<"commercial" | "powerWashing", Plan[]> = {
   commercial: [
     {
       name: "Office & Retail Regular",
@@ -200,7 +154,7 @@ const FAQItem = ({
 
 const Pricing = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<"residential" | "commercial" | "powerWashing">(
+  const [activeTab, setActiveTab] = useState<"commercial" | "powerWashing">(
     "powerWashing"
   );
   const [openFAQ, setOpenFAQ] = useState<number | null>(0);
@@ -264,16 +218,6 @@ const Pricing = () => {
                 }`}
               >
                 Commercial & Industrial
-              </button>
-              <button
-                onClick={() => setActiveTab("residential")}
-                className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
-                  activeTab === "residential"
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Residential Cleans
               </button>
             </div>
           </FadeIn>

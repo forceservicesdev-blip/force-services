@@ -4,12 +4,10 @@ import {
   Clock,
   Facebook,
   Instagram,
-  Linkedin,
   Mail,
   MapPin,
   MessageCircle,
   Phone,
-  Twitter,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -20,8 +18,6 @@ const whatsappHref = `https://wa.me/${COMPANY.whatsappNumber.replace(/\D/g, "")}
 const socialLinks = [
   { icon: Facebook, href: COMPANY.social.facebook, label: "Facebook" },
   { icon: Instagram, href: COMPANY.social.instagram, label: "Instagram" },
-  { icon: Twitter, href: COMPANY.social.twitter, label: "Twitter" },
-  { icon: Linkedin, href: COMPANY.social.linkedin, label: "LinkedIn" },
 ];
 
 const Footer = () => {
@@ -41,6 +37,8 @@ const Footer = () => {
                 <a
                   key={social.label}
                   href={social.href}
+                  target={social.href !== "#" ? "_blank" : undefined}
+                  rel={social.href !== "#" ? "noopener noreferrer" : undefined}
                   aria-label={social.label}
                   className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-tertiary transition-colors"
                 >

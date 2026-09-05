@@ -5,14 +5,14 @@ import FadeIn from "@/components/FadeIn";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { useBlog, usePublishedBlogs } from "@/hooks/useBlogs";
+import { COMPANY } from "@/lib/config";
 import DOMPurify from "dompurify";
-import { Facebook, Linkedin, Twitter } from "lucide-react";
+import { Facebook, Instagram } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 
 const socialLinks = [
-  { icon: Facebook, href: "#" },
-  { icon: Twitter, href: "#" },
-  { icon: Linkedin, href: "#" },
+  { icon: Facebook, href: COMPANY.social.facebook, label: "Facebook" },
+  { icon: Instagram, href: COMPANY.social.instagram, label: "Instagram" },
 ];
 
 const BlogDetail = () => {
@@ -150,6 +150,9 @@ const BlogDetail = () => {
                     <a
                       key={index}
                       href={social.href}
+                      target={social.href !== "#" ? "_blank" : undefined}
+                      rel={social.href !== "#" ? "noopener noreferrer" : undefined}
+                      aria-label={social.label}
                       className="w-10 h-10 rounded-full group bg-muted flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-white transition-colors"
                     >
                       <social.icon className="h-4 w-4 text-white group-hover:text-black" />

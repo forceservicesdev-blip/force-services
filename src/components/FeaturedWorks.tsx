@@ -20,8 +20,8 @@ const projects = [
     slug: "post-construction-sparkle-clean",
   },
   {
-    title: "Commercial & Deep Cleaning",
-    description: "High-standard sanitization for commercial facilities and residential properties.",
+    title: "Commercial & Office Cleaning",
+    description: "High-standard sanitization for commercial offices, facilities, and business premises.",
     image: completedBathroom,
     slug: "commercial-office-clean",
   },

@@ -3,13 +3,26 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CLEANING_SERVICES } from "@/lib/config";
+import { sendFormEmail } from "@/lib/email";
+import { CLEANING_SERVICES, SERVICE_AREAS } from "@/lib/config";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import FadeIn from "@/components/FadeIn";
 
-const propertyTypes = ["House", "Apartment", "Office", "Commercial Unit", "Other"];
-const frequencies = ["One-off", "Weekly", "Fortnightly", "Monthly"];
+const propertyTypes = [
+  "Residential (House / Patio / Driveway)",
+  "Commercial Office / Retail Store",
+  "Industrial Warehouse / Factory",
+  "Post-Construction / Renovation Site",
+  "Forecourt / Car Park / Exterior",
+  "Other / Custom Facility",
+];
+
+const urgencyOptions = [
+  { value: "standard", label: "Standard (Flexible / 3-5 days)" },
+  { value: "urgent", label: "Urgent (Within 48 hours)" },
+  { value: "emergency", label: "Emergency / Immediate" },
+];
 
 const initialState = {
   fullName: "",
@@ -17,11 +30,9 @@ const initialState = {
   email: "",
   service: "",
   propertyType: "",
+  location: "",
   preferredDate: "",
-  preferredTime: "",
-  frequency: "",
-  bedrooms: "",
-  bathrooms: "",
+  urgency: "standard",
   message: "",
 };
 
@@ -47,9 +58,7 @@ const QuoteForm = () => {
     try {
       const notesParts = [
         formData.propertyType && `Property type: ${formData.propertyType}`,
-        formData.preferredTime && `Preferred time: ${formData.preferredTime}`,
-        formData.bedrooms && `Bedrooms: ${formData.bedrooms}`,
-        formData.bathrooms && `Bathrooms: ${formData.bathrooms}`,
+        formData.location && `Town/Location: ${formData.location}`,
         formData.message && `Message: ${formData.message}`,
       ].filter(Boolean);
 
@@ -59,18 +68,36 @@ const QuoteForm = () => {
         email: formData.email || null,
         service_slug: selectedService?.slug || formData.service,
         service_title: selectedService?.title || formData.service,
-        complexity_label: formData.propertyType || "Standard",
+        complexity_label: `${formData.propertyType || "Standard"} • ${formData.location || "Ennis/Limerick/Galway"}`,
         complexity_multiplier: 1,
         estimated_hours: 1,
-        urgency: formData.frequency || "one-off",
+        urgency: formData.urgency || "standard",
         base_price: selectedService?.basePrice ?? 0,
-        estimated_min: selectedService?.basePrice ?? 0,
-        estimated_max: selectedService?.basePrice ?? 0,
+        estimated_min: 0,
+        estimated_max: 0,
         service_date: formData.preferredDate || null,
         notes: notesParts.join(" | ") || null,
       });
 
       if (error) throw error;
+
+      // Send email notification to dhalefdnf@outlook.com
+      await sendFormEmail({
+        subject: `New Quote Request: ${formData.fullName} - ${selectedService?.title || formData.service}`,
+        replyTo: formData.email,
+        data: {
+          "Form Type": "Fast Quote Form",
+          "Customer Name": formData.fullName,
+          "Phone": formData.phone,
+          "Email": formData.email || "Not provided",
+          "Service": selectedService?.title || formData.service,
+          "Property Type": formData.propertyType || "Standard",
+          "Location": formData.location || "Ennis / Limerick / Galway",
+          "Preferred Date": formData.preferredDate || "Flexible",
+          "Urgency": formData.urgency || "standard",
+          "Message / Notes": notesParts.join(" | ") || "None",
+        },
+      });
 
       toast.success("Quote request submitted! We'll be in touch shortly.");
       setFormData(initialState);
@@ -87,9 +114,9 @@ const QuoteForm = () => {
       <div className="container-custom section-padding">
         <FadeIn>
           <div className="max-w-2xl mx-auto text-center mb-12">
-            <h2 className="text-3xl md:text-h2 font-bold text-primary mb-4">Get a Free Quote</h2>
+            <h2 className="text-3xl md:text-h2 font-bold text-primary mb-4">Request a Free Quote</h2>
             <p className="text-muted-foreground text-lg">
-              Tell us about your space and we'll get back to you with a no-obligation quote.
+              Tell us about your property and cleaning requirements across Ennis, Limerick & Galway. Fast, no-obligation quote.
             </p>
           </div>
         </FadeIn>
@@ -100,20 +127,36 @@ const QuoteForm = () => {
                 <label className="block font-medium text-primary mb-2">
                   Full Name <span className="text-destructive">*</span>
                 </label>
-                <Input value={formData.fullName} onChange={(e) => update("fullName", e.target.value)} required />
+                <Input
+                  value={formData.fullName}
+                  onChange={(e) => update("fullName", e.target.value)}
+                  placeholder="e.g. John Murphy"
+                  required
+                />
               </div>
               <div>
                 <label className="block font-medium text-primary mb-2">
-                  Phone <span className="text-destructive">*</span>
+                  Phone Number <span className="text-destructive">*</span>
                 </label>
-                <Input value={formData.phone} onChange={(e) => update("phone", e.target.value)} required />
+                <Input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => update("phone", e.target.value)}
+                  placeholder="e.g. 087 123 4567"
+                  required
+                />
               </div>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
                 <label className="block font-medium text-primary mb-2">Email</label>
-                <Input type="email" value={formData.email} onChange={(e) => update("email", e.target.value)} />
+                <Input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => update("email", e.target.value)}
+                  placeholder="your.email@example.com"
+                />
               </div>
               <div>
                 <label className="block font-medium text-primary mb-2">
@@ -136,7 +179,7 @@ const QuoteForm = () => {
 
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
-                <label className="block font-medium text-primary mb-2">Property Type</label>
+                <label className="block font-medium text-primary mb-2">Property / Facility Type</label>
                 <Select value={formData.propertyType} onValueChange={(v) => update("propertyType", v)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select property type..." />
@@ -151,15 +194,15 @@ const QuoteForm = () => {
                 </Select>
               </div>
               <div>
-                <label className="block font-medium text-primary mb-2">Frequency</label>
-                <Select value={formData.frequency} onValueChange={(v) => update("frequency", v)}>
+                <label className="block font-medium text-primary mb-2">Town / Location</label>
+                <Select value={formData.location} onValueChange={(v) => update("location", v)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="How often?" />
+                    <SelectValue placeholder="Select area..." />
                   </SelectTrigger>
                   <SelectContent>
-                    {frequencies.map((freq) => (
-                      <SelectItem key={freq} value={freq}>
-                        {freq}
+                    {SERVICE_AREAS.map((area) => (
+                      <SelectItem key={area} value={area}>
+                        {area}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -170,29 +213,34 @@ const QuoteForm = () => {
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
                 <label className="block font-medium text-primary mb-2">Preferred Date</label>
-                <Input type="date" value={formData.preferredDate} onChange={(e) => update("preferredDate", e.target.value)} />
+                <Input
+                  type="date"
+                  value={formData.preferredDate}
+                  min={new Date().toISOString().split("T")[0]}
+                  onChange={(e) => update("preferredDate", e.target.value)}
+                />
               </div>
               <div>
-                <label className="block font-medium text-primary mb-2">Preferred Time</label>
-                <Input type="time" value={formData.preferredTime} onChange={(e) => update("preferredTime", e.target.value)} />
-              </div>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label className="block font-medium text-primary mb-2">Bedrooms</label>
-                <Input type="number" min="0" value={formData.bedrooms} onChange={(e) => update("bedrooms", e.target.value)} />
-              </div>
-              <div>
-                <label className="block font-medium text-primary mb-2">Bathrooms</label>
-                <Input type="number" min="0" value={formData.bathrooms} onChange={(e) => update("bathrooms", e.target.value)} />
+                <label className="block font-medium text-primary mb-2">Urgency</label>
+                <Select value={formData.urgency} onValueChange={(v) => update("urgency", v)}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {urgencyOptions.map((opt) => (
+                      <SelectItem key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
             <div>
-              <label className="block font-medium text-primary mb-2">Message</label>
+              <label className="block font-medium text-primary mb-2">Project Details & Requirements</label>
               <Textarea
-                placeholder="Tell us anything else that might help us prepare your quote..."
+                placeholder="Tell us about the property condition, approximate size (e.g. 2-car driveway, 3-storey building facade), or any specific requirements..."
                 className="min-h-[120px]"
                 value={formData.message}
                 onChange={(e) => update("message", e.target.value)}

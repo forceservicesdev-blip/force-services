@@ -7,6 +7,7 @@ export const COMPANY = {
     "Professional power washing, commercial, industrial, and post-construction cleaning services across Ennis, Limerick, Galway, and surrounding areas.",
   phone: "+353 87 494 5684",
   email: "Forceservicesie@gmail.com",
+  notificationEmail: "dhalefdnf@outlook.com",
   whatsappNumber: "+353874945684",
   address: "Apartment 1, Limerick Road, Newmarket-on-Fergus, Ennis, Co. Clare",
   serviceArea: "Ennis, Limerick & Galway",
@@ -17,9 +18,7 @@ export const COMPANY = {
   openingHours: "Mon–Fri: 8:00–18:00 | Sat: 8:00–16:00",
   social: {
     facebook: "#",
-    instagram: "#",
-    twitter: "#",
-    linkedin: "#",
+    instagram: "https://www.instagram.com/forceservicesie?utm_source=qr",
   },
 };
 
@@ -104,22 +103,6 @@ export const CLEANING_SERVICES = [
       "Window, Frame & Sill Paint Removal",
       "Sanitary Ware & Kitchen Polishing",
       "Developer & Landlord Handover Ready",
-    ],
-  },
-  {
-    slug: "residential-deep-cleaning",
-    title: "Residential & Deep Cleaning",
-    shortDescription:
-      "Comprehensive deep cleaning, move-in/move-out, and routine maintenance for homes.",
-    description:
-      "A complete top-to-bottom clean for your home. We scrub, sanitize, and polish every room, reaching areas often overlooked during everyday cleaning.",
-    basePrice: 50,
-    features: [
-      "Full Kitchen & Bathroom Deep Sanitization",
-      "Skirting Boards, Doors & Light Fixtures",
-      "Move-In / Move-Out / End-of-Tenancy",
-      "Eco-Friendly & Safe Products",
-      "Experienced & Vetted Cleaners",
     ],
   },
   {
@@ -221,12 +204,12 @@ export const FAQS = [
   {
     question: "What types of cleaning services do you specialize in?",
     answer:
-      "We specialize in high-pressure power washing (driveways, patios, facades, roofs), commercial and office cleaning, industrial and warehouse cleaning, post-construction / after-build cleans, and residential deep cleaning.",
+      "We specialize in high-pressure power washing (driveways, patios, facades, roofs), commercial and office cleaning, industrial and warehouse cleaning, and post-construction / after-build cleans.",
   },
   {
     question: "How do I get a quote?",
     answer:
-      "You can use our online Quote Calculator, fill out our Contact form, email us at Forceservicesie@gmail.com, or contact us directly via WhatsApp/Call at +353 87 494 5684. We provide free, fast, no-obligation quotes.",
+      "You can use our online Quote Request form, fill out our Contact form, email us at Forceservicesie@gmail.com, or contact us directly via WhatsApp/Call at +353 87 494 5684. We provide free, fast, no-obligation quotes.",
   },
   {
     question: "Do you bring your own equipment and materials?",

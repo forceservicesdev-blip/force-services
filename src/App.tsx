@@ -16,7 +16,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
-import QuoteCalculator from "./pages/QuoteCalculator";
+import QuoteRequest from "./pages/QuoteRequest";
 import Reviews from "./pages/Reviews";
 import ServiceDetail from "./pages/ServiceDetail";
 import Services from "./pages/Services";
@@ -70,7 +70,7 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />
           <Route path="/pricing" element={<Pricing />} />
-          <Route path="/quote" element={<QuoteCalculator />} />
+          <Route path="/quote" element={<QuoteRequest />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/faq" element={<FAQ />} />
