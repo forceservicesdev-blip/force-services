@@ -61,7 +61,6 @@ const QuoteForm = () => {
         formData.message && `Message: ${formData.message}`,
       ].filter(Boolean);
 
-      // Send email notification to dhalefdnf@outlook.com
       await sendFormEmail({
         subject: `New Quote Request: ${formData.fullName} - ${selectedService?.title || formData.service}`,
         replyTo: formData.email,

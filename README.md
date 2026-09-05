@@ -1,6 +1,6 @@
 # Force Services — Professional Cleaning & Power Washing Web Platform
 
-Official website and lead-generation platform for **Force Services** (CRO: `IT00026659BB`), providing professional power washing, commercial, industrial, and post-construction cleaning across **Ennis, Limerick, Galway, and County Clare, Ireland**.
+Official website and lead-generation platform for **Force Services**, providing professional power washing, commercial, industrial, and post-construction cleaning across **Ennis, Limerick, Galway, and County Clare, Ireland**.
 
 ---
 
@@ -124,7 +124,6 @@ The application will start locally at `http://localhost:8080` (or the port speci
 ## 🏢 Company Information
 
 - **Company Name**: Force Services
-- **CRO Registration**: IT00026659BB
 - **Phone**: [+353 87 494 5684](tel:+353874945684)
 - **WhatsApp**: [+353 87 494 5684](https://wa.me/353874945684)
 - **Email**: [Forceservicesie@gmail.com](mailto:Forceservicesie@gmail.com)

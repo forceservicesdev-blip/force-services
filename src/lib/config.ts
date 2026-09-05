@@ -1,13 +1,13 @@
 export const COMPANY = {
   name: "Force Services",
   legalName: "Force Services",
-  cro: "IT00026659BB",
+  cro: "",
   tagline: "Professional Power Washing, Commercial, Industrial & Post-Construction Cleaning",
   description:
     "Professional power washing, commercial, industrial, and post-construction cleaning services across Ennis, Limerick, Galway, and surrounding areas.",
   phone: "+353 87 494 5684",
-  email: "Forceservicesie@gmail.com",
-  notificationEmail: "dhalefdnf@outlook.com",
+  email: "forceservicesie@gmail.com",
+  notificationEmail: "forceservicesie@gmail.com",
   whatsappNumber: "+353874945684",
   address: "Apartment 1, Limerick Road, Newmarket-on-Fergus, Ennis, Co. Clare",
   serviceArea: "Ennis, Limerick & Galway",
@@ -179,7 +179,7 @@ export const FAQS = [
   {
     question: "Are you fully insured and registered?",
     answer:
-      "Yes, Force Services is fully insured for public liability and commercial operations (CRO: IT00026659BB), giving you complete peace of mind for every project.",
+      "Yes, Force Services is fully insured for public liability and commercial operations, giving you complete peace of mind for every project.",
   },
   {
     question: "How long has Force Services been in business?",
