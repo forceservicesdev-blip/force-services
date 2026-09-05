@@ -72,7 +72,7 @@ const TRUST_POINTS = [
   {
     icon: ShieldCheck,
     title: "Fully Insured & Certified",
-    desc: "Comprehensive public & commercial liability coverage (CRO: IT00026659BB).",
+    desc: "Comprehensive public & commercial liability coverage for every project.",
   },
   {
     icon: Sparkles,
@@ -130,7 +130,6 @@ const QuoteRequest = () => {
         notes ? `Details: ${notes}` : "",
       ].filter(Boolean);
 
-      // Send email notification to dhalefdnf@outlook.com
       await sendFormEmail({
         subject: `New Detailed Quote Request: ${fullName} - ${activeService?.title || selectedService}`,
         replyTo: email,

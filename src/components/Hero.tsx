@@ -65,7 +65,7 @@ const Hero = () => {
                 <img
                   src={heroImage}
                   alt="Professional cleaning specialist"
-                  className="w-full h-[250px] sm:h-[320px] object-cover object-center"
+                  className="w-full h-[250px] sm:h-[320px] object-cover object-top"
                 />
               </div>
             </div>
@@ -98,7 +98,7 @@ const Hero = () => {
               <img
                 src={heroImage}
                 alt="Professional cleaner"
-                className="w-full h-[420px] md:h-[520px] object-cover"
+                className="w-full h-[420px] md:h-[520px] object-cover object-top"
               />
             </div>
           </FadeIn>

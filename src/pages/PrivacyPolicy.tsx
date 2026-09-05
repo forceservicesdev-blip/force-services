@@ -78,11 +78,7 @@ const PrivacyPolicy = () => {
                   <h2 className="text-2xl font-bold text-primary">1. Who We Are</h2>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  <strong>{COMPANY.legalName}</strong> (CRO Registration:{" "}
-                  <code className="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-sm font-mono">
-                    {COMPANY.cro}
-                  </code>
-                  ), trading as <strong>{COMPANY.name}</strong>, is a registered Irish cleaning and exterior maintenance contractor providing professional power washing, commercial, industrial, and post-construction cleaning throughout {COMPANY.serviceArea} and surrounding counties.
+                  <strong>{COMPANY.legalName}</strong>, trading as <strong>{COMPANY.name}</strong>, is a registered Irish cleaning and exterior maintenance contractor providing professional power washing, commercial, industrial, and post-construction cleaning throughout {COMPANY.serviceArea} and surrounding counties.
                 </p>
                 <div className="grid sm:grid-cols-2 gap-3 pt-2 text-sm text-muted-foreground bg-secondary/30 p-4 rounded-xl">
                   <div className="flex items-center gap-2">

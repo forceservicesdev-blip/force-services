@@ -54,7 +54,7 @@ const coreValues = [
   {
     title: "Fully Insured & Registered",
     description:
-      `Book with total peace of mind. Force Services is fully registered (CRO: ${COMPANY.cro}) and insured for domestic and commercial projects.`,
+      `Book with total peace of mind. Force Services is fully registered and insured for domestic and commercial projects.`,
     icon: Wrench,
   },
   {
@@ -192,9 +192,9 @@ const About = () => {
                         ✓
                       </div>
                       <div>
-                        <h4 className="font-bold text-foreground text-lg">Official Registration & Insurance</h4>
+                        <h4 className="font-bold text-foreground text-lg">Fully Insured & Certified</h4>
                         <p className="text-muted-foreground text-sm">
-                          Company Registration Number: <strong className="text-foreground">{COMPANY.cro}</strong>. Fully insured for complete security.
+                          Comprehensive public and commercial liability insurance for complete safety and peace of mind.
                         </p>
                       </div>
                     </div>

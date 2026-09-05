@@ -15,7 +15,7 @@ export async function sendFormEmail({
   replyTo,
   data,
 }: SendEmailOptions): Promise<{ success: boolean; message?: string }> {
-  const recipient = (COMPANY as any).notificationEmail || "dhalefdnf@outlook.com";
+  const recipient = (COMPANY as any).notificationEmail || "forceservicesie@gmail.com";
 
   // Filter out empty/null values and clean keys
   const cleanData: Record<string, string> = {};

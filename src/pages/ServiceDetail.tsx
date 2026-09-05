@@ -113,7 +113,7 @@ const detailedServices: Record<string, ServiceDetailData> = {
       "Improves facility safety and prevents slip & fall hazards",
       "Ensures full compliance with health, safety, and hygiene regulations",
       "Extends the lifespan of industrial flooring and machinery",
-      "Full adherence to Irish Health & Safety standards (CRO: " + COMPANY.cro + ")",
+      "Full adherence to Irish Health & Safety and environmental standards",
     ],
     workSteps: [
       { number: "01", title: "Safety & Hazard Assessment", description: "Comprehensive risk assessment and identification of specialized cleaning zones." },
@@ -226,7 +226,6 @@ const ServiceDetail = () => {
       user_id: user?.id || null,
     });
 
-    // Send email notification to dhalefdnf@outlook.com
     await sendFormEmail({
       subject: `New Service Inquiry: ${fullName.trim()} - ${serviceName}`,
       data: {

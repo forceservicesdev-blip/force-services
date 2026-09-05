@@ -11,7 +11,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Expand,
-  MapPin,
   ShieldCheck,
   Sparkles,
   X,
@@ -19,7 +18,6 @@ import {
 import { Link } from "react-router-dom";
 
 // Direct image imports from src/assets/images/
-import service01 from "@/assets/images/service-01.jpeg";
 import service02 from "@/assets/images/service-02.jpeg";
 import service03 from "@/assets/images/service-03.jpeg";
 import service04 from "@/assets/images/service-04.jpeg";
@@ -30,94 +28,77 @@ import service08 from "@/assets/images/service-08.jpeg";
 import service09 from "@/assets/images/service-09.jpeg";
 
 /**
- * List of showcase projects (9 images located in src/assets/images/).
+ * List of showcase projects (8 images located in src/assets/images/).
  * All images are displayed in standard 16:9 widescreen format.
  */
 export const SHOWCASE_SERVICES = [
   {
     id: "01",
-    image: service01,
-    title: "High-Pressure Driveway & Kerb Washing",
-    category: "Driveway Wash",
-    location: "Ennis, Co. Clare",
-    description: "Deep pressure washing stripping away years of heavy moss, lichen, and weather grime.",
-    highlights: ["Deep moss removal", "Kerb & border detail", "Uniform streak-free finish"],
-  },
-  {
-    id: "02",
     image: service02,
     title: "Commercial Forecourt & Pavement Clean",
-    category: "Commercial",
     location: "Co. Clare Commercial Site",
     description: "Large-scale surface cleaning restoring safety, slip resistance, and clean business appeal.",
     highlights: ["High PSI hot wash", "Oil & stain mitigation", "Zero surface damage"],
   },
   {
-    id: "03",
+    id: "02",
     image: service03,
     title: "Patio & Paving Slab Revitalisation",
-    category: "Patio & Paving",
     location: "Residential Garden",
     description: "Revival of natural paving stone colors, washing away slippery algae and embedded soil.",
     highlights: ["Joint-safe wash", "Natural stone revival", "Anti-fungal treatment"],
   },
   {
-    id: "04",
+    id: "03",
     image: service04,
     title: "Stone Wall & Perimeter Restoration",
-    category: "Masonry Wash",
     location: "Private Residence",
     description: "Specialized pressure and chemical treatment bringing out the natural beauty of stone boundaries.",
     highlights: ["Organic stain removal", "Masonry preservation", "Clean finish"],
   },
   {
-    id: "05",
+    id: "04",
     image: service05,
     title: "Exterior Wall Soft Washing & Facade",
-    category: "Facade Care",
     location: "Domestic Property",
     description: "Low-pressure softwash treatment removing red and green algae without damaging paint or render.",
     highlights: ["Render safe", "Long-lasting biocide", "Immediate curb appeal"],
   },
   {
-    id: "06",
+    id: "05",
     image: service06,
     title: "Commercial Property Grounds Wash",
-    category: "Industrial",
     location: "Business Yard",
     description: "Heavy-duty cleaning for car parks, loading bays, and commercial concrete surfaces.",
     highlights: ["Heavy-duty equipment", "Fast turnaround", "Commercial grade"],
   },
   {
-    id: "07",
+    id: "06",
     image: service07,
     title: "Block Paving & Pathway Renewal",
-    category: "Surface Cleaning",
     location: "Residential Pathway",
     description: "Targeted jet washing clearing weeds, dirt, and built-up grime between pavers.",
     highlights: ["Weed eradication", "Deep surface clean", "Smooth even finish"],
   },
   {
-    id: "08",
+    id: "07",
     image: service08,
     title: "Roof & Gutter Deep Clearance",
-    category: "Roof & Gutter",
     location: "County Clare",
     description: "Removal of heavy moss growth, unclogging gutters, and pressure rinsing exterior fascia.",
     highlights: ["Full moss scrape", "Downpipe clearing", "Overflow prevention"],
   },
   {
-    id: "09",
+    id: "08",
     image: service09,
     title: "Decking & Timber Exterior Wash",
-    category: "Timber Care",
     location: "Private Garden Deck",
     description: "Gentle yet effective pressure treatment restoring wood grain without splintering.",
     highlights: ["Non-destructive wash", "Algae removal", "Slip prevention"],
   },
 ];
 
-const AUTOPLAY_INTERVAL = 5000; // 5 seconds per slide
+const AUTOPLAY_INTERVAL = 5000;
 
 const BeforeAfter = () => {
   const [api, setApi] = useState<CarouselApi>();
@@ -127,14 +108,12 @@ const BeforeAfter = () => {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Touch and Drag swipe refs for Lightbox
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
   const mouseStartX = useRef<number | null>(null);
   const isMouseDown = useRef<boolean>(false);
   const lastWheelTime = useRef<number>(0);
 
-  // Update slide count and current index from embla
   useEffect(() => {
     if (!api) return;
 
@@ -362,46 +341,19 @@ const BeforeAfter = () => {
                           <span className="rounded-full bg-black/70 backdrop-blur-md px-2.5 py-0.5 text-[11px] font-bold text-white border border-white/20 tracking-wider shadow-xs">
                             #{item.id}
                           </span>
-                          <span className="rounded-full bg-primary/95 backdrop-blur-md px-3 py-0.5 text-[11px] font-semibold text-primary-foreground shadow-xs">
-                            {item.category}
-                          </span>
+                          {item.category && (
+                            <span className="rounded-full bg-primary/95 backdrop-blur-md px-3 py-0.5 text-[11px] font-semibold text-primary-foreground shadow-xs">
+                              {item.category}
+                            </span>
+                          )}
                         </div>
 
                         {/* Bottom Image Info Banner */}
-                        <div className="absolute bottom-3 left-3 right-3 z-30 flex items-center justify-between text-white/90">
-                          <div className="flex items-center gap-1.5 text-[11px] font-medium bg-black/60 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/10">
-                            <MapPin className="h-3 w-3 text-tertiary" />
-                            <span>{item.location}</span>
-                          </div>
-
+                        <div className="absolute bottom-3 right-3 z-30 flex items-center justify-end text-white/90">
                           {/* Zoom prompt icon */}
                           <div className="p-1.5 rounded-full bg-white/20 backdrop-blur-md text-white group-hover:bg-primary group-hover:text-primary-foreground transition-colors shadow-md">
                             <Expand className="h-3.5 w-3.5" />
                           </div>
-                        </div>
-                      </div>
-
-                      {/* Card Details & Content */}
-                      <div className="p-5 flex-1 flex flex-col justify-between gap-3">
-                        <div>
-                          <h3 className="text-base sm:text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-snug line-clamp-1">
-                            {item.title}
-                          </h3>
-                          <p className="text-muted-foreground text-xs sm:text-sm mt-1.5 line-clamp-2 leading-relaxed">
-                            {item.description}
-                          </p>
-                        </div>
-
-                        {/* Highlights pills */}
-                        <div className="pt-2.5 border-t border-border/70 flex flex-wrap gap-1.5">
-                          {item.highlights.slice(0, 2).map((h) => (
-                            <span
-                              key={h}
-                              className="text-[11px] font-medium bg-secondary text-secondary-foreground px-2 py-0.5 rounded-md"
-                            >
-                              ✓ {h}
-                            </span>
-                          ))}
                         </div>
                       </div>
                     </div>
@@ -545,9 +497,11 @@ const BeforeAfter = () => {
                 <span className="rounded-full bg-black/75 backdrop-blur-md px-3.5 py-1 text-xs font-bold text-white border border-white/20">
                   {activeItem.id} of {SHOWCASE_SERVICES.length}
                 </span>
-                <span className="rounded-full bg-primary px-3.5 py-1 text-xs font-semibold text-primary-foreground">
-                  {activeItem.category}
-                </span>
+                {activeItem.category && (
+                  <span className="rounded-full bg-primary px-3.5 py-1 text-xs font-semibold text-primary-foreground">
+                    {activeItem.category}
+                  </span>
+                )}
               </div>
 
               {/* Swipe/Scroll Hint Badge */}
@@ -557,7 +511,7 @@ const BeforeAfter = () => {
             </div>
 
             {/* Scrollable In-Modal Thumbnail Bar */}
-            <div className="bg-neutral-950/80 px-4 py-2.5 border-t border-border/40 flex items-center justify-center gap-2 overflow-x-auto scrollbar-none">
+            <div className="bg-neutral-950/80 px-4 py-3 border-t border-border/40 flex items-center justify-center gap-2 overflow-x-auto scrollbar-none">
               {SHOWCASE_SERVICES.map((item, idx) => {
                 const isActive = lightboxIndex === idx;
                 return (
@@ -581,30 +535,6 @@ const BeforeAfter = () => {
                   </button>
                 );
               })}
-            </div>
-
-            {/* Bottom Details Footer */}
-            <div className="p-5 sm:p-6 bg-card border-t border-border flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                  <MapPin className="h-3.5 w-3.5 text-tertiary" />
-                  <span>{activeItem.location}</span>
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-foreground">
-                  {activeItem.title}
-                </h3>
-                <p className="text-muted-foreground text-xs sm:text-sm max-w-2xl line-clamp-2">
-                  {activeItem.description}
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3 flex-shrink-0">
-                <Link to="/quote" onClick={() => setLightboxIndex(null)}>
-                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold rounded-full px-6 shadow-md">
-                    Request Quote For This
-                  </Button>
-                </Link>
-              </div>
             </div>
           </div>
         </div>

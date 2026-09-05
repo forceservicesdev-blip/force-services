@@ -60,7 +60,7 @@ const TermsAndConditions = () => {
               Please read these terms and conditions carefully before booking or using any cleaning services provided by {COMPANY.name}.
             </p>
             <p className="text-xs text-muted-foreground mt-3">
-              Last Updated: <span className="font-semibold text-foreground">{lastUpdated}</span> • CRO: {COMPANY.cro}
+              Last Updated: <span className="font-semibold text-foreground">{lastUpdated}</span>
             </p>
           </FadeIn>
         </div>
@@ -81,11 +81,7 @@ const TermsAndConditions = () => {
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
                   These Terms and Conditions constitute a legally binding agreement between you (the "Client", "Customer", or "You") and{" "}
-                  <strong>{COMPANY.legalName}</strong> (CRO Registration:{" "}
-                  <code className="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-sm font-mono">
-                    {COMPANY.cro}
-                  </code>
-                  ), trading as <strong>{COMPANY.name}</strong> (“we”, “us”, or “our”).
+                  <strong>{COMPANY.legalName}</strong>, trading as <strong>{COMPANY.name}</strong> (“we”, “us”, or “our”).
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
                   By booking our cleaning services, accepting a quotation, or using our website, you acknowledge that you have read, understood, and agreed to be bound by these terms.
@@ -215,7 +211,7 @@ const TermsAndConditions = () => {
                 </div>
                 <div className="space-y-3 text-muted-foreground leading-relaxed">
                   <p>
-                    <strong>Public & Commercial Liability:</strong> {COMPANY.name} is fully insured for public liability and property damage under comprehensive Irish business insurance cover (CRO: {COMPANY.cro}).
+                    <strong>Public & Commercial Liability:</strong> {COMPANY.name} is fully insured for public liability and property damage under comprehensive Irish business insurance cover.
                   </p>
                   <p>
                     <strong>Satisfaction Guarantee:</strong> We pride ourselves on the highest standards. If you notice any area that was overlooked or unsatisfactory, please notify us within <strong>24 hours</strong> of job completion. We will return to inspect and re-clean the affected area at no additional charge.

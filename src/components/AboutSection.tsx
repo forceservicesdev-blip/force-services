@@ -56,7 +56,7 @@ const AboutSection = () => {
               </div>
               <div className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <CheckCircle2 className="h-5 w-5 text-tertiary flex-shrink-0" />
-                <span>Fully Insured (CRO: {COMPANY.cro})</span>
+                <span>Fully Insured & Certified</span>
               </div>
               <div className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <CheckCircle2 className="h-5 w-5 text-tertiary flex-shrink-0" />

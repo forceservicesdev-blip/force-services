@@ -79,7 +79,6 @@ const Career = () => {
       note: note.trim() || null,
     });
 
-    // Send email notification to dhalefdnf@outlook.com
     await sendFormEmail({
       subject: `New Job Application: ${fullName.trim()} for ${job.title}`,
       replyTo: email.trim(),
