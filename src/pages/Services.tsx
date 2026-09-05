@@ -15,11 +15,10 @@ import {
 import { Link } from "react-router-dom";
 
 const SERVICE_ICONS: Record<string, typeof Home> = {
-  "regular-house-cleaning": Home,
-  "deep-cleaning": Sparkles,
-  "end-of-tenancy-cleaning": KeyRound,
-  "office-commercial-cleaning": Building2,
-  "move-in-move-out-cleaning": Truck,
+  "power-washing": Sparkles,
+  "commercial-cleaning": Building2,
+  "industrial-cleaning": Building2,
+  "post-construction-cleaning": Building2,
   "custom-cleaning": SprayCan,
 };
 
@@ -47,10 +46,10 @@ const Services = () => {
             </FadeIn>
             <FadeIn delay={100}>
               <p className="text-muted-foreground text-lg lg:pt-4">
-                From regular house cleans to end-of-tenancy deep cleans,{" "}
-                {COMPANY.name} offers a full range of professional cleaning
-                services across {COMPANY.serviceArea}. Fully insured, fully
-                trusted, and tailored to you.
+                From high-pressure power washing to commercial, industrial, and
+                post-construction cleaning, {COMPANY.name} offers a full range of
+                professional cleaning services across {COMPANY.serviceArea}.
+                Fully insured, fully trusted, and tailored to you.
               </p>
             </FadeIn>
           </div>

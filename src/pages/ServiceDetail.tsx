@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { useCreateServiceInquiry } from "@/hooks/useServiceInquiries";
 import { CLEANING_SERVICES, COMPANY } from "@/lib/config";
+import { sendFormEmail } from "@/lib/email";
 import { Check, Loader2, Phone, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -151,34 +152,6 @@ const detailedServices: Record<string, ServiceDetailData> = {
       { number: "04", title: "Handover Inspection", description: "White-glove inspection ensuring the property is 100% move-in ready." },
     ],
   },
-  "residential-deep-cleaning": {
-    title: "Residential & Deep Cleaning",
-    tagline: "Top-to-bottom domestic cleaning, move-in/move-out, and routine house care.",
-    image: cleaningKitchen,
-    aboutTitle: "Deep Cleaning for Spotless, Fresh Homes",
-    aboutDescription:
-      "Whether you are moving home, preparing for a special event, or simply need a thorough seasonal reset, Force Services delivers unrivaled residential deep cleaning.\n\nOur vetted and trained team gets into every hard-to-reach corner, tackling built-up grease in kitchens, limescale in bathrooms, and dust behind furniture so you can enjoy a spotless living space.",
-    included: [
-      "Kitchen deep clean: oven, hob, extractor, countertops, and exterior cupboards",
-      "Bathroom descaling, tile scrubbing, and fixture sanitization",
-      "Skirting boards, door frames, switches, and sockets detailed",
-      "Floor vacuuming and deep mopping of all hard flooring",
-      "End of tenancy and move-in / move-out full sanitization",
-      "Eco-friendly, safe products suitable for families and pets",
-    ],
-    benefits: [
-      "Secures rental deposits on end-of-tenancy inspections",
-      "Eliminates built-up bacteria, allergens, and limescale",
-      "Saves you hours of demanding physical labor",
-      "Trusted, vetted, and insured cleaners in your home",
-    ],
-    workSteps: [
-      { number: "01", title: "Room-by-Room Checklist", description: "Customizing tasks based on your home priorities and special requests." },
-      { number: "02", title: "Top-to-Bottom Dusting", description: "Starting with ceiling fixtures, cobwebs, and high ledges down to floor level." },
-      { number: "03", title: "Deep Scrub & Sanitize", description: "Intense descaling of bathrooms and degreasing of kitchen surfaces." },
-      { number: "04", title: "Final Walkthrough", description: "Ensuring every room smells fresh, feels hygienic, and looks spotless." },
-    ],
-  },
   "custom-cleaning": {
     title: "Custom Tailored Cleaning",
     tagline: "Bespoke cleaning packages designed specifically around your unique requirements.",
@@ -268,6 +241,18 @@ const ServiceDetail = () => {
       phone: phone.trim(),
       note: note.trim() || null,
       user_id: user?.id || null,
+    });
+
+    // Send email notification to dhalefdnf@outlook.com
+    await sendFormEmail({
+      subject: `New Service Inquiry: ${fullName.trim()} - ${serviceName}`,
+      data: {
+        "Form Type": "Service Detail Sidebar Inquiry",
+        "Customer Name": fullName.trim(),
+        "Phone": phone.trim(),
+        "Service": serviceName,
+        "Notes / Message": note.trim() || "None",
+      },
     });
 
     setFullName("");

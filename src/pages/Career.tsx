@@ -10,6 +10,7 @@ import { useCareerBySlug, useCareers } from "@/hooks/useCareers";
 import { useCreateJobApplication } from "@/hooks/useJobApplications";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { ArrowUpRight, Briefcase, CheckCircle2, Loader2, MapPin } from "lucide-react";
+import { sendFormEmail } from "@/lib/email";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { z } from "zod";
@@ -104,6 +105,22 @@ const Career = () => {
       linkedin_url: linkedin.trim() || null,
       cv_link: cvLink.trim() || null,
       note: note.trim() || null,
+    });
+
+    // Send email notification to dhalefdnf@outlook.com
+    await sendFormEmail({
+      subject: `New Job Application: ${fullName.trim()} for ${job.title}`,
+      replyTo: email.trim(),
+      data: {
+        "Position": job.title,
+        "Applicant Name": fullName.trim(),
+        "Email": email.trim(),
+        "Phone": phone.trim(),
+        "Current Company": currentCompany.trim() || "Not specified",
+        "CV / Portfolio Link": cvLink.trim() || "Not provided",
+        "LinkedIn": linkedin.trim() || "Not provided",
+        "Cover Note / Message": note.trim() || "None",
+      },
     });
 
     // Reset form on success

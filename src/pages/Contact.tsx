@@ -15,12 +15,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { supabase } from "@/integrations/supabase/client";
+import { sendFormEmail } from "@/lib/email";
 import { CLEANING_SERVICES, COMPANY } from "@/lib/config";
 import { Clock, DollarSign, Mail, MapPin, Phone, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { toast } from "sonner";
-import type { QuoteData } from "./QuoteCalculator";
+import type { QuoteData } from "./QuoteRequest";
 
 const contactInfo = [
   {
@@ -114,6 +115,22 @@ const Contact = () => {
 
         if (error) throw error;
 
+        // Send email notification to dhalefdnf@outlook.com
+        await sendFormEmail({
+          subject: `New Quote Request: ${formData.fullName} - ${quoteData.serviceTitle}`,
+          replyTo: formData.email,
+          data: {
+            "Form Type": "Contact Page (Plan/Quote Inquiry)",
+            "Customer Name": formData.fullName,
+            "Phone": formData.phone,
+            "Email": formData.email || "Not provided",
+            "Service": quoteData.serviceTitle,
+            "Plan": quoteData.complexityLabel,
+            "Base Price": `€${quoteData.basePrice}`,
+            "Notes / Message": formData.notes || "None",
+          },
+        });
+
         toast.success("Quote request submitted successfully! We'll contact you soon.");
       } else {
         // Regular contact form - save to contacts table
@@ -126,6 +143,20 @@ const Contact = () => {
         });
 
         if (error) throw error;
+
+        // Send email notification to dhalefdnf@outlook.com
+        await sendFormEmail({
+          subject: `New Contact Message from ${formData.fullName}`,
+          replyTo: formData.email,
+          data: {
+            "Form Type": "General Contact Message (/contact)",
+            "Customer Name": formData.fullName,
+            "Phone": formData.phone,
+            "Email": formData.email || "Not provided",
+            "Service Interested In": formData.service || "General Inquiry",
+            "Message / Notes": formData.notes || "None",
+          },
+        });
 
         toast.success("Message sent successfully! We'll get back to you soon.");
       }
@@ -173,42 +204,33 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Quote Summary (if coming from calculator) */}
+      {/* Quote Summary (if coming from quote request) */}
       {quoteData && (
         <section className="pb-8 px-4">
           <div className="container mx-auto section-padding">
             <FadeIn>
-              <div className="max-w-4xl mx-auto bg-primary rounded-2xl p-6 text-primary-foreground">
-                <h3 className="text-xl font-bold mb-4">Your Quote Summary</h3>
-                <div className="grid md:grid-cols-4 gap-4">
+              <div className="max-w-4xl mx-auto bg-primary rounded-2xl p-6 text-primary-foreground shadow-md">
+                <h3 className="text-xl font-bold mb-4">Your Project Selection</h3>
+                <div className="grid md:grid-cols-3 gap-4">
                   <div className="flex items-center gap-3">
-                    <Sparkles className="w-5 h-5 text-accent" />
+                    <Sparkles className="w-5 h-5 text-accent shrink-0" />
                     <div>
                       <p className="text-sm text-primary-foreground/70">Service</p>
                       <p className="font-medium">{quoteData.serviceTitle}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-accent" />
+                    <MapPin className="w-5 h-5 text-accent shrink-0" />
                     <div>
-                      <p className="text-sm text-primary-foreground/70">Details</p>
+                      <p className="text-sm text-primary-foreground/70">Property & Location</p>
                       <p className="font-medium">{quoteData.complexityLabel}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-accent" />
+                    <Clock className="w-5 h-5 text-accent shrink-0" />
                     <div>
                       <p className="text-sm text-primary-foreground/70">Urgency</p>
                       <p className="font-medium capitalize">{quoteData.urgency}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <DollarSign className="w-5 h-5 text-accent" />
-                    <div>
-                      <p className="text-sm text-primary-foreground/70">Estimate</p>
-                      <p className="font-bold text-lg">
-                        €{quoteData.estimatedMin} - €{quoteData.estimatedMax}
-                      </p>
                     </div>
                   </div>
                 </div>
