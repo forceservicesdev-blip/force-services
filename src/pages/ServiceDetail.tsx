@@ -22,8 +22,6 @@ import heroGrid4 from "@/assets/hero-grid-4.jpg";
 import cleaningKitchen from "@/assets/cleaning-kitchen.jpg";
 import cleaningBathroom from "@/assets/cleaning-bathroom.jpg";
 import cleaningTeam from "@/assets/cleaning-team.jpg";
-import { useAuth } from "@/hooks/useAuth";
-import { useUserProfile } from "@/hooks/useUserProfile";
 
 const nameSchema = z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters");
 const phoneSchema = z.string().trim().min(1, "Phone is required").max(20, "Phone must be less than 20 characters");
@@ -185,8 +183,6 @@ const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const serviceKey = slug && detailedServices[slug] ? slug : "power-washing";
   const service = detailedServices[serviceKey];
-  const { user } = useAuth();
-  const { data: profile } = useUserProfile(user?.id);
 
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
@@ -195,19 +191,6 @@ const ServiceDetail = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const createInquiry = useCreateServiceInquiry();
-
-  useEffect(() => {
-    if (user) {
-      if (!fullName) {
-        const name = profile?.full_name || user.user_metadata?.full_name || "";
-        setFullName(name);
-      }
-      if (!phone) {
-        const userPhone = profile?.phone || user.user_metadata?.phone || "";
-        setPhone(userPhone);
-      }
-    }
-  }, [user, profile, fullName, phone]);
 
   useEffect(() => {
     if (slug && detailedServices[slug]) {

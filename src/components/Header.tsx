@@ -1,26 +1,14 @@
 import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/useAuth";
-import { useUserProfile } from "@/hooks/useUserProfile";
 import { COMPANY, WHATSAPP_MESSAGE } from "@/lib/config";
-import {
-  ChevronDown,
-  LayoutDashboard,
-  LogOut,
-  Menu,
-  MessageCircle,
-  User,
-  X,
-} from "lucide-react";
+import { Menu, MessageCircle, X } from "lucide-react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
+import { Link } from "react-router-dom";
 
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
   { name: "About Us", href: "/about" },
-  { name: "Reviews", href: "/reviews" },
   { name: "FAQ", href: "/faq" },
   { name: "Contact", href: "/contact" },
 ];
@@ -31,14 +19,6 @@ const whatsappHref = `https://wa.me/${COMPANY.whatsappNumber.replace(/\D/g, "")}
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
-  const { user, signOut } = useAuth();
-  const { data: profile } = useUserProfile(user?.id);
-
-  const handleSignOut = async () => {
-    await signOut();
-    navigate("/");
-  };
 
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border shadow-sm">
@@ -77,75 +57,6 @@ const Header = () => {
                 Get a Free Quote
               </Button>
             </Link>
-
-            {!user ? (
-              <Button
-                variant="outline"
-                className="rounded-full"
-                onClick={() => navigate("/auth")}
-              >
-                Sign In
-              </Button>
-            ) : (
-              <HoverCard openDelay={0}>
-                <HoverCardTrigger asChild>
-                  <div className="group relative flex items-center gap-0.5 rounded-xl cursor-pointer">
-                    <div className="size-9">
-                      <div className="flex size-full items-center justify-center rounded-full bg-primary text-primary-foreground font-semibold">
-                        {user.email?.slice(0, 2).toUpperCase() || "U"}
-                      </div>
-                    </div>
-                    <div className="flex h-full min-h-9 items-center rounded-sm group-hover:bg-secondary">
-                      <ChevronDown className="size-4 text-foreground" />
-                    </div>
-                  </div>
-                </HoverCardTrigger>
-                <HoverCardContent
-                  side="bottom"
-                  align="end"
-                  className="min-w-64 rounded-lg border border-border bg-primary p-2 shadow-lg"
-                >
-                  <div className="flex flex-col gap-1">
-                    <div className="flex items-center gap-3 rounded-[10px] p-2">
-                      <div className="bg-primary-foreground text-primary flex size-10 min-h-10 min-w-10 items-center justify-center rounded-full font-semibold">
-                        {user.email?.slice(0, 2).toUpperCase() || "U"}
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <span className="max-w-40 truncate font-medium text-primary-foreground">
-                          {profile?.full_name || user.user_metadata?.full_name || user.email?.split("@")[0]}
-                        </span>
-                        <span className="max-w-40 truncate text-sm text-primary-foreground/70">
-                          {user.email}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="m-[1.5px] h-px w-full bg-primary-foreground/20" />
-                    <Link
-                      to="/dashboard"
-                      className="flex items-center gap-2 rounded-[10px] p-2 hover:bg-primary-foreground/10"
-                    >
-                      <LayoutDashboard className="h-4 w-4 text-primary-foreground" />
-                      <span className="text-sm text-primary-foreground">Dashboard</span>
-                    </Link>
-                    <Link
-                      to="/dashboard/profile"
-                      className="flex items-center gap-2 rounded-[10px] p-2 hover:bg-primary-foreground/10"
-                    >
-                      <User className="h-4 w-4 text-primary-foreground" />
-                      <span className="text-sm text-primary-foreground">Profile</span>
-                    </Link>
-                    <div className="m-[1.5px] h-px w-full bg-primary-foreground/20" />
-                    <button
-                      className="flex items-center gap-2 rounded-[10px] p-2 hover:bg-primary-foreground/10"
-                      onClick={handleSignOut}
-                    >
-                      <LogOut className="h-4 w-4 text-primary-foreground" />
-                      <span className="text-sm text-primary-foreground">Logout</span>
-                    </button>
-                  </div>
-                </HoverCardContent>
-              </HoverCard>
-            )}
           </div>
 
           {/* Mobile Menu Button */}

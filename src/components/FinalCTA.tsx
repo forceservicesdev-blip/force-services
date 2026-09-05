@@ -26,11 +26,7 @@ const FinalCTA = () => {
               </Button>
             </Link>
             <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full sm:w-auto gap-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
-              >
+              <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 border-primary text-primary hover:text-primary-foreground">
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp Us
               </Button>

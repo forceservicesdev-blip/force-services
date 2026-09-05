@@ -4,9 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
-import { WhatsAppButton } from "./components/WhatsAppButton";
 import About from "./pages/About";
-import Auth from "./pages/Auth";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import Career from "./pages/Career";
@@ -17,35 +15,20 @@ import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import QuoteRequest from "./pages/QuoteRequest";
-import Reviews from "./pages/Reviews";
 import ServiceDetail from "./pages/ServiceDetail";
 import Services from "./pages/Services";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Work from "./pages/Work";
 import WorkDetail from "./pages/WorkDetail";
 
-// Dashboard pages
-import { DashboardLayout } from "./components/dashboard/DashboardLayout";
-import DashboardApplications from "./pages/dashboard/DashboardApplications";
-import DashboardBlogs from "./pages/dashboard/DashboardBlogs";
-import DashboardCareers from "./pages/dashboard/DashboardCareers";
-import DashboardContacts from "./pages/dashboard/DashboardContacts";
-import DashboardOverview from "./pages/dashboard/DashboardOverview";
-import DashboardProfile from "./pages/dashboard/DashboardProfile";
-import DashboardQuotes from "./pages/dashboard/DashboardQuotes";
-import DashboardServiceInquiries from "./pages/dashboard/DashboardServiceInquiries";
-import UserQuotes from "./pages/dashboard/UserQuotes";
-import UserServiceInquiries from "./pages/dashboard/UserServiceInquiries";
-
-// Create QueryClient outside component to prevent recreation on every render
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      gcTime: 10 * 60 * 1000, // 10 minutes  
-      refetchOnWindowFocus: false, // Prevent refetch when switching browser tabs
-      refetchOnMount: false, // Don't refetch on mount if data exists
-      refetchOnReconnect: false, // Don't refetch on network reconnect
+      staleTime: 5 * 60 * 1000,
+      gcTime: 10 * 60 * 1000,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
       retry: 1,
     },
   },
@@ -72,30 +55,13 @@ const App = () => (
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/quote" element={<QuoteRequest />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/reviews" element={<Reviews />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-          <Route path="/auth" element={<Auth />} />
-
-          {/* Dashboard Routes - Using Layout Route */}
-          <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route index element={<DashboardOverview />} />
-            <Route path="contacts" element={<DashboardContacts />} />
-            <Route path="quotes" element={<DashboardQuotes />} />
-            <Route path="service-inquiries" element={<DashboardServiceInquiries />} />
-            <Route path="blogs" element={<DashboardBlogs />} />
-            <Route path="careers" element={<DashboardCareers />} />
-            <Route path="applications" element={<DashboardApplications />} />
-            <Route path="profile" element={<DashboardProfile />} />
-            <Route path="my-quotes" element={<UserQuotes />} />
-            <Route path="my-inquiries" element={<UserServiceInquiries />} />
-          </Route>
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <WhatsAppButton />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

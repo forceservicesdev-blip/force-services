@@ -30,22 +30,22 @@ const Services = () => {
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pb-24 bg-secondary">
         <div className="container-custom section-padding">
-          <div className="text-muted-foreground text-sm mb-4">
-            <Link to="/" className="hover:text-primary transition-colors">
-              Home
-            </Link>
-            <span className="mx-2">/</span>
-            <span className="text-primary">Services</span>
-          </div>
+          <div className="max-w-3xl">
+            <div className="text-muted-foreground text-sm mb-4">
+              <Link to="/" className="hover:text-primary transition-colors">
+                Home
+              </Link>
+              <span className="mx-2">/</span>
+              <span className="text-primary font-medium">Services</span>
+            </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
             <FadeIn>
-              <h1 className="text-foreground font-bold text-4xl md:text-5xl lg:text-6xl">
+              <h1 className="text-foreground font-bold text-4xl md:text-5xl lg:text-6xl mb-6">
                 Our Cleaning Services
               </h1>
             </FadeIn>
             <FadeIn delay={100}>
-              <p className="text-muted-foreground text-lg lg:pt-4">
+              <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
                 From high-pressure power washing to commercial, industrial, and
                 post-construction cleaning, {COMPANY.name} offers a full range of
                 professional cleaning services across {COMPANY.serviceArea}.

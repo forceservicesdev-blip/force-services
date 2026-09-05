@@ -13,14 +13,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useAuth } from "@/hooks/useAuth";
-import { useUserProfile } from "@/hooks/useUserProfile";
-import { supabase } from "@/integrations/supabase/client";
 import { sendFormEmail } from "@/lib/email";
 import { CLEANING_SERVICES, COMPANY, SERVICE_AREAS, WHATSAPP_MESSAGE } from "@/lib/config";
 import {
   CheckCircle2,
-  Clock,
   Mail,
   MapPin,
   MessageCircle,
@@ -30,7 +26,7 @@ import {
   Truck,
   Waves,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -97,9 +93,6 @@ const TRUST_POINTS = [
 
 const QuoteRequest = () => {
   const location = useLocation();
-  const { user } = useAuth();
-  const { data: profile } = useUserProfile(user?.id);
-
   const preselectedSlug = location.state?.serviceSlug as string | undefined;
 
   const [selectedService, setSelectedService] = useState<string>(
@@ -116,16 +109,6 @@ const QuoteRequest = () => {
   const [notes, setNotes] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (user) {
-      if (profile?.full_name || user.user_metadata?.full_name) {
-        setFullName(profile?.full_name || user.user_metadata?.full_name || "");
-      }
-      if (user.email) setEmail(user.email);
-      if (profile?.phone) setPhone(profile.phone);
-    }
-  }, [user, profile]);
 
   const activeService = CLEANING_SERVICES.find((s) => s.slug === selectedService);
 
@@ -146,26 +129,6 @@ const QuoteRequest = () => {
         preferredTime ? `Time: ${preferredTime}` : "",
         notes ? `Details: ${notes}` : "",
       ].filter(Boolean);
-
-      const { error } = await supabase.from("quote_requests").insert({
-        user_id: user?.id || null,
-        full_name: fullName,
-        phone,
-        email: email || null,
-        service_slug: activeService?.slug || selectedService,
-        service_title: activeService?.title || "Custom Cleaning",
-        complexity_label: `${propertyType} • ${selectedArea}`,
-        complexity_multiplier: 1,
-        estimated_hours: 1,
-        urgency,
-        base_price: activeService?.basePrice || 0,
-        estimated_min: 0,
-        estimated_max: 0,
-        service_date: preferredDate || null,
-        notes: notesArray.join(" | "),
-      });
-
-      if (error) throw error;
 
       // Send email notification to dhalefdnf@outlook.com
       await sendFormEmail({
@@ -598,10 +561,6 @@ const QuoteRequest = () => {
                   </div>
 
                   <div className="border-t border-primary-foreground/20 pt-4 text-xs text-primary-foreground/75 space-y-1">
-                    <p className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 shrink-0 text-accent" />
-                      {COMPANY.openingHours}
-                    </p>
                     <p className="flex items-center gap-2">
                       <MapPin className="w-4 h-4 shrink-0 text-accent" />
                       Serving {COMPANY.serviceArea}

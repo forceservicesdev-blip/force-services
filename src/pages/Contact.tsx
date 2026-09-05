@@ -12,9 +12,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useAuth } from "@/hooks/useAuth";
-import { useUserProfile } from "@/hooks/useUserProfile";
-import { supabase } from "@/integrations/supabase/client";
 import { sendFormEmail } from "@/lib/email";
 import { CLEANING_SERVICES, COMPANY } from "@/lib/config";
 import { Clock, DollarSign, Mail, MapPin, Phone, Sparkles } from "lucide-react";
@@ -41,7 +38,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Call Us",
-    description: COMPANY.openingHours,
+    description: "",
     value: COMPANY.phone,
     href: `tel:${COMPANY.phone}`,
   },
@@ -49,9 +46,6 @@ const contactInfo = [
 
 const Contact = () => {
   const location = useLocation();
-  const { user } = useAuth();
-  const { data: profile } = useUserProfile(user?.id);
-
   const quoteData = location.state?.quoteData as QuoteData | undefined;
 
   const [formData, setFormData] = useState({
@@ -62,18 +56,6 @@ const Contact = () => {
     notes: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Pre-fill form with user data when logged in
-  useEffect(() => {
-    if (user) {
-      setFormData((prev) => ({
-        ...prev,
-        fullName: profile?.full_name || prev.fullName,
-        email: user.email || prev.email,
-        phone: profile?.phone || prev.phone,
-      }));
-    }
-  }, [user, profile]);
 
   useEffect(() => {
     if (quoteData) {
@@ -96,25 +78,6 @@ const Contact = () => {
 
     try {
       if (quoteData) {
-        // Submit quote request to database
-        const { error } = await supabase.from("quote_requests").insert({
-          full_name: formData.fullName,
-          phone: formData.phone,
-          email: formData.email || null,
-          service_slug: quoteData.serviceSlug,
-          service_title: quoteData.serviceTitle,
-          complexity_label: quoteData.complexityLabel,
-          complexity_multiplier: quoteData.complexityMultiplier,
-          estimated_hours: quoteData.estimatedHours,
-          urgency: quoteData.urgency,
-          base_price: quoteData.basePrice,
-          estimated_min: quoteData.estimatedMin,
-          estimated_max: quoteData.estimatedMax,
-          notes: formData.notes || null,
-        });
-
-        if (error) throw error;
-
         // Send email notification to dhalefdnf@outlook.com
         await sendFormEmail({
           subject: `New Quote Request: ${formData.fullName} - ${quoteData.serviceTitle}`,
@@ -133,17 +96,6 @@ const Contact = () => {
 
         toast.success("Quote request submitted successfully! We'll contact you soon.");
       } else {
-        // Regular contact form - save to contacts table
-        const { error } = await supabase.from("contacts").insert({
-          full_name: formData.fullName,
-          phone: formData.phone,
-          email: formData.email || null,
-          service: formData.service || null,
-          notes: formData.notes || null,
-        });
-
-        if (error) throw error;
-
         // Send email notification to dhalefdnf@outlook.com
         await sendFormEmail({
           subject: `New Contact Message from ${formData.fullName}`,
