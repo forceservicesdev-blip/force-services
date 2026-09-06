@@ -1,9 +1,27 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { COMPANY, WHATSAPP_MESSAGE } from "@/lib/config";
-import heroImage from "@/assets/cleaning-hero.jpg";
-import { ShieldCheck, Clock, Sparkles, BadgeCheck, MessageCircle } from "lucide-react";
+import {
+  ShieldCheck,
+  Clock,
+  Sparkles,
+  BadgeCheck,
+  MessageCircle,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import FadeIn from "@/components/FadeIn";
+
+// Showcase images from the carousel
+import service02 from "@/assets/images/service-02.jpeg";
+import service03 from "@/assets/images/service-03.jpeg";
+import service04 from "@/assets/images/service-04.jpeg";
+import service05 from "@/assets/images/service-05.jpeg";
+import service06 from "@/assets/images/service-06.jpeg";
+import service07 from "@/assets/images/service-07.jpeg";
+import service08 from "@/assets/images/service-08.jpeg";
+import service09 from "@/assets/images/service-09.jpeg";
 
 const badges = [
   { icon: ShieldCheck, label: "Fully Insured" },
@@ -12,7 +30,125 @@ const badges = [
   { icon: Sparkles, label: "Satisfaction Guaranteed" },
 ];
 
+const heroImages = [
+  service02,
+  service03,
+  service04,
+  service05,
+  service06,
+  service07,
+  service08,
+  service09,
+];
+
+interface HeroImageSliderProps {
+  currentSlide: number;
+  setCurrentSlide: React.Dispatch<React.SetStateAction<number>>;
+  isPaused: boolean;
+  setIsPaused: React.Dispatch<React.SetStateAction<boolean>>;
+  className?: string;
+}
+
+const HeroImageSlider = ({
+  currentSlide,
+  setCurrentSlide,
+  setIsPaused,
+  className = "",
+}: HeroImageSliderProps) => {
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length);
+  };
+
+  return (
+    <div
+      className={`group relative rounded-2xl overflow-hidden shadow-card border border-border/40 select-none bg-neutral-900 ${className}`}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {heroImages.map((image, index) => {
+        const isActive = index === currentSlide;
+        return (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+            }`}
+          >
+            <img
+              src={image}
+              alt="Cleaning service showcase"
+              style={{ transitionDuration: "4000ms" }}
+              className={`w-full h-full object-cover object-center transform transition-transform ease-out ${
+                isActive ? "scale-105" : "scale-100"
+              }`}
+            />
+          </div>
+        );
+      })}
+
+      {/* Manual Navigation Controls (appear on hover / active) */}
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          prevSlide();
+        }}
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
+        aria-label="Previous image"
+      >
+        <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+      </button>
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          nextSlide();
+        }}
+        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
+        aria-label="Next image"
+      >
+        <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
+      </button>
+
+      {/* Bottom Indicator Dots */}
+      <div className="absolute bottom-3 sm:bottom-4 inset-x-0 z-20 flex justify-center pointer-events-none">
+        <div className="flex items-center gap-1.5 pointer-events-auto bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15">
+          {heroImages.map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => setCurrentSlide(idx)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                idx === currentSlide
+                  ? "w-4 sm:w-5 bg-white shadow-sm"
+                  : "w-1.5 bg-white/40 hover:bg-white/80"
+              }`}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Hero = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
   const whatsappNumber = COMPANY.whatsappNumber.replace(/\D/g, "");
   const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
@@ -59,15 +195,15 @@ const Hero = () => {
               high-standard finish every time.
             </p>
 
-            {/* Mobile Hero Image - smoothly integrated with text on mobile */}
+            {/* Mobile Hero Image Slider - smoothly integrated with text on mobile */}
             <div className="block lg:hidden my-6">
-              <div className="relative rounded-2xl overflow-hidden shadow-card border border-border/40">
-                <img
-                  src={heroImage}
-                  alt="Professional cleaning specialist"
-                  className="w-full h-[250px] sm:h-[320px] object-cover object-top"
-                />
-              </div>
+              <HeroImageSlider
+                currentSlide={currentSlide}
+                setCurrentSlide={setCurrentSlide}
+                isPaused={isPaused}
+                setIsPaused={setIsPaused}
+                className="w-full h-[260px] sm:h-[340px]"
+              />
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
@@ -92,15 +228,16 @@ const Hero = () => {
               ))}
             </div>
           </FadeIn>
-          {/* Desktop Hero Image - unchanged for desktop */}
+
+          {/* Desktop Hero Image Slider */}
           <FadeIn delay={150} className="hidden lg:block">
-            <div className="relative rounded-2xl overflow-hidden shadow-card">
-              <img
-                src={heroImage}
-                alt="Professional cleaner"
-                className="w-full h-[420px] md:h-[520px] object-cover object-top"
-              />
-            </div>
+            <HeroImageSlider
+              currentSlide={currentSlide}
+              setCurrentSlide={setCurrentSlide}
+              isPaused={isPaused}
+              setIsPaused={setIsPaused}
+              className="w-full h-[440px] md:h-[520px]"
+            />
           </FadeIn>
         </div>
       </div>
