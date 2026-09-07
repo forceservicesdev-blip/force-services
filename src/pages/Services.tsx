@@ -17,9 +17,10 @@ import { Link } from "react-router-dom";
 const SERVICE_ICONS: Record<string, typeof Home> = {
   "power-washing": Sparkles,
   "commercial-cleaning": Building2,
-  "industrial-cleaning": Building2,
-  "post-construction-cleaning": Building2,
-  "custom-cleaning": SprayCan,
+  "industrial-cleaning": Truck,
+  "post-construction-cleaning": Home,
+  "exterior-cleaning": SprayCan,
+  "custom-cleaning": KeyRound,
 };
 
 const Services = () => {
@@ -46,7 +47,7 @@ const Services = () => {
             </FadeIn>
             <FadeIn delay={100}>
               <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
-                From high-pressure power washing to commercial, industrial, and
+                From high-pressure power washing and building facades to commercial, industrial, and
                 post-construction cleaning, {COMPANY.name} offers a full range of
                 professional cleaning services across {COMPANY.serviceArea}.
                 Fully insured, fully trusted, and tailored to you.
@@ -64,29 +65,58 @@ const Services = () => {
               const Icon = SERVICE_ICONS[service.slug] || Sparkles;
               return (
                 <FadeIn key={service.slug} delay={index * 100}>
-                  <div className="group flex flex-col h-full rounded-2xl border border-border bg-card p-8 transition-all duration-300 hover:bg-primary hover:border-primary">
-                    <div className="w-14 h-14 rounded-full bg-primary/10 group-hover:bg-primary-foreground/10 flex items-center justify-center mb-6 transition-colors duration-300">
-                      <Icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                  <div className="group h-full flex flex-col rounded-2xl bg-card border border-border/70 overflow-hidden shadow-card transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 hover:border-primary/40">
+                    {/* Card Image */}
+                    <div className="relative h-56 w-full overflow-hidden bg-muted">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                      {/* Floating Price Pill */}
+                      <div className="absolute top-3 right-3 z-10">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-black/60 text-white backdrop-blur-md border border-white/20 shadow-sm">
+                          From €{service.basePrice}
+                        </span>
+                      </div>
+
+                      {/* Floating Service Icon */}
+                      <div className="absolute bottom-3 left-4 z-10 w-11 h-11 rounded-xl bg-white/95 dark:bg-neutral-900/95 text-primary shadow-md flex items-center justify-center border border-white/30 backdrop-blur-sm group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                        <Icon className="h-5 w-5" />
+                      </div>
                     </div>
-                    <h3 className="font-bold text-xl mb-3 text-card-foreground group-hover:text-primary-foreground transition-colors duration-300">
-                      {service.title}
-                    </h3>
-                    <p className="text-muted-foreground group-hover:text-primary-foreground/80 mb-6 flex-1 transition-colors duration-300">
-                      {service.shortDescription}
-                    </p>
-                    <div className="flex items-center justify-between gap-4">
-                      <span className="font-bold text-primary group-hover:text-primary-foreground transition-colors duration-300">
-                        From €{service.basePrice}
-                      </span>
-                      <Link to="/quote" state={{ serviceSlug: service.slug }}>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="rounded-full group-hover:bg-primary-foreground group-hover:text-primary group-hover:border-primary-foreground"
-                        >
-                          Get a Quote
-                        </Button>
-                      </Link>
+
+                    {/* Card Body */}
+                    <div className="p-6 flex flex-col flex-1">
+                      <h3 className="text-xl font-bold text-card-foreground group-hover:text-primary transition-colors mb-2">
+                        {service.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1">
+                        {service.shortDescription}
+                      </p>
+
+                      {/* Actions */}
+                      <div className="flex items-center gap-3 pt-3 border-t border-border/40">
+                        <Link to={`/services/${service.slug}`} className="flex-1">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="w-full gap-1.5 border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground transition-all rounded-lg"
+                          >
+                            Learn More
+                          </Button>
+                        </Link>
+                        <Link to="/quote" state={{ serviceSlug: service.slug }} className="flex-1">
+                          <Button
+                            size="sm"
+                            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all rounded-lg shadow-sm"
+                          >
+                            Get a Quote
+                          </Button>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </FadeIn>

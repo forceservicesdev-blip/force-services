@@ -15,13 +15,12 @@ import { Link, useParams } from "react-router-dom";
 import { z } from "zod";
 
 // Images
-import heroGrid1 from "@/assets/hero-grid-1.jpg";
-import heroGrid2 from "@/assets/hero-grid-2.jpg";
-import heroGrid3 from "@/assets/hero-grid-3.jpg";
-import heroGrid4 from "@/assets/hero-grid-4.jpg";
-import cleaningKitchen from "@/assets/cleaning-kitchen.jpg";
-import cleaningBathroom from "@/assets/cleaning-bathroom.jpg";
-import cleaningTeam from "@/assets/cleaning-team.jpg";
+import powerWashingImg from "@/assets/cardimages/shawn-rain-0LIyVDJ6Xuk-unsplash.jpg";
+import commercialImg from "@/assets/cardimages/s-o-c-i-a-l-c-u-t-1RT4txDDAbM-unsplash.jpg";
+import industrialImg from "@/assets/cardimages/jacques-dillies-jcav1COVvOc-unsplash.jpg";
+import postConstructionImg from "@/assets/cardimages/steffen-lemmerzahl-Dqvb5xO0_Vg-unsplash.jpg";
+import exteriorCleaningImg from "@/assets/cardimages/sam-balye-y8URY9-ypSI-unsplash.jpg";
+import customCleaningImg from "@/assets/cardimages/cytonn-photography-n95VMLxqM2I-unsplash.jpg";
 
 const nameSchema = z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters");
 const phoneSchema = z.string().trim().min(1, "Phone is required").max(20, "Phone must be less than 20 characters");
@@ -41,7 +40,7 @@ const detailedServices: Record<string, ServiceDetailData> = {
   "power-washing": {
     title: "Power Washing & Pressure Cleaning",
     tagline: "Heavy-duty exterior cleaning for driveways, patios, facades, roofs, and decking.",
-    image: heroGrid1,
+    image: powerWashingImg,
     aboutTitle: "High-Performance Power Washing Services",
     aboutDescription:
       "Restore the beauty and curb appeal of your property with Force Services' professional power washing.\n\nOver time, Irish weather causes moss, black lichen, algae, and grime to build up on driveways, patios, and building exteriors. Using commercial-grade pressure washing equipment and targeted surface treatments, we safely eliminate years of dirt without causing damage to mortar, stone, or tarmac.",
@@ -69,7 +68,7 @@ const detailedServices: Record<string, ServiceDetailData> = {
   "commercial-cleaning": {
     title: "Commercial & Office Cleaning",
     tagline: "Professional, hygienic, and flexible contract cleaning for businesses and retail.",
-    image: heroGrid2,
+    image: commercialImg,
     aboutTitle: "Spotless Workspaces for Productive Teams",
     aboutDescription:
       "A clean working environment improves productivity, employee wellbeing, and creates a positive impression on your clients.\n\nForce Services provides tailored commercial cleaning contracts across Ennis, Limerick, and Galway. We work around your operational schedule — whether you require early morning, evening, or weekend service.",
@@ -97,7 +96,7 @@ const detailedServices: Record<string, ServiceDetailData> = {
   "industrial-cleaning": {
     title: "Industrial & Warehouse Cleaning",
     tagline: "Heavy-duty cleaning for warehouses, factories, manufacturing plants, and industrial units.",
-    image: heroGrid3,
+    image: industrialImg,
     aboutTitle: "Heavy-Duty Industrial Cleaning Solutions",
     aboutDescription:
       "Industrial facilities demand specialized cleaning machinery, heavy degreasing chemicals, and stringent health and safety adherence.\n\nForce Services brings 5 years of hands-on experience and industrial-grade equipment to tackle heavy oil, grease, tyre marks, dust accumulation, and overhead structural cleaning in factories and warehouses across Ireland.",
@@ -125,7 +124,7 @@ const detailedServices: Record<string, ServiceDetailData> = {
   "post-construction-cleaning": {
     title: "Post-Construction & Builders Cleaning",
     tagline: "Comprehensive after-build sparkle cleans for new builds, fit-outs, and renovations.",
-    image: heroGrid4,
+    image: postConstructionImg,
     aboutTitle: "Turn Construction Sites into Move-In Ready Spaces",
     aboutDescription:
       "After construction or remodeling, properties are left covered in fine plaster dust, paint splatters, silicon residue, and building debris.\n\nForce Services specializes in multi-phase post-construction cleaning — from initial rough cleans to final sparkle cleans that prepare homes, offices, and retail units for immediate handover to owners or tenants.",
@@ -150,10 +149,38 @@ const detailedServices: Record<string, ServiceDetailData> = {
       { number: "04", title: "Handover Inspection", description: "White-glove inspection ensuring the property is 100% move-in ready." },
     ],
   },
+  "exterior-cleaning": {
+    title: "Building Facade & Exterior Cleaning",
+    tagline: "Specialized soft-wash and pressure cleaning for building facades, cladding, roofs, and stonework.",
+    image: exteriorCleaningImg,
+    aboutTitle: "Specialized Exterior & Facade Restoration",
+    aboutDescription:
+      "Keep your building's exterior pristine and protected against atmospheric pollutants, algae, and weather staining.\n\nForce Services provides specialized soft-washing and gentle pressure cleaning for commercial facades, residential render, architectural cladding, and roofs across Ennis, Limerick, and Galway. We safely treat and eliminate red and green algae biofilms without eroding coatings or delicate masonry.",
+    included: [
+      "Commercial facades, cladding, and shopfront detailing",
+      "K-Rend, monocouche, and delicate plaster soft-wash",
+      "Roof moss scraping and biocide preventative treatments",
+      "Brick, limestone, sandstone, and masonry washdown",
+      "Gutter clearing, soffits, and fascia cleaning",
+      "Protective eco-friendly anti-algae sealants",
+    ],
+    benefits: [
+      "Eliminates discolouration and restores original building appearance",
+      "Non-abrasive soft-wash methods protect surfaces from damage",
+      "Prevents long-term moisture ingress and organic deterioration",
+      "Improves commercial property curb appeal and tenant value",
+    ],
+    workSteps: [
+      { number: "01", title: "Facade Inspection", description: "We evaluate the substrate material, biological growth, and access requirements." },
+      { number: "02", title: "Soft-Wash Application", description: "Targeted application of gentle bio-treatments to break down algae and lichen." },
+      { number: "03", title: "Controlled Rinse", description: "Low-pressure wash removing suspended grime without damaging the render." },
+      { number: "04", title: "Preventative Seal", description: "Optional biocide coating to prevent regrowth for up to 24 months." },
+    ],
+  },
   "custom-cleaning": {
     title: "Custom Tailored Cleaning",
     tagline: "Bespoke cleaning packages designed specifically around your unique requirements.",
-    image: cleaningTeam,
+    image: customCleaningImg,
     aboutTitle: "Tailored Solutions for Specialized Projects",
     aboutDescription:
       "Every property and project has unique demands. If your cleaning requirements don't fit standard categories, Force Services will design a personalized cleaning package for you.\n\nFrom emergency cleanups to specialized surface restoration, we bring the right manpower, tools, and materials to get the job done right.",

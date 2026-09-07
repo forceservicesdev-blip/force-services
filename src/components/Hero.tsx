@@ -13,15 +13,17 @@ import {
 import { Link } from "react-router-dom";
 import FadeIn from "@/components/FadeIn";
 
-// Showcase images from the carousel
-import service02 from "@/assets/images/service-02.jpeg";
-import service03 from "@/assets/images/service-03.jpeg";
-import service04 from "@/assets/images/service-04.jpeg";
-import service05 from "@/assets/images/service-05.jpeg";
-import service06 from "@/assets/images/service-06.jpeg";
-import service07 from "@/assets/images/service-07.jpeg";
-import service08 from "@/assets/images/service-08.jpeg";
-import service09 from "@/assets/images/service-09.jpeg";
+// Showcase images from servicesimages
+import serviceImg3 from "@/assets/servicesimages/29135CF5-C3C9-4AEA-9FC7-03EC069FC362.JPG";
+import serviceImg4 from "@/assets/servicesimages/339F02F5-130C-403D-9753-305EFD401A49.JPG";
+import serviceImg5 from "@/assets/servicesimages/4a9514f2-b6a5-4430-831a-87e9378bb396.JPG";
+import serviceImg6 from "@/assets/servicesimages/7DCC728B-3B09-4558-B11C-7DFC84FF5FE9.JPG";
+import serviceImg7 from "@/assets/servicesimages/9a6116ae-c085-4131-99cd-8358d8281764.JPG";
+import serviceImg8 from "@/assets/servicesimages/A4AFA8BF-E6B6-4A81-920C-9A0A26483CDF.JPG";
+import serviceImg9 from "@/assets/servicesimages/a21e7b71-a5cf-40d8-b244-2b29387c877d.JPG";
+import serviceImg10 from "@/assets/servicesimages/b54edaf1-6bad-4a1b-9de9-0a1b2923cd5b.JPG";
+import serviceImg11 from "@/assets/servicesimages/b760514f-d69b-40b7-a559-9366f13c8736.JPG";
+import serviceImg12 from "@/assets/servicesimages/d5036617-31ab-42dd-8cea-0d72f76bee06.JPG";
 
 const badges = [
   { icon: ShieldCheck, label: "Fully Insured" },
@@ -31,14 +33,16 @@ const badges = [
 ];
 
 const heroImages = [
-  service02,
-  service03,
-  service04,
-  service05,
-  service06,
-  service07,
-  service08,
-  service09,
+  serviceImg3,
+  serviceImg4,
+  serviceImg5,
+  serviceImg6,
+  serviceImg7,
+  serviceImg8,
+  serviceImg9,
+  serviceImg10,
+  serviceImg11,
+  serviceImg12,
 ];
 
 interface HeroImageSliderProps {
@@ -115,14 +119,14 @@ const HeroImageSlider = ({
       </button>
 
       {/* Bottom Indicator Dots */}
-      <div className="absolute bottom-3 sm:bottom-4 inset-x-0 z-20 flex justify-center pointer-events-none">
-        <div className="flex items-center gap-1.5 pointer-events-auto bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15">
+      <div className="absolute bottom-3 sm:bottom-4 inset-x-0 z-20 flex justify-center pointer-events-none px-2">
+        <div className="flex items-center gap-1.5 pointer-events-auto bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 max-w-[95%] overflow-x-auto no-scrollbar">
           {heroImages.map((_, idx) => (
             <button
               key={idx}
               type="button"
               onClick={() => setCurrentSlide(idx)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
+              className={`h-1.5 rounded-full transition-all duration-300 flex-shrink-0 ${
                 idx === currentSlide
                   ? "w-4 sm:w-5 bg-white shadow-sm"
                   : "w-1.5 bg-white/40 hover:bg-white/80"

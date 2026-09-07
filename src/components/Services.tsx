@@ -2,17 +2,24 @@ import { Button } from "@/components/ui/button";
 import { CLEANING_SERVICES } from "@/lib/config";
 import FadeIn from "@/components/FadeIn";
 import {
-  Home,
-  Sparkles,
-  KeyRound,
   Building2,
+  Home,
+  KeyRound,
+  Sparkles,
+  SprayCan,
   Truck,
-  Settings2,
   ArrowRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const icons = [Home, Sparkles, KeyRound, Building2, Truck, Settings2];
+const SERVICE_ICONS: Record<string, typeof Sparkles> = {
+  "power-washing": Sparkles,
+  "commercial-cleaning": Building2,
+  "industrial-cleaning": Truck,
+  "post-construction-cleaning": Home,
+  "exterior-cleaning": SprayCan,
+  "custom-cleaning": KeyRound,
+};
 
 const Services = () => {
   return (
@@ -22,33 +29,68 @@ const Services = () => {
           <div className="max-w-2xl mx-auto text-center mb-14">
             <h2 className="text-3xl md:text-h2 font-bold text-primary mb-4">Our Cleaning Services</h2>
             <p className="text-muted-foreground text-lg">
-              From regular tidy-ups to deep cleans, we have a service to fit every home and business.
+              From power washing and commercial maintenance to industrial facilities and post-construction cleans, we have a specialized solution for every property.
             </p>
           </div>
         </FadeIn>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {CLEANING_SERVICES.map((service, index) => {
-            const Icon = icons[index % icons.length];
+            const Icon = SERVICE_ICONS[service.slug] || Sparkles;
             return (
               <FadeIn key={service.slug} delay={index * 75}>
-                <div className="h-full flex flex-col rounded-2xl bg-secondary p-8 shadow-card transition-transform hover:-translate-y-1">
-                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-6">
-                    <Icon className="h-7 w-7 text-primary" />
+                <div className="group h-full flex flex-col rounded-2xl bg-card border border-border/70 overflow-hidden shadow-card transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 hover:border-primary/40">
+                  {/* Card Image */}
+                  <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-muted">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                    {/* Floating Price Pill */}
+                    <div className="absolute top-3 right-3 z-10">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-black/60 text-white backdrop-blur-md border border-white/20 shadow-sm">
+                        From €{service.basePrice}
+                      </span>
+                    </div>
+
+                    {/* Floating Service Icon */}
+                    <div className="absolute bottom-3 left-4 z-10 w-11 h-11 rounded-xl bg-white/95 dark:bg-neutral-900/95 text-primary shadow-md flex items-center justify-center border border-white/30 backdrop-blur-sm group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                      <Icon className="h-5 w-5" />
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-primary mb-2">{service.title}</h3>
-                  <p className="text-muted-foreground mb-6 flex-1">{service.shortDescription}</p>
-                  <div className="flex flex-wrap gap-3">
-                    <Link to={`/services/${service.slug}`}>
-                      <Button variant="outline" size="sm" className="gap-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                        Learn More
-                        <ArrowRight className="h-4 w-4" />
-                      </Button>
-                    </Link>
-                    <Link to="/quote">
-                      <Button size="sm" className="bg-tertiary text-tertiary-foreground hover:bg-tertiary/90">
-                        Get a Quote
-                      </Button>
-                    </Link>
+
+                  {/* Card Body */}
+                  <div className="p-6 flex flex-col flex-1">
+                    <h3 className="text-xl font-bold text-card-foreground group-hover:text-primary transition-colors mb-2">
+                      {service.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1">
+                      {service.shortDescription}
+                    </p>
+
+                    {/* Actions */}
+                    <div className="flex items-center gap-3 pt-3 border-t border-border/40">
+                      <Link to={`/services/${service.slug}`} className="flex-1">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full gap-1.5 border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground transition-all rounded-lg"
+                        >
+                          Learn More
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </Button>
+                      </Link>
+                      <Link to="/quote" state={{ serviceSlug: service.slug }} className="flex-1">
+                        <Button
+                          size="sm"
+                          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all rounded-lg shadow-sm"
+                        >
+                          Get a Quote
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </FadeIn>

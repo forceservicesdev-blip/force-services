@@ -39,10 +39,18 @@ export const SERVICE_AREAS = [
   "Co. Clare",
 ];
 
+import powerWashingImg from "@/assets/cardimages/shawn-rain-0LIyVDJ6Xuk-unsplash.jpg";
+import commercialImg from "@/assets/cardimages/s-o-c-i-a-l-c-u-t-1RT4txDDAbM-unsplash.jpg";
+import industrialImg from "@/assets/cardimages/jacques-dillies-jcav1COVvOc-unsplash.jpg";
+import postConstructionImg from "@/assets/cardimages/steffen-lemmerzahl-Dqvb5xO0_Vg-unsplash.jpg";
+import exteriorCleaningImg from "@/assets/cardimages/sam-balye-y8URY9-ypSI-unsplash.jpg";
+import customCleaningImg from "@/assets/cardimages/cytonn-photography-n95VMLxqM2I-unsplash.jpg";
+
 export const CLEANING_SERVICES = [
   {
     slug: "power-washing",
     title: "Power Washing & Pressure Cleaning",
+    image: powerWashingImg,
     shortDescription:
       "High-pressure washing for driveways, patios, facades, roofs, decking, and exterior walls.",
     description:
@@ -59,6 +67,7 @@ export const CLEANING_SERVICES = [
   {
     slug: "commercial-cleaning",
     title: "Commercial & Office Cleaning",
+    image: commercialImg,
     shortDescription:
       "Flexible and reliable contract cleaning for offices, shops, retail stores, and commercial premises.",
     description:
@@ -75,6 +84,7 @@ export const CLEANING_SERVICES = [
   {
     slug: "industrial-cleaning",
     title: "Industrial & Warehouse Cleaning",
+    image: industrialImg,
     shortDescription:
       "Heavy-duty cleaning for factories, warehouses, workshops, and industrial facilities.",
     description:
@@ -91,6 +101,7 @@ export const CLEANING_SERVICES = [
   {
     slug: "post-construction-cleaning",
     title: "Post-Construction & Builders Cleaning",
+    image: postConstructionImg,
     shortDescription:
       "Thorough after-build sparkle cleaning for new developments, home renovations, and fit-outs.",
     description:
@@ -105,8 +116,26 @@ export const CLEANING_SERVICES = [
     ],
   },
   {
+    slug: "exterior-cleaning",
+    title: "Building Facade & Exterior Cleaning",
+    image: exteriorCleaningImg,
+    shortDescription:
+      "Specialized soft-wash and pressure cleaning for building facades, cladding, roofs, and stonework.",
+    description:
+      "Keep your property's exterior looking immaculate with our comprehensive facade and exterior wash services. We safely remove moss, red and green algae, carbon soot, and environmental pollutants without damaging delicate render or stonework.",
+    basePrice: 90,
+    features: [
+      "Building Facades & Exterior Cladding",
+      "Render Soft-Washing & Algae Removal",
+      "Roof Moss Treatment & Gutter Clearing",
+      "Stone, Brick & Masonry Restoration",
+      "Commercial & Residential Exteriors",
+    ],
+  },
+  {
     slug: "custom-cleaning",
     title: "Custom Tailored Cleaning",
+    image: customCleaningImg,
     shortDescription:
       "Bespoke cleaning solutions tailored specifically to your project requirements.",
     description:
