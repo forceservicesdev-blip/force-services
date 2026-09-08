@@ -27,7 +27,7 @@ import {
   Waves,
 } from "lucide-react";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 export interface QuoteData {
@@ -92,6 +92,7 @@ const TRUST_POINTS = [
 ];
 
 const QuoteRequest = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const preselectedSlug = location.state?.serviceSlug as string | undefined;
 
@@ -150,6 +151,14 @@ const QuoteRequest = () => {
 
       setIsSuccess(true);
       toast.success("Quote request received! We will contact you shortly.");
+
+      navigate("/thank-you", {
+        state: {
+          name: fullName,
+          service: activeService?.title || selectedService,
+          type: "detailed_quote",
+        },
+      });
     } catch (err) {
       console.error("Error submitting quote request:", err);
       toast.error("Could not submit quote request. Please call or WhatsApp us directly.");

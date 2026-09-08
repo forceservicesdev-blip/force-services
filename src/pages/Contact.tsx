@@ -25,7 +25,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import type { QuoteData } from "./QuoteRequest";
 
@@ -54,6 +54,7 @@ const contactAssurances = [
 ];
 
 const Contact = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const quoteData = location.state?.quoteData as QuoteData | undefined;
 
@@ -123,6 +124,9 @@ const Contact = () => {
         toast.success("Message sent successfully! We'll get back to you soon.");
       }
 
+      const submittedName = formData.fullName;
+      const submittedService = quoteData?.serviceTitle || formData.service || "General Inquiry";
+
       // Reset form
       setFormData({
         fullName: "",
@@ -130,6 +134,14 @@ const Contact = () => {
         email: "",
         service: "",
         notes: "",
+      });
+
+      navigate("/thank-you", {
+        state: {
+          name: submittedName,
+          service: submittedService,
+          type: "contact",
+        },
       });
     } catch (error) {
       console.error("Error submitting form:", error);

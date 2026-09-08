@@ -7,6 +7,7 @@ import { sendFormEmail } from "@/lib/email";
 import { CLEANING_SERVICES, SERVICE_AREAS } from "@/lib/config";
 import { toast } from "sonner";
 import FadeIn from "@/components/FadeIn";
+import { useNavigate } from "react-router-dom";
 
 const propertyTypes = [
   "Residential (House / Patio / Driveway)",
@@ -36,6 +37,7 @@ const initialState = {
 };
 
 const QuoteForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -79,7 +81,17 @@ const QuoteForm = () => {
       });
 
       toast.success("Quote request submitted! We'll be in touch shortly.");
+      const submittedName = formData.fullName;
+      const submittedService = selectedService?.title || formData.service;
       setFormData(initialState);
+
+      navigate("/thank-you", {
+        state: {
+          name: submittedName,
+          service: submittedService,
+          type: "fast_quote",
+        },
+      });
     } catch (error) {
       console.error("Error submitting quote request:", error);
       toast.error("Something went wrong. Please try again.");

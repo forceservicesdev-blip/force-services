@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AnalyticsTracker from "./components/AnalyticsTracker";
 import ScrollToTop from "./components/ScrollToTop";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
@@ -18,6 +19,7 @@ import QuoteRequest from "./pages/QuoteRequest";
 import ServiceDetail from "./pages/ServiceDetail";
 import Services from "./pages/Services";
 import TermsAndConditions from "./pages/TermsAndConditions";
+import ThankYou from "./pages/ThankYou";
 import Work from "./pages/Work";
 import WorkDetail from "./pages/WorkDetail";
 
@@ -41,6 +43,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
+        <AnalyticsTracker />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
@@ -58,6 +61,8 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/obrigado" element={<ThankYou />} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

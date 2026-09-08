@@ -10,7 +10,7 @@ import { useCreateJobApplication } from "@/hooks/useJobApplications";
 import { ArrowUpRight, Briefcase, CheckCircle2, Loader2, MapPin } from "lucide-react";
 import { sendFormEmail } from "@/lib/email";
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 
 const nameSchema = z.string().trim().min(1, "Name is required").max(100);
@@ -18,6 +18,7 @@ const emailSchema = z.string().trim().email("Invalid email address").max(255);
 const phoneSchema = z.string().trim().min(1, "Phone is required").max(20);
 
 const Career = () => {
+  const navigate = useNavigate();
   const { slug } = useParams();
   const { data: careers, isLoading: careersLoading } = useCareers();
 
@@ -94,7 +95,9 @@ const Career = () => {
       },
     });
 
-    // Reset form on success
+    const applicantName = fullName.trim();
+    const positionApplied = job.title;
+
     setFullName("");
     setEmail("");
     setCurrentCompany("");
@@ -103,6 +106,14 @@ const Career = () => {
     setCvLink("");
     setNote("");
     setErrors({});
+
+    navigate("/thank-you", {
+      state: {
+        name: applicantName,
+        service: `Job Application: ${positionApplied}`,
+        type: "career_application",
+      },
+    });
   };
 
   if (careersLoading || careerLoading) {

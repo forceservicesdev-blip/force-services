@@ -11,7 +11,7 @@ import { CLEANING_SERVICES, COMPANY } from "@/lib/config";
 import { sendFormEmail } from "@/lib/email";
 import { Check, Loader2, Phone, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 
 // Images
@@ -207,6 +207,7 @@ const detailedServices: Record<string, ServiceDetailData> = {
 };
 
 const ServiceDetail = () => {
+  const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
   const serviceKey = slug && detailedServices[slug] ? slug : "power-washing";
   const service = detailedServices[serviceKey];
@@ -264,10 +265,19 @@ const ServiceDetail = () => {
       },
     });
 
+    const submittedName = fullName.trim();
     setFullName("");
     setPhone("");
     setNote("");
     setErrors({});
+
+    navigate("/thank-you", {
+      state: {
+        name: submittedName,
+        service: serviceName,
+        type: "service_inquiry",
+      },
+    });
   };
 
   return (
