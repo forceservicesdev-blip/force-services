@@ -51,6 +51,7 @@ export const CLEANING_SERVICES = [
     slug: "power-washing",
     title: "Power Washing & Pressure Cleaning",
     image: powerWashingImg,
+    imagePosition: "object-bottom",
     shortDescription:
       "High-pressure washing for driveways, patios, facades, roofs, decking, and exterior walls.",
     description:
@@ -119,6 +120,7 @@ export const CLEANING_SERVICES = [
     slug: "exterior-cleaning",
     title: "Building Facade & Exterior Cleaning",
     image: exteriorCleaningImg,
+    imagePosition: "object-bottom",
     shortDescription:
       "Specialized soft-wash and pressure cleaning for building facades, cladding, roofs, and stonework.",
     description:

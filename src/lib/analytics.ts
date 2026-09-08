@@ -121,6 +121,8 @@ export function trackWhatsAppClick(context: {
       event_category: "Engagement",
       event_label: context.button_text || "WhatsApp Button",
       page_location: context.page_location || window.location.pathname,
+      transport_type: "beacon",
+      debug_mode: true,
     });
 
     // Standard GA4 contact event
@@ -128,11 +130,16 @@ export function trackWhatsAppClick(context: {
       method: "WhatsApp",
       event_category: "Lead Generation",
       event_label: context.button_text || "WhatsApp Button",
+      transport_type: "beacon",
+      debug_mode: true,
     });
   }
 
   if (import.meta.env.DEV) {
     console.log("[Analytics] Tracked WhatsApp click:", eventData);
+    if (!window.gtag) {
+      console.warn("[Analytics] Warning: window.gtag is not defined! Check if an ad-blocker is active.");
+    }
   }
 }
 
@@ -181,27 +188,29 @@ export function setupGlobalAnalyticsListeners() {
     if (!target) return;
 
     // Find closest anchor tag
-    const anchor = target.closest("a");
+    const anchor = target.closest ? target.closest("a") : null;
     if (!anchor) return;
 
-    const href = anchor.getAttribute("href") || "";
+    const hrefAttr = anchor.getAttribute("href") || "";
+    const hrefProp = anchor.href || "";
+    const fullHref = `${hrefAttr} ${hrefProp}`.toLowerCase();
 
     // 1. Detect WhatsApp links
-    if (href.includes("wa.me") || href.includes("whatsapp.com")) {
+    if (fullHref.includes("wa.me") || fullHref.includes("whatsapp.com")) {
       const buttonText = anchor.innerText?.trim() || anchor.getAttribute("aria-label") || "WhatsApp Link";
       trackWhatsAppClick({
         button_text: buttonText,
         page_location: window.location.pathname,
-        destination_url: href,
+        destination_url: hrefAttr || hrefProp,
       });
     }
 
     // 2. Detect Phone links
-    if (href.startsWith("tel:")) {
+    if (fullHref.includes("tel:")) {
       const buttonText = anchor.innerText?.trim() || anchor.getAttribute("aria-label") || "Phone Link";
       trackPhoneClick({
         button_text: buttonText,
-        phone_number: href.replace("tel:", ""),
+        phone_number: hrefAttr.replace("tel:", "").trim(),
         page_location: window.location.pathname,
       });
     }

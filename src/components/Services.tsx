@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { CLEANING_SERVICES } from "@/lib/config";
 import FadeIn from "@/components/FadeIn";
+import { cn } from "@/lib/utils";
 import {
   Building2,
   Home,
@@ -44,16 +45,15 @@ const Services = () => {
                     <img
                       src={service.image}
                       alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      className={cn(
+                        "w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105",
+                        (service.slug === "power-washing" || service.slug === "exterior-cleaning") && "object-bottom"
+                      )}
+                      style={{
+                        objectPosition: (service.slug === "power-washing" || service.slug === "exterior-cleaning") ? "center 75%" : undefined
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-                    {/* Floating Price Pill */}
-                    <div className="absolute top-3 right-3 z-10">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-black/60 text-white backdrop-blur-md border border-white/20 shadow-sm">
-                        From €{service.basePrice}
-                      </span>
-                    </div>
 
                     {/* Floating Service Icon */}
                     <div className="absolute bottom-3 left-4 z-10 w-11 h-11 rounded-xl bg-white/95 dark:bg-neutral-900/95 text-primary shadow-md flex items-center justify-center border border-white/30 backdrop-blur-sm group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">

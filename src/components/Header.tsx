@@ -1,6 +1,7 @@
 import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { COMPANY, WHATSAPP_MESSAGE } from "@/lib/config";
+import { trackWhatsAppClick } from "@/lib/analytics";
 import { Menu, MessageCircle, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -46,6 +47,7 @@ const Header = () => {
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick({ button_text: "Header WhatsApp Desktop" })}
               className="flex items-center gap-2 text-sm font-medium text-tertiary hover:text-tertiary/80 transition-colors"
             >
               <MessageCircle className="h-5 w-5" />
@@ -88,6 +90,7 @@ const Header = () => {
                   href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackWhatsAppClick({ button_text: "Header WhatsApp Mobile" })}
                   className="flex items-center justify-center gap-2 rounded-full border border-tertiary text-tertiary font-semibold py-2.5"
                 >
                   <MessageCircle className="h-5 w-5" />

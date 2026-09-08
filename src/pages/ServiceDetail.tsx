@@ -13,6 +13,7 @@ import { Check, Loader2, Phone, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
+import { cn } from "@/lib/utils";
 
 // Images
 import powerWashingImg from "@/assets/cardimages/shawn-rain-0LIyVDJ6Xuk-unsplash.jpg";
@@ -330,7 +331,13 @@ const ServiceDetail = () => {
               <img
                 src={service.image}
                 alt={service.title}
-                className="w-full h-[360px] md:h-[480px] object-cover"
+                className={cn(
+                  "w-full h-[360px] md:h-[480px] object-cover",
+                  (serviceKey === "power-washing" || serviceKey === "exterior-cleaning") && "object-bottom"
+                )}
+                style={{
+                  objectPosition: (serviceKey === "power-washing" || serviceKey === "exterior-cleaning") ? "center 75%" : undefined
+                }}
               />
             </div>
           </FadeIn>
