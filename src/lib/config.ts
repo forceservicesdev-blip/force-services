@@ -104,7 +104,7 @@ export const CLEANING_SERVICES = [
     title: "Post-Construction & Builders Cleaning",
     image: postConstructionImg,
     shortDescription:
-      "Thorough after-build sparkle cleaning for new developments, home renovations, and fit-outs.",
+      "Thorough after-build sparkle cleaning for new developments, commercial renovations, and fit-outs.",
     description:
       "Transition from construction site to move-in ready. We eliminate fine drywall dust, plaster residue, paint splatters, adhesive tags, and construction debris from all surfaces, windows, and floors.",
     basePrice: 150,
@@ -131,7 +131,7 @@ export const CLEANING_SERVICES = [
       "Render Soft-Washing & Algae Removal",
       "Roof Moss Treatment & Gutter Clearing",
       "Stone, Brick & Masonry Restoration",
-      "Commercial & Residential Exteriors",
+      "Commercial & Industrial Exteriors",
     ],
   },
   {
@@ -162,7 +162,7 @@ export const WHY_CHOOSE_US = [
   {
     title: "5 Years of Experience",
     description:
-      "With 5 years in Ireland, we have the proven expertise to handle complex residential, commercial, industrial, and builder projects.",
+      "With 5 years in Ireland, we have the proven expertise to handle complex commercial, industrial, and builder projects.",
   },
   {
     title: "Superior Equipment & Materials",

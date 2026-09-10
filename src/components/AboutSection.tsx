@@ -33,16 +33,16 @@ const AboutSection = () => {
           <FadeIn delay={100}>
             <div className="inline-flex items-center gap-2 rounded-full bg-tertiary/10 px-4 py-2 text-sm font-semibold text-tertiary mb-5">
               <Star className="h-4 w-4 fill-tertiary" />
-              Trusted Cleaning Company in Ireland
+              Trusted Commercial Cleaning Company in Ireland
             </div>
             <h2 className="text-3xl md:text-h2 font-bold text-primary mb-6 text-balance">
-              Quality Work, Reliable Service & Peace of Mind
+              Quality Work, Reliable Service &amp; Peace of Mind
             </h2>
             <p className="text-muted-foreground text-lg mb-4">
-              Founded 5 years ago in Ireland, <strong className="text-primary">{COMPANY.name}</strong> was built on a simple goal: to provide reliable, professional, and high-quality cleaning services our customers can truly depend on.
+              Founded 5 years ago in Ireland, <strong className="text-primary">{COMPANY.name}</strong> was built on a simple goal: to provide reliable, professional commercial cleaning services businesses can truly depend on.
             </p>
             <p className="text-muted-foreground text-base mb-6">
-              Over the years, we have gained valuable hands-on experience delivering superior power washing, commercial, industrial, and post-construction cleaning projects across {COMPANY.serviceArea} and surrounding regions.
+              Over the years, we have gained valuable hands-on experience delivering superior power washing, commercial, industrial, and post-construction cleaning projects across County Clare, Limerick, and surrounding regions.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">

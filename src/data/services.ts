@@ -56,7 +56,7 @@ export const services: Service[] = [
     title: "Sewer Repair & Cleaning",
     slug: "sewer-repair-cleaning",
     description:
-      "Our team is available 24/7 to tackle leaks, burst pipes, and other critical plumbing problems, ensuring your home or business runs smoothly.",
+      "Our team is available 24/7 to tackle leaks, burst pipes, and other critical plumbing problems, ensuring your facility or business runs smoothly.",
     basePrice: 125,
     complexityOptions: [
       { label: "Routine Cleaning", multiplier: 1, description: "Standard sewer line cleaning" },

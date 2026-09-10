@@ -67,10 +67,10 @@ const pricingPlans: Record<"commercial" | "powerWashing", Plan[]> = {
   ],
   powerWashing: [
     {
-      name: "Driveway & Patio Refresh",
+      name: "Commercial Grounds & Paving",
       price: 80,
       unit: "Starting from",
-      description: "High-pressure clean for residential driveways and garden patios.",
+      description: "High-pressure clean for commercial entrance paving, walkways, and forecourts.",
       features: [
         "Concrete, paving & tarmac power wash",
         "Moss, algae & weed removal",
@@ -84,7 +84,7 @@ const pricingPlans: Record<"commercial" | "powerWashing", Plan[]> = {
       name: "Full Exterior Package",
       price: 180,
       unit: "Starting from",
-      description: "Complete home exterior makeover: driveway, patio, walls & decking.",
+      description: "Complete commercial exterior makeover: walkways, paving, walls & decking.",
       features: [
         "Driveway + front & rear patio washing",
         "Timber decking gentle clean & algae strip",

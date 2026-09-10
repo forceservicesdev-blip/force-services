@@ -123,9 +123,9 @@ const BlogDetail = () => {
 
                   <div className="grid lg:grid-cols-2 gap-8 mb-8">
                     <div>
-                      <h4 className="text-primary mb-4">Increase Home Value</h4>
+                      <h4 className="text-primary mb-4">Increase Property Value</h4>
                       <p className="text-muted-foreground mb-4 leading-relaxed">
-                        A well-maintained plumbing system can increase your home's value and appeal to potential buyers.
+                        A well-maintained property increases your facility's value and appeal to clients and visitors.
                       </p>
                       <p className="text-muted-foreground leading-relaxed">
                         Modern fixtures and efficient systems are attractive features that can set your property apart.

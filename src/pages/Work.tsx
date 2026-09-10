@@ -16,11 +16,11 @@ export const works = [
   {
     slug: "driveway-patio-power-wash",
     image: work1,
-    title: "Driveway & Patio Power Wash",
+    title: "Commercial Paving & Grounds Power Wash",
     location: "Ennis, Co. Clare",
     category: "Power Washing",
     description:
-      "Deep power washing of extensive residential driveway and patio paving. Eliminated years of embedded moss, black lichen, and slippery algae, restoring the original vibrant stone finish.",
+      "Deep power washing of extensive commercial entrance paving, walkways, and forecourts. Eliminated years of embedded moss, black lichen, and slippery algae, restoring safety and clean presentation.",
   },
   {
     slug: "commercial-office-clean",
@@ -47,7 +47,7 @@ export const works = [
     location: "Galway Development",
     category: "Builders Clean",
     description:
-      "Full after-build sparkle clean for a newly constructed residential complex. Complete dust extraction, window paint removal, sanitary ware polishing, and move-in handover ready.",
+      "Full after-build sparkle clean for a newly constructed commercial development. Complete dust extraction, window paint removal, sanitary ware polishing, and handover ready.",
   },
   {
     slug: "building-facade-softwash",
@@ -61,11 +61,11 @@ export const works = [
   {
     slug: "residential-move-in-clean",
     image: work6,
-    title: "Residential Deep & Move-In Clean",
+    title: "Commercial Deep & Handover Clean",
     location: "Newmarket-on-Fergus",
-    category: "Residential Deep Clean",
+    category: "Commercial Deep Clean",
     description:
-      "Total top-to-bottom sanitization of a 4-bedroom family home before moving in. Detailed kitchen oven degrease, bathroom limescale treatment, and carpet extraction.",
+      "Total top-to-bottom sanitization and deep cleaning of a commercial premises prior to business handover. Detailed kitchen sanitization, restroom descaling, and floor machine scrubbing.",
   },
 ];
 
@@ -91,7 +91,7 @@ const Work = () => {
                 Featured Projects
               </h1>
               <p className="text-muted-foreground max-w-xl text-lg mt-3">
-                Proven results across Ennis, Limerick, and Galway. See how {COMPANY.name} transforms residential, commercial, and industrial properties.
+                Proven results across Ennis, Limerick, and Galway. See how {COMPANY.name} transforms commercial and industrial properties.
               </p>
             </div>
             <Link to="/quote">

@@ -84,7 +84,7 @@ const HeroImageSlider = ({
           >
             <img
               src={image}
-              alt="Cleaning service showcase"
+              alt="Commercial cleaning showcase"
               style={{ transitionDuration: "4000ms" }}
               className={`w-full h-full object-cover object-center transform transition-transform ease-out ${
                 isActive ? "scale-105" : "scale-100"
@@ -159,7 +159,7 @@ const Hero = () => {
   return (
     <section className="relative overflow-hidden bg-secondary pt-6 pb-12 sm:pt-8 sm:pb-16 md:pt-10 md:pb-20 lg:pt-12 lg:pb-24">
       {/* Background Decorative Elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
         {/* Subtle geometric dot pattern */}
         <div className="absolute inset-0 opacity-[0.06] bg-[radial-gradient(hsl(var(--primary))_1.5px,transparent_1.5px)] [background-size:24px_24px]" />
 
@@ -192,11 +192,10 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <FadeIn>
             <h1 className="text-4xl md:text-5xl lg:text-h1 font-bold text-primary mb-6 text-balance">
-              Professional Cleaning Services You Can Trust
+              Professional Commercial Cleaning in Clare &amp; Limerick
             </h1>
             <p className="text-lg text-muted-foreground mb-6 max-w-xl">
-              {COMPANY.description} Trusted across {COMPANY.serviceArea} for a spotless,
-              high-standard finish every time.
+              Commercial, industrial and post-construction cleaning for businesses across Ennis, Shannon, Limerick and surrounding areas.
             </p>
 
             {/* Mobile Hero Image Slider - smoothly integrated with text on mobile */}

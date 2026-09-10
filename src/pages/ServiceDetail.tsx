@@ -128,7 +128,7 @@ const detailedServices: Record<string, ServiceDetailData> = {
     image: postConstructionImg,
     aboutTitle: "Turn Construction Sites into Move-In Ready Spaces",
     aboutDescription:
-      "After construction or remodeling, properties are left covered in fine plaster dust, paint splatters, silicon residue, and building debris.\n\nForce Services specializes in multi-phase post-construction cleaning — from initial rough cleans to final sparkle cleans that prepare homes, offices, and retail units for immediate handover to owners or tenants.",
+      "After construction or remodeling, properties are left covered in fine plaster dust, paint splatters, silicon residue, and building debris.\n\nForce Services specializes in multi-phase post-construction cleaning — from initial rough cleans to final sparkle cleans that prepare commercial facilities, offices, and retail units for immediate handover to owners or tenants.",
     included: [
       "Removal of fine drywall dust from all walls, ceilings, and ledges",
       "Paint overspray, plaster, and adhesive removal from glass and tiles",
@@ -141,7 +141,7 @@ const detailedServices: Record<string, ServiceDetailData> = {
       "Guarantees seamless handover to landlords, buyers, or letting agents",
       "Eliminates airborne dust particles for improved indoor air quality",
       "Fast turnaround times to meet project completion deadlines",
-      "Experienced with large residential developments and commercial fit-outs",
+      "Experienced with large commercial developments and business fit-outs",
     ],
     workSteps: [
       { number: "01", title: "Rough Debris Clean", description: "Removal of leftover packaging, large debris, and heavy construction dust." },
@@ -156,7 +156,7 @@ const detailedServices: Record<string, ServiceDetailData> = {
     image: exteriorCleaningImg,
     aboutTitle: "Specialized Exterior & Facade Restoration",
     aboutDescription:
-      "Keep your building's exterior pristine and protected against atmospheric pollutants, algae, and weather staining.\n\nForce Services provides specialized soft-washing and gentle pressure cleaning for commercial facades, residential render, architectural cladding, and roofs across Ennis, Limerick, and Galway. We safely treat and eliminate red and green algae biofilms without eroding coatings or delicate masonry.",
+      "Keep your building's exterior pristine and protected against atmospheric pollutants, algae, and weather staining.\n\nForce Services provides specialized soft-washing and gentle pressure cleaning for commercial facades, exterior render, architectural cladding, and roofs across Ennis, Limerick, and Galway. We safely treat and eliminate red and green algae biofilms without eroding coatings or delicate masonry.",
     included: [
       "Commercial facades, cladding, and shopfront detailing",
       "K-Rend, monocouche, and delicate plaster soft-wash",

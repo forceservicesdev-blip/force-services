@@ -14,10 +14,10 @@ const CTA = () => {
       <div className="container-custom section-padding">
         <FadeIn>
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-primary mb-4">A Cleaner Home Starts Here</h2>
+            <h2 className="text-primary mb-4">Professional Commercial Cleaning Starts Here</h2>
             <p className="text-foreground/70 text-lg mb-10 max-w-2xl mx-auto">
               Book a professional cleaning team you can trust. Get a fast, no-obligation
-              quote and enjoy a spotless home or workplace across {COMPANY.serviceArea}.
+              quote and enjoy a spotless commercial facility or workplace across {COMPANY.serviceArea}.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to="/quote">

@@ -44,7 +44,7 @@ export const SHOWCASE_SERVICES = [
     id: "02",
     image: service03,
     title: "Patio & Paving Slab Revitalisation",
-    location: "Residential Garden",
+    location: "Commercial Grounds",
     description: "Revival of natural paving stone colors, washing away slippery algae and embedded soil.",
     highlights: ["Joint-safe wash", "Natural stone revival", "Anti-fungal treatment"],
   },
@@ -52,7 +52,7 @@ export const SHOWCASE_SERVICES = [
     id: "03",
     image: service04,
     title: "Stone Wall & Perimeter Restoration",
-    location: "Private Residence",
+    location: "Commercial Perimeter",
     description: "Specialized pressure and chemical treatment bringing out the natural beauty of stone boundaries.",
     highlights: ["Organic stain removal", "Masonry preservation", "Clean finish"],
   },
@@ -60,7 +60,7 @@ export const SHOWCASE_SERVICES = [
     id: "04",
     image: service05,
     title: "Exterior Wall Soft Washing & Facade",
-    location: "Domestic Property",
+    location: "Commercial Property",
     description: "Low-pressure softwash treatment removing red and green algae without damaging paint or render.",
     highlights: ["Render safe", "Long-lasting biocide", "Immediate curb appeal"],
   },
@@ -76,7 +76,7 @@ export const SHOWCASE_SERVICES = [
     id: "06",
     image: service07,
     title: "Block Paving & Pathway Renewal",
-    location: "Residential Pathway",
+    location: "Commercial Pathway",
     description: "Targeted jet washing clearing weeds, dirt, and built-up grime between pavers.",
     highlights: ["Weed eradication", "Deep surface clean", "Smooth even finish"],
   },
@@ -92,7 +92,7 @@ export const SHOWCASE_SERVICES = [
     id: "08",
     image: service09,
     title: "Decking & Timber Exterior Wash",
-    location: "Private Garden Deck",
+    location: "Commercial Outdoor Decking",
     description: "Gentle yet effective pressure treatment restoring wood grain without splintering.",
     highlights: ["Non-destructive wash", "Algae removal", "Slip prevention"],
   },
@@ -246,7 +246,7 @@ const BeforeAfter = () => {
                 See the Difference a Professional Clean Makes
               </h2>
               <p className="text-muted-foreground text-base md:text-lg mt-3">
-                Explore our recent domestic, commercial, and exterior restoration projects across Clare & surrounding areas.
+                Explore our recent commercial, industrial, and exterior restoration projects across Clare &amp; surrounding areas.
               </p>
             </div>
 

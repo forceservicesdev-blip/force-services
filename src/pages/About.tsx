@@ -42,7 +42,7 @@ const coreValues = [
   {
     title: "5 Years of Proven Experience",
     description:
-      "With 5 years in Ireland, we have developed the specialized knowledge and skills to handle demanding residential, commercial, industrial, and construction cleans.",
+      "With 5 years in Ireland, we have developed the specialized knowledge and skills to handle demanding commercial, industrial, and post-construction cleans.",
     icon: Award,
   },
   {
@@ -54,7 +54,7 @@ const coreValues = [
   {
     title: "Fully Insured & Registered",
     description:
-      `Book with total peace of mind. Force Services is fully registered and insured for domestic and commercial projects.`,
+      `Book with total peace of mind. Force Services is fully registered and insured for commercial and industrial projects.`,
     icon: Wrench,
   },
   {
@@ -146,7 +146,7 @@ const About = () => {
                     <strong className="text-foreground">{COMPANY.name}</strong> was founded five years ago in Ireland with a simple goal: to provide reliable, professional, and high-quality cleaning services that our customers can truly depend on.
                   </p>
                   <p>
-                    What started as a small business has grown through hard work, dedication, and, most importantly, the trust of our customers. Over the years, we have gained valuable experience working with residential properties, commercial spaces, and post-construction projects throughout {COMPANY.serviceArea} and beyond.
+                    What started as a small business has grown through hard work, dedication, and, most importantly, the trust of our customers. Over the years, we have gained valuable experience working with commercial spaces, industrial facilities, and post-construction projects throughout {COMPANY.serviceArea} and beyond.
                   </p>
                   <p>
                     We take pride in every job we complete and believe that attention to detail, professionalism, and excellent customer service are the foundation of a successful cleaning company.
@@ -224,7 +224,7 @@ const About = () => {
               <p className="text-primary font-bold mb-3 uppercase tracking-wider text-sm">Our Commitments</p>
               <h2 className="text-foreground text-3xl md:text-4xl lg:text-5xl font-bold">What Sets Us Apart</h2>
               <p className="text-muted-foreground text-lg mt-4">
-                Choosing a cleaning company means choosing someone you can trust with your home or business. We provide more than just cleaning — we provide quality, reliability, and peace of mind.
+                Choosing a cleaning company means choosing someone you can trust with your business or commercial facility. We provide more than just cleaning — we provide quality, reliability, and peace of mind.
               </p>
             </div>
 

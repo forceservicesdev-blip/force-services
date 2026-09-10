@@ -13,11 +13,10 @@ const FinalCTA = () => {
       <div className="container-custom section-padding text-center">
         <FadeIn>
           <h2 className="text-3xl md:text-h2 font-bold text-primary-foreground mb-4 text-balance">
-            A Cleaner Home Starts Here
+            Professional Commercial Cleaning Starts Here
           </h2>
           <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto mb-8">
-            Get a free, no-obligation quote today and let us take care of the cleaning while you focus on what
-            matters most.
+            Get a free, no-obligation quote today and let us take care of the cleaning while you focus on running your business.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/quote">

@@ -4,7 +4,7 @@ import FadeIn from "@/components/FadeIn";
 import { cn } from "@/lib/utils";
 import {
   Building2,
-  Home,
+  HardHat,
   KeyRound,
   Sparkles,
   SprayCan,
@@ -17,7 +17,7 @@ const SERVICE_ICONS: Record<string, typeof Sparkles> = {
   "power-washing": Sparkles,
   "commercial-cleaning": Building2,
   "industrial-cleaning": Truck,
-  "post-construction-cleaning": Home,
+  "post-construction-cleaning": HardHat,
   "exterior-cleaning": SprayCan,
   "custom-cleaning": KeyRound,
 };
@@ -28,9 +28,9 @@ const Services = () => {
       <div className="container-custom section-padding">
         <FadeIn>
           <div className="max-w-2xl mx-auto text-center mb-14">
-            <h2 className="text-3xl md:text-h2 font-bold text-primary mb-4">Our Cleaning Services</h2>
+            <h2 className="text-3xl md:text-h2 font-bold text-primary mb-4">Commercial Cleaning Services</h2>
             <p className="text-muted-foreground text-lg">
-              From power washing and commercial maintenance to industrial facilities and post-construction cleans, we have a specialized solution for every property.
+              From power washing and commercial office maintenance to industrial facilities, post-construction cleaning, and builders cleans, we deliver specialized solutions for every business.
             </p>
           </div>
         </FadeIn>

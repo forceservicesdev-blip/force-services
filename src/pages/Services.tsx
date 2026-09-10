@@ -7,7 +7,7 @@ import { CLEANING_SERVICES, COMPANY } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import {
   Building2,
-  Home,
+  HardHat,
   KeyRound,
   Sparkles,
   SprayCan,
@@ -15,11 +15,11 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const SERVICE_ICONS: Record<string, typeof Home> = {
+const SERVICE_ICONS: Record<string, typeof Sparkles> = {
   "power-washing": Sparkles,
   "commercial-cleaning": Building2,
   "industrial-cleaning": Truck,
-  "post-construction-cleaning": Home,
+  "post-construction-cleaning": HardHat,
   "exterior-cleaning": SprayCan,
   "custom-cleaning": KeyRound,
 };

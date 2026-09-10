@@ -122,7 +122,6 @@ export function trackWhatsAppClick(context: {
       event_label: context.button_text || "WhatsApp Button",
       page_location: context.page_location || window.location.pathname,
       transport_type: "beacon",
-      debug_mode: true,
     });
 
     // Standard GA4 contact event
@@ -131,7 +130,6 @@ export function trackWhatsAppClick(context: {
       event_category: "Lead Generation",
       event_label: context.button_text || "WhatsApp Button",
       transport_type: "beacon",
-      debug_mode: true,
     });
   }
 

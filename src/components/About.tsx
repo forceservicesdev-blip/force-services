@@ -13,7 +13,7 @@ const features = [
   },
   {
     title: "Comprehensive Solutions",
-    description: "From residential power washing to industrial plant cleans, we handle every job with expertise.",
+    description: "From commercial power washing to industrial plant cleans, we handle every job with expertise.",
   },
 ];
 

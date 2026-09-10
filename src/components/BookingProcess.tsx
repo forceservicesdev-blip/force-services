@@ -26,7 +26,7 @@ const BookingProcess = () => {
         <FadeIn>
           <div className="max-w-2xl mx-auto text-center mb-14">
             <h2 className="text-3xl md:text-h2 font-bold text-primary mb-4">Booking With Us Is Simple</h2>
-            <p className="text-muted-foreground text-lg">Three easy steps to a cleaner home or workplace.</p>
+            <p className="text-muted-foreground text-lg">Three easy steps to a cleaner commercial space or workplace.</p>
           </div>
         </FadeIn>
         <div className="grid md:grid-cols-3 gap-8">

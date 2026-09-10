@@ -10,9 +10,9 @@ const ServiceAreas = () => {
       <div className="container-custom section-padding">
         <FadeIn>
           <div className="max-w-2xl mx-auto text-center mb-14">
-            <h2 className="text-3xl md:text-h2 font-bold text-primary mb-4">Areas We Cover</h2>
+            <h2 className="text-3xl md:text-h2 font-bold text-primary mb-4">Areas We Cover in County Clare &amp; Limerick</h2>
             <p className="text-muted-foreground text-lg">
-              Proudly serving {COMPANY.serviceArea} and the surrounding towns of {COMPANY.county}.
+              Delivering trusted commercial cleaning in Limerick, commercial cleaning in Ennis, and industrial cleaning in Shannon. We serve businesses, builders cleans, and facilities across County Clare and surrounding areas.
             </p>
           </div>
         </FadeIn>

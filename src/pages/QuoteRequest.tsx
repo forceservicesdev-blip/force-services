@@ -48,11 +48,11 @@ export interface QuoteData {
 }
 
 const PROPERTY_TYPES = [
-  "Residential (House / Patio / Driveway)",
   "Commercial Office / Retail Store",
   "Industrial Warehouse / Factory",
   "Post-Construction / Renovation Site",
-  "Forecourt / Car Park / Exterior",
+  "Commercial Grounds / Forecourt / Car Park",
+  "Hospitality / Public Facility",
   "Other / Custom Facility",
 ];
 

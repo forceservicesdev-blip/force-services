@@ -26,7 +26,7 @@ export const CAREERS_DATA: Career[] = [
     employment_type: "Full-time / Permanent",
     experience_level: "1+ years experience preferred (Full training provided)",
     salary_range: "Competitive Hourly Rate + Performance Bonus",
-    description: "We are seeking a motivated and hardworking Power Washing Technician to join our growing exterior cleaning team. You will operate commercial high-pressure cleaning equipment and softwash systems for domestic and commercial clients.",
+    description: "We are seeking a motivated and hardworking Power Washing Technician to join our growing exterior cleaning team. You will operate commercial high-pressure cleaning equipment and softwash systems for commercial and industrial clients.",
     responsibilities: [
       "Operate heavy-duty industrial pressure washers and rotary surface cleaners safely and efficiently.",
       "Conduct soft washing, chemical applications, and biocidal rinses on roofs, facades, and patios.",

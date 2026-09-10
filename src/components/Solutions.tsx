@@ -17,7 +17,7 @@ const features = [
   },
   {
     title: "5 Years of Proven Reliability",
-    description: "Proudly serving residential, commercial, industrial, and building clients across Ireland.",
+    description: "Proudly serving commercial, industrial, and building clients across Ireland.",
   },
 ];
 

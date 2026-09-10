@@ -115,7 +115,7 @@ const PrivacyPolicy = () => {
                   <li className="flex items-start gap-2.5">
                     <div className="h-2 w-2 rounded-full bg-primary mt-2 shrink-0" />
                     <span>
-                      <strong className="text-foreground">Property & Service Information:</strong> Property type (residential, commercial, industrial), service requested (power washing, office cleaning, soft washing, etc.), property size, and specific cleaning instructions or site access details.
+                      <strong className="text-foreground">Property &amp; Service Information:</strong> Property type (commercial, industrial), service requested (power washing, office cleaning, soft washing, etc.), property size, and specific cleaning instructions or site access details.
                     </span>
                   </li>
                   <li className="flex items-start gap-2.5">
