@@ -7,6 +7,7 @@ import {
   Sparkles,
   BadgeCheck,
   MessageCircle,
+  Phone,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -209,12 +210,18 @@ const Hero = () => {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-10">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 mb-10">
               <Link to="/quote">
                 <Button size="lg" className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90">
                   Get a Free Quote
                 </Button>
               </Link>
+              <a href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`}>
+                <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold">
+                  <Phone className="h-5 w-5" />
+                  {COMPANY.phone}
+                </Button>
+              </a>
               <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
                   <MessageCircle className="h-5 w-5" />

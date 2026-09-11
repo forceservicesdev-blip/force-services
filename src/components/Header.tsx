@@ -2,7 +2,7 @@ import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { COMPANY, WHATSAPP_MESSAGE } from "@/lib/config";
 import { trackWhatsAppClick } from "@/lib/analytics";
-import { Menu, MessageCircle, X } from "lucide-react";
+import { Menu, MessageCircle, Phone, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -42,7 +42,15 @@ const Header = () => {
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-4">
+            <a
+              href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`}
+              className="flex items-center gap-2 text-sm font-semibold text-foreground/80 hover:text-primary transition-colors"
+            >
+              <Phone className="h-4 w-4 text-primary" />
+              <span>{COMPANY.phone}</span>
+            </a>
+
             <a
               href={whatsappHref}
               target="_blank"
@@ -86,6 +94,13 @@ const Header = () => {
                 </Link>
               ))}
               <div className="flex flex-col gap-3 mt-4">
+                <a
+                  href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`}
+                  className="flex items-center justify-center gap-2 rounded-full border border-primary text-primary font-semibold py-2.5 hover:bg-primary hover:text-primary-foreground transition-colors"
+                >
+                  <Phone className="h-4 w-4" />
+                  Call {COMPANY.phone}
+                </a>
                 <a
                   href={whatsappHref}
                   target="_blank"

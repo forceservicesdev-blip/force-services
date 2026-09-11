@@ -5,7 +5,7 @@ export const COMPANY = {
   tagline: "Professional Power Washing, Commercial, Industrial & Post-Construction Cleaning",
   description:
     "Professional power washing, commercial, industrial, and post-construction cleaning services across Ennis, Limerick, Galway, and surrounding areas.",
-  phone: "+353 87 494 5684",
+  phone: "+353 85 765 0548",
   email: "forceservicesie@gmail.com",
   notificationEmail: "forceservicesie@gmail.com",
   whatsappNumber: "+353874945684",
@@ -200,7 +200,7 @@ export const FAQS = [
   {
     question: "How do I get a quote?",
     answer:
-      "You can use our online Quote Request form, fill out our Contact form, email us at Forceservicesie@gmail.com, or contact us directly via WhatsApp/Call at +353 87 494 5684. We provide free, fast, no-obligation quotes.",
+      "You can use our online Quote Request form, fill out our Contact form, email us at Forceservicesie@gmail.com, or contact us directly via WhatsApp (+353 87 494 5684) or Call at +353 85 765 0548. We provide free, fast, no-obligation quotes.",
   },
   {
     question: "Do you bring your own equipment and materials?",

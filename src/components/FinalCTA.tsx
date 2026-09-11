@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { COMPANY, WHATSAPP_MESSAGE } from "@/lib/config";
 import { Link } from "react-router-dom";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Phone } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 
 const FinalCTA = () => {
@@ -18,14 +18,20 @@ const FinalCTA = () => {
           <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto mb-8">
             Get a free, no-obligation quote today and let us take care of the cleaning while you focus on running your business.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
             <Link to="/quote">
               <Button size="lg" className="w-full sm:w-auto bg-tertiary text-tertiary-foreground hover:bg-tertiary/90">
                 Get a Free Quote
               </Button>
             </Link>
+            <a href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`}>
+              <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 border-white/30 text-white hover:bg-white hover:text-primary font-semibold">
+                <Phone className="h-5 w-5" />
+                {COMPANY.phone}
+              </Button>
+            </a>
             <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 border-primary text-primary hover:text-primary-foreground">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 border-white/30 text-white hover:bg-white hover:text-primary font-semibold">
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp Us
               </Button>
