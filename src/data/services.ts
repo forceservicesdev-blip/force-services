@@ -11,7 +11,7 @@ export interface Service {
   title: string;
   slug: string;
   description: string;
-  basePrice: number; // Base price per hour
+  basePrice: number;
   complexityOptions: ComplexityOption[];
 }
 
