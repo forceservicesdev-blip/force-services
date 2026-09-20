@@ -243,17 +243,39 @@ const Contact = () => {
 
                   {/* Direct Channels Cards */}
                   <div className="space-y-3 pt-2">
+                    {/* Primary Phone */}
                     <a
-                      href={`tel:${COMPANY.phone}`}
+                      href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`}
                       className="group flex items-center gap-4 p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/10 transition-all duration-200"
                     >
                       <div className="w-12 h-12 rounded-xl bg-white/10 text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                         <Phone className="w-5 h-5 text-white" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-xs uppercase font-medium tracking-wider text-primary-foreground/70">Phone Direct</p>
+                        <div className="flex items-center gap-2">
+                          <p className="text-xs uppercase font-medium tracking-wider text-primary-foreground/70">Phone Direct</p>
+                          <span className="text-[10px] bg-white/20 text-white font-semibold px-1.5 py-0.5 rounded">Primary</span>
+                        </div>
                         <p className="text-base sm:text-lg font-bold text-white truncate">{COMPANY.phone}</p>
                         <p className="text-xs text-primary-foreground/60">Mon – Sat: 8:00 AM – 6:00 PM</p>
+                      </div>
+                    </a>
+
+                    {/* Secondary Phone (Old number as 2nd option) */}
+                    <a
+                      href={`tel:${COMPANY.secondaryPhone.replace(/\s+/g, "")}`}
+                      className="group flex items-center gap-4 p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/10 transition-all duration-200"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-white/10 text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                        <Phone className="w-5 h-5 text-white" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-2">
+                          <p className="text-xs uppercase font-medium tracking-wider text-primary-foreground/70">Alternative Phone</p>
+                          <span className="text-[10px] bg-white/15 text-primary-foreground/80 font-semibold px-1.5 py-0.5 rounded">2nd Option</span>
+                        </div>
+                        <p className="text-base sm:text-lg font-bold text-white truncate">{COMPANY.secondaryPhone}</p>
+                        <p className="text-xs text-primary-foreground/60">Secondary / alternative line</p>
                       </div>
                     </a>
 
