@@ -91,6 +91,90 @@ const pages = [
     description:
       "Terms and conditions for Force Services cleaning and maintenance services.",
   },
+  {
+    path: "career",
+    title: "Careers & Opportunities | Force Services",
+    description:
+      "Join the Force Services team. Explore open positions for power washing technicians and commercial cleaning operatives in Clare and Limerick.",
+  },
+  {
+    path: "career/power-washing-technician",
+    title: "Power Washing Technician Career | Force Services",
+    description:
+      "Apply for the Power Washing & Surface Restoration Technician role at Force Services covering Clare, Limerick & Galway.",
+  },
+  {
+    path: "career/commercial-cleaning-operative",
+    title: "Commercial Cleaning Operative Career | Force Services",
+    description:
+      "Apply for the Commercial & Office Cleaning Operative role at Force Services in Ennis & Shannon, Co. Clare.",
+  },
+  {
+    path: "work",
+    title: "Our Work & Completed Projects | Force Services",
+    description:
+      "Explore completed commercial power washing, office cleaning, and industrial maintenance projects by Force Services.",
+  },
+  {
+    path: "work/driveway-patio-power-wash",
+    title: "Commercial Paving & Grounds Power Wash | Force Services",
+    description:
+      "Project review: deep power washing of commercial entrance paving, walkways, and forecourts in Ennis, Co. Clare.",
+  },
+  {
+    path: "work/commercial-office-clean",
+    title: "Commercial Office Sanitization Project | Force Services",
+    description:
+      "Project review: corporate office deep clean and sanitization contract in Limerick City.",
+  },
+  {
+    path: "work/warehouse-industrial-degreasing",
+    title: "Warehouse Floor Scrubbing & Degreasing | Force Services",
+    description:
+      "Project review: heavy-duty industrial scrub and degreasing of a logistics facility in Shannon.",
+  },
+  {
+    path: "work/post-construction-sparkle-clean",
+    title: "Post-Construction Builders Clean | Force Services",
+    description:
+      "Project review: after-build sparkle clean for a newly constructed commercial development in Galway.",
+  },
+  {
+    path: "work/building-facade-softwash",
+    title: "Commercial Building Facade Restoration | Force Services",
+    description:
+      "Project review: soft-washing and facade restoration of a commercial building in Ennis, Co. Clare.",
+  },
+  {
+    path: "work/residential-move-in-clean",
+    title: "Commercial Deep & Handover Clean | Force Services",
+    description:
+      "Project review: total top-to-bottom sanitization and deep cleaning before commercial business handover.",
+  },
+  {
+    path: "blog",
+    title: "Cleaning & Maintenance Blog | Force Services",
+    description:
+      "Read expert tips and insights on power washing, commercial cleaning, soft washing, and property maintenance in Ireland.",
+  },
+  {
+    path: "blog/power-washing-vs-soft-washing",
+    title: "Power Washing vs. Soft Washing Guide | Force Services",
+    description:
+      "Learn the crucial differences between high-pressure power washing and low-pressure soft washing to protect your surfaces.",
+  },
+  {
+    path: "blog/benefits-of-regular-commercial-cleaning",
+    title: "Why Regular Commercial Cleaning Protects Your Business | Force Services",
+    description:
+      "Discover how a professionally maintained office or retail space improves employee health, safety compliance, and client trust.",
+  },
+  {
+    path: "blog/post-construction-cleaning-checklist",
+    title: "Post-Construction Cleaning Checklist | Force Services",
+    description:
+      "A complete step-by-step checklist to transforming a finished build or renovation site into an immaculate, move-in-ready space.",
+  },
 ];
 
 function generateStaticPages() {
