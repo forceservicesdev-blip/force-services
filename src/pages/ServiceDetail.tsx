@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
+import NotFound from "@/pages/NotFound";
 
 // Images
 import powerWashingImg from "@/assets/cardimages/shawn-rain-0LIyVDJ6Xuk-unsplash.jpg";
@@ -210,6 +211,11 @@ const detailedServices: Record<string, ServiceDetailData> = {
 const ServiceDetail = () => {
   const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
+
+  if (slug && !detailedServices[slug]) {
+    return <NotFound />;
+  }
+
   const serviceKey = slug && detailedServices[slug] ? slug : "power-washing";
   const service = detailedServices[serviceKey];
 
@@ -222,10 +228,24 @@ const ServiceDetail = () => {
   const createInquiry = useCreateServiceInquiry();
 
   useEffect(() => {
-    if (slug && detailedServices[slug]) {
-      setSelectedService(slug);
+    if (serviceKey && detailedServices[serviceKey]) {
+      setSelectedService(serviceKey);
+      document.title = `${detailedServices[serviceKey].title} | ${COMPANY.name}`;
+
+      const descMeta = document.querySelector('meta[name="description"]');
+      if (descMeta && detailedServices[serviceKey].tagline) {
+        descMeta.setAttribute("content", detailedServices[serviceKey].tagline);
+      }
+
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) {
+        canonical = document.createElement("link");
+        canonical.setAttribute("rel", "canonical");
+        document.head.appendChild(canonical);
+      }
+      canonical.setAttribute("href", `https://www.forceservices.ie/services/${serviceKey}`);
     }
-  }, [slug]);
+  }, [serviceKey]);
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};

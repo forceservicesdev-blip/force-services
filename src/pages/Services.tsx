@@ -13,6 +13,7 @@ import {
   SprayCan,
   Truck,
 } from "lucide-react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const SERVICE_ICONS: Record<string, typeof Sparkles> = {
@@ -25,6 +26,24 @@ const SERVICE_ICONS: Record<string, typeof Sparkles> = {
 };
 
 const Services = () => {
+  useEffect(() => {
+    document.title = `Our Cleaning Services | ${COMPANY.name}`;
+    const descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) {
+      descMeta.setAttribute(
+        "content",
+        `From high-pressure power washing to commercial and industrial cleaning, ${COMPANY.name} offers a full range of professional cleaning services across ${COMPANY.serviceArea}.`
+      );
+    }
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", "https://www.forceservices.ie/services");
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Header />
