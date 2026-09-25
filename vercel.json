@@ -5,12 +5,17 @@
     {
       "source": "/services/pressure-washing",
       "destination": "/services/power-washing",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/services/builders-cleaning",
       "destination": "/services/post-construction-cleaning",
-      "permanent": true
+      "statusCode": 301
+    },
+    {
+      "source": "/services/office-cleaning",
+      "destination": "/services/commercial-cleaning",
+      "statusCode": 301
     }
   ]
 }
