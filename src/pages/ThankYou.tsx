@@ -1,7 +1,6 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
-import { trackLeadConversion } from "@/lib/analytics";
 import { COMPANY } from "@/lib/config";
 import {
   ArrowRight,
@@ -14,7 +13,6 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 interface ThankYouState {
@@ -26,18 +24,6 @@ interface ThankYouState {
 const ThankYou = () => {
   const location = useLocation();
   const state = (location.state as ThankYouState) || {};
-
-  useEffect(() => {
-    // Fire conversion event on page load for Google Analytics 4 & GTM
-    trackLeadConversion({
-      event: "generate_lead",
-      form_type: state.type || "quote_or_contact",
-      customer_name: state.name || "Anonymous",
-      service: state.service || "General Inquiry",
-      currency: "EUR",
-      value: 1,
-    });
-  }, [state.name, state.service, state.type]);
 
   const whatsappHref = `https://wa.me/${COMPANY.whatsappNumber.replace(/\D/g, "")}?text=${encodeURIComponent(
     `Hi ${COMPANY.name}, I just submitted a request on your website${state.name ? ` (Name: ${state.name})` : ""}. Could you confirm you received it?`

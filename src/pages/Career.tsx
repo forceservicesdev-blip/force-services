@@ -9,6 +9,8 @@ import { useCareerBySlug, useCareers } from "@/hooks/useCareers";
 import { useCreateJobApplication } from "@/hooks/useJobApplications";
 import { ArrowUpRight, Briefcase, CheckCircle2, Loader2, MapPin } from "lucide-react";
 import { sendFormEmail } from "@/lib/email";
+import { trackLeadConversion } from "@/lib/analytics";
+import { toast } from "sonner";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
@@ -68,52 +70,76 @@ const Career = () => {
 
     if (!validateForm() || !job) return;
 
-    await createApplication.mutateAsync({
-      career_id: job.id,
-      job_title: job.title,
-      full_name: fullName.trim(),
-      email: email.trim(),
-      phone: phone.trim(),
-      current_company: currentCompany.trim() || null,
-      linkedin_url: linkedin.trim() || null,
-      cv_link: cvLink.trim() || null,
-      note: note.trim() || null,
-    });
+    try {
+      await createApplication.mutateAsync({
+        career_id: job.id,
+        job_title: job.title,
+        full_name: fullName.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        current_company: currentCompany.trim() || null,
+        linkedin_url: linkedin.trim() || null,
+        cv_link: cvLink.trim() || null,
+        note: note.trim() || null,
+      });
 
-    await sendFormEmail({
-      subject: `New Job Application: ${fullName.trim()} for ${job.title}`,
-      replyTo: email.trim(),
-      data: {
-        "Position": job.title,
-        "Applicant Name": fullName.trim(),
-        "Email": email.trim(),
-        "Phone": phone.trim(),
-        "Current Company": currentCompany.trim() || "Not specified",
-        "CV / Portfolio Link": cvLink.trim() || "Not provided",
-        "LinkedIn": linkedin.trim() || "Not provided",
-        "Cover Note / Message": note.trim() || "None",
-      },
-    });
+      const sendResult = await sendFormEmail({
+        subject: `New Job Application: ${fullName.trim()} for ${job.title}`,
+        replyTo: email.trim(),
+        data: {
+          "Position": job.title,
+          "Applicant Name": fullName.trim(),
+          "Email": email.trim(),
+          "Phone": phone.trim(),
+          "Current Company": currentCompany.trim() || "Not specified",
+          "CV / Portfolio Link": cvLink.trim() || "Not provided",
+          "LinkedIn": linkedin.trim() || "Not provided",
+          "Cover Note / Message": note.trim() || "None",
+        },
+      });
 
-    const applicantName = fullName.trim();
-    const positionApplied = job.title;
+      if (!sendResult.success) {
+        if (sendResult.requiresActivation) {
+          toast.error("Notification service requires initial confirmation. Please contact us directly.");
+        } else {
+          toast.error(sendResult.message || "Failed to submit application. Please try again.");
+        }
+        return;
+      }
 
-    setFullName("");
-    setEmail("");
-    setCurrentCompany("");
-    setPhone("");
-    setLinkedin("");
-    setCvLink("");
-    setNote("");
-    setErrors({});
+      // Track lead conversion in GA4 only after confirmed successful delivery
+      trackLeadConversion({
+        form_type: "career_application",
+        service: `Job Application: ${job.title}`,
+        currency: "EUR",
+        value: 1,
+      });
 
-    navigate("/thank-you", {
-      state: {
-        name: applicantName,
-        service: `Job Application: ${positionApplied}`,
-        type: "career_application",
-      },
-    });
+      toast.success("Application submitted successfully! We'll review and get back to you.");
+
+      const applicantName = fullName.trim();
+      const positionApplied = job.title;
+
+      setFullName("");
+      setEmail("");
+      setCurrentCompany("");
+      setPhone("");
+      setLinkedin("");
+      setCvLink("");
+      setNote("");
+      setErrors({});
+
+      navigate("/thank-you", {
+        state: {
+          name: applicantName,
+          service: `Job Application: ${positionApplied}`,
+          type: "career_application",
+        },
+      });
+    } catch (error) {
+      console.error("Error submitting job application:", error);
+      toast.error("Network error while submitting. Please check your connection or contact us directly.");
+    }
   };
 
   if (careersLoading || careerLoading) {

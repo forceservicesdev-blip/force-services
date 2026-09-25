@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { sendFormEmail } from "@/lib/email";
+import { trackLeadConversion } from "@/lib/analytics";
 import { CLEANING_SERVICES, COMPANY, WHATSAPP_MESSAGE } from "@/lib/config";
 import {
   CheckCircle2,
@@ -90,8 +91,11 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
+      const serviceName = quoteData?.serviceTitle || formData.service || "General Inquiry";
+      let sendResult;
+
       if (quoteData) {
-        await sendFormEmail({
+        sendResult = await sendFormEmail({
           subject: `New Quote Request: ${formData.fullName} - ${quoteData.serviceTitle}`,
           replyTo: formData.email,
           data: {
@@ -105,10 +109,8 @@ const Contact = () => {
             "Notes / Message": formData.notes || "None",
           },
         });
-
-        toast.success("Quote request submitted successfully! We'll contact you soon.");
       } else {
-        await sendFormEmail({
+        sendResult = await sendFormEmail({
           subject: `New Contact Message from ${formData.fullName}`,
           replyTo: formData.email,
           data: {
@@ -120,12 +122,33 @@ const Contact = () => {
             "Message / Notes": formData.notes || "None",
           },
         });
+      }
 
+      if (!sendResult.success) {
+        if (sendResult.requiresActivation) {
+          toast.error("Notification service requires initial confirmation. Please contact us by phone or WhatsApp.");
+        } else {
+          toast.error(sendResult.message || "Failed to send message. Please try again.");
+        }
+        return;
+      }
+
+      // Track lead conversion in GA4 only after confirmed successful delivery
+      trackLeadConversion({
+        form_type: quoteData ? "quote_inquiry" : "contact",
+        service: serviceName,
+        currency: "EUR",
+        value: 1,
+      });
+
+      if (quoteData) {
+        toast.success("Quote request submitted successfully! We'll contact you soon.");
+      } else {
         toast.success("Message sent successfully! We'll get back to you soon.");
       }
 
       const submittedName = formData.fullName;
-      const submittedService = quoteData?.serviceTitle || formData.service || "General Inquiry";
+      const submittedService = serviceName;
 
       // Reset form
       setFormData({
@@ -145,7 +168,7 @@ const Contact = () => {
       });
     } catch (error) {
       console.error("Error submitting form:", error);
-      toast.error("Something went wrong. Please try again.");
+      toast.error("Network error while submitting. Please check your connection or contact us directly.");
     } finally {
       setIsSubmitting(false);
     }

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { sendFormEmail } from "@/lib/email";
+import { trackLeadConversion } from "@/lib/analytics";
 import { CLEANING_SERVICES, SERVICE_AREAS } from "@/lib/config";
 import { toast } from "sonner";
 import FadeIn from "@/components/FadeIn";
@@ -63,7 +64,7 @@ const QuoteForm = () => {
         formData.message && `Message: ${formData.message}`,
       ].filter(Boolean);
 
-      await sendFormEmail({
+      const sendResult = await sendFormEmail({
         subject: `New Quote Request: ${formData.fullName} - ${selectedService?.title || formData.service}`,
         replyTo: formData.email,
         data: {
@@ -80,6 +81,23 @@ const QuoteForm = () => {
         },
       });
 
+      if (!sendResult.success) {
+        if (sendResult.requiresActivation) {
+          toast.error("Notification service requires initial confirmation. Please contact us by phone or WhatsApp.");
+        } else {
+          toast.error(sendResult.message || "Failed to submit quote request. Please try again.");
+        }
+        return;
+      }
+
+      // Track lead conversion in GA4 only after confirmed successful delivery
+      trackLeadConversion({
+        form_type: "fast_quote",
+        service: selectedService?.title || formData.service,
+        currency: "EUR",
+        value: 1,
+      });
+
       toast.success("Quote request submitted! We'll be in touch shortly.");
       const submittedName = formData.fullName;
       const submittedService = selectedService?.title || formData.service;
@@ -94,7 +112,7 @@ const QuoteForm = () => {
       });
     } catch (error) {
       console.error("Error submitting quote request:", error);
-      toast.error("Something went wrong. Please try again.");
+      toast.error("Network error while submitting. Please check your connection or contact us directly.");
     } finally {
       setIsSubmitting(false);
     }

@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { sendFormEmail } from "@/lib/email";
+import { trackLeadConversion } from "@/lib/analytics";
 import { CLEANING_SERVICES, COMPANY, SERVICE_AREAS, WHATSAPP_MESSAGE } from "@/lib/config";
 import {
   CheckCircle2,
@@ -131,7 +132,7 @@ const QuoteRequest = () => {
         notes ? `Details: ${notes}` : "",
       ].filter(Boolean);
 
-      await sendFormEmail({
+      const sendResult = await sendFormEmail({
         subject: `New Detailed Quote Request: ${fullName} - ${activeService?.title || selectedService}`,
         replyTo: email,
         data: {
@@ -149,6 +150,23 @@ const QuoteRequest = () => {
         },
       });
 
+      if (!sendResult.success) {
+        if (sendResult.requiresActivation) {
+          toast.error("Notification service requires initial confirmation. Please contact us by phone or WhatsApp.");
+        } else {
+          toast.error(sendResult.message || "Could not submit quote request. Please try again.");
+        }
+        return;
+      }
+
+      // Track lead conversion in GA4 only after confirmed successful delivery
+      trackLeadConversion({
+        form_type: "detailed_quote",
+        service: activeService?.title || selectedService,
+        currency: "EUR",
+        value: 1,
+      });
+
       setIsSuccess(true);
       toast.success("Quote request received! We will contact you shortly.");
 
@@ -161,7 +179,7 @@ const QuoteRequest = () => {
       });
     } catch (err) {
       console.error("Error submitting quote request:", err);
-      toast.error("Could not submit quote request. Please call or WhatsApp us directly.");
+      toast.error("Network error while submitting. Please check your connection or contact us directly.");
     } finally {
       setIsSubmitting(false);
     }

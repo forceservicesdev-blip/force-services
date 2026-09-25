@@ -17,7 +17,7 @@ export const COMPANY = {
   yearsInBusiness: 5,
   year: new Date().getFullYear(),
   social: {
-    facebook: "#",
+    facebook: "",
     instagram: "https://www.instagram.com/forceservicesie?utm_source=qr",
   },
 };
@@ -50,20 +50,20 @@ import customCleaningImg from "@/assets/cardimages/cytonn-photography-n95VMLxqM2
 export const CLEANING_SERVICES = [
   {
     slug: "power-washing",
-    title: "Power Washing & Pressure Cleaning",
+    title: "Commercial Power Washing & Pressure Cleaning",
     image: powerWashingImg,
     imagePosition: "object-bottom",
     shortDescription:
-      "High-pressure washing for driveways, patios, facades, roofs, decking, and exterior walls.",
+      "High-pressure washing for commercial forecourts, carparks, retail entrances, paving, and business premises.",
     description:
-      "Revitalize your property's exterior with our heavy-duty power washing service. We remove moss, algae, stubborn stains, dirt, and grime from driveways, patios, building exteriors, stone, concrete, and timber decking with precision and care.",
+      "Heavy-duty exterior power washing and pressure cleaning tailored for businesses, commercial facilities, and property managers across Clare, Limerick, and Galway. We remove moss, algae, oil residues, tyre marks, and grime from commercial forecourts, carparks, retail walkways, building perimeters, and masonry.",
     basePrice: 80,
     features: [
-      "Driveways, Patios & Footpaths",
-      "Building Facades & Exterior Walls",
-      "Roof Moss Removal & Gutter Cleaning",
-      "Decking & Timber Restoration",
-      "Commercial Forecourts & Car Parks",
+      "Commercial Forecourts, Carparks & Loading Bays",
+      "Business Entrance Paving & Pedestrian Walkways",
+      "Commercial Building Facades & Perimeter Walls",
+      "Moss, Lichen & Slippery Algae Removal",
+      "Oil Stain Degreasing & High-Pressure Washdown",
     ],
   },
   {

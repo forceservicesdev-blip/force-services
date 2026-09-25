@@ -13,7 +13,7 @@ import { Link, useParams } from "react-router-dom";
 const socialLinks = [
   { icon: Facebook, href: COMPANY.social.facebook, label: "Facebook" },
   { icon: Instagram, href: COMPANY.social.instagram, label: "Instagram" },
-];
+].filter((s) => s.href && s.href !== "#" && s.href.trim() !== "");
 
 const BlogDetail = () => {
   const { slug } = useParams();

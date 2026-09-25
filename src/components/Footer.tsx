@@ -17,7 +17,7 @@ const whatsappHref = `https://wa.me/${COMPANY.whatsappNumber.replace(/\D/g, "")}
 const socialLinks = [
   { icon: Facebook, href: COMPANY.social.facebook, label: "Facebook" },
   { icon: Instagram, href: COMPANY.social.instagram, label: "Instagram" },
-];
+].filter((s) => s.href && s.href !== "#" && s.href.trim() !== "");
 
 const Footer = () => {
   return (
@@ -31,20 +31,22 @@ const Footer = () => {
             <p className="text-primary-foreground/70 mt-4 mb-6 max-w-sm text-sm">
               {COMPANY.description}
             </p>
-            <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target={social.href !== "#" ? "_blank" : undefined}
-                  rel={social.href !== "#" ? "noopener noreferrer" : undefined}
-                  aria-label={social.label}
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-tertiary transition-colors"
-                >
-                  <social.icon className="h-5 w-5" />
-                </a>
-              ))}
-            </div>
+            {socialLinks.length > 0 && (
+              <div className="flex gap-3">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-tertiary transition-colors"
+                  >
+                    <social.icon className="h-5 w-5" />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Services */}

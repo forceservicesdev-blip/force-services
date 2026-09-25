@@ -53,42 +53,38 @@ export function trackPageView(pagePath?: string, pageTitle?: string) {
 }
 
 /**
- * Fires lead conversion event after successful form submission
+ * Fires lead conversion event after successful form submission confirmation.
+ * Strips any Personally Identifiable Information (PII) such as customer names, emails, phones.
+ * Uses a single dispatch to avoid double counting between gtag.js and dataLayer.
  */
 export function trackLeadConversion(payload: ConversionPayload = {}) {
   if (typeof window === "undefined") return;
 
   const eventName = payload.event || "generate_lead";
-  const eventData = {
-    event: eventName,
-    page_location: window.location.href,
-    page_path: window.location.pathname,
-    timestamp: new Date().toISOString(),
-    ...payload,
+
+  // Strictly sanitize event parameters - Never send PII to GA4/GTM
+  const eventParams: Record<string, any> = {
+    currency: payload.currency || "EUR",
+    value: typeof payload.value === "number" ? payload.value : 1,
+    form_type: payload.form_type || "general_lead",
+    service: payload.service || "general",
   };
 
-  // 1. Google Tag Manager / DataLayer
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(eventData);
-
-  // 2. Google Analytics 4 gtag.js
+  // Google Analytics 4 via gtag.js (canonical implementation from index.html)
+  // gtag() automatically manages dataLayer. Sending to both gtag and dataLayer directly
+  // can result in duplicate event tracking in GA4 / GTM containers.
   if (typeof window.gtag === "function") {
-    window.gtag("event", eventName, {
-      currency: payload.currency || "EUR",
-      value: payload.value || 1,
-      form_type: payload.form_type || "general_lead",
-      service: payload.service || "general",
-    });
-
-    // Also dispatch form_submit event for additional tracking flexibility
-    window.gtag("event", "form_submit", {
-      form_type: payload.form_type || "general_lead",
-      service: payload.service || "general",
+    window.gtag("event", eventName, eventParams);
+  } else if (Array.isArray(window.dataLayer)) {
+    // Fallback only if gtag function is not defined
+    window.dataLayer.push({
+      event: eventName,
+      ...eventParams,
     });
   }
 
   if (import.meta.env.DEV) {
-    console.log(`[Analytics] Tracked lead conversion:`, eventData);
+    console.log(`[Analytics] Tracked lead conversion (${eventName}):`, eventParams);
   }
 }
 
