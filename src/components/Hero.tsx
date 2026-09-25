@@ -193,11 +193,21 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <FadeIn>
             <h1 className="text-4xl md:text-5xl lg:text-h1 font-bold text-primary mb-6 text-balance">
-              Professional Commercial Cleaning in Clare &amp; Limerick
+              Commercial Cleaning Services in County Clare &amp; Limerick
             </h1>
-            <p className="text-lg text-muted-foreground mb-6 max-w-xl">
-              Commercial, industrial and post-construction cleaning for businesses across Ennis, Shannon, Limerick and surrounding areas.
+            <p className="text-lg text-muted-foreground mb-4 max-w-xl">
+              Force Services delivers dependable commercial cleaning services for businesses, corporate offices, and industrial facilities across County Clare and County Limerick, including Ennis and Shannon. From routine contract cleaning to specialized post-construction and exterior cleaning, we keep your commercial premises immaculate.
             </p>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-primary mb-6">
+              <span className="font-semibold text-foreground">Key services:</span>
+              <Link to="/services/commercial-cleaning" className="underline hover:text-tertiary">Commercial &amp; Office Cleaning</Link>
+              <span className="text-muted-foreground">•</span>
+              <Link to="/services/post-construction-cleaning" className="underline hover:text-tertiary">Post-Construction Cleaning</Link>
+              <span className="text-muted-foreground">•</span>
+              <Link to="/services/power-washing" className="underline hover:text-tertiary">Power Washing</Link>
+              <span className="text-muted-foreground">•</span>
+              <Link to="/services/industrial-cleaning" className="underline hover:text-tertiary">Industrial Cleaning</Link>
+            </div>
 
             {/* Mobile Hero Image Slider - smoothly integrated with text on mobile */}
             <div className="block lg:hidden my-6">

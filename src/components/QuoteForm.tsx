@@ -74,7 +74,7 @@ const QuoteForm = () => {
           "Email": formData.email || "Not provided",
           "Service": selectedService?.title || formData.service,
           "Property Type": formData.propertyType || "Standard",
-          "Location": formData.location || "Ennis / Limerick / Galway",
+          "Location": formData.location || "Ennis / Shannon / Clare / Limerick",
           "Preferred Date": formData.preferredDate || "Flexible",
           "Urgency": formData.urgency || "standard",
           "Message / Notes": notesParts.join(" | ") || "None",
@@ -125,7 +125,7 @@ const QuoteForm = () => {
           <div className="max-w-2xl mx-auto text-center mb-12">
             <h2 className="text-3xl md:text-h2 font-bold text-primary mb-4">Request a Free Quote</h2>
             <p className="text-muted-foreground text-lg">
-              Tell us about your property and cleaning requirements across Ennis, Limerick & Galway. Fast, no-obligation quote.
+              Tell us about your commercial property and cleaning requirements across Ennis, Shannon, Clare &amp; Limerick. Fast, no-obligation quote.
             </p>
           </div>
         </FadeIn>

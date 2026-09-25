@@ -71,7 +71,7 @@ const ThankYou = () => {
                   </div>
                   <h3 className="font-semibold text-foreground">Review & Assessment</h3>
                   <p className="text-xs text-muted-foreground">
-                    Our team examines your project requirements and location across Clare, Limerick or Galway.
+                    Our team examines your project requirements and location across County Clare or County Limerick.
                   </p>
                 </div>
 

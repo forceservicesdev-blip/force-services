@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { COMPANY, FAQS } from "@/lib/config";
 import { Check, Phone, Sparkles, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 interface Plan {
@@ -159,6 +159,24 @@ const Pricing = () => {
   );
   const [openFAQ, setOpenFAQ] = useState<number | null>(0);
 
+  useEffect(() => {
+    document.title = `Commercial Cleaning Pricing & Packages | Force Services`;
+    const descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) {
+      descMeta.setAttribute(
+        "content",
+        "Transparent commercial cleaning packages and competitive rates for businesses across County Clare and County Limerick. Office cleaning, power washing, and facility maintenance."
+      );
+    }
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", "https://www.forceservices.ie/pricing");
+  }, []);
+
   const handleSelectPlan = (plan: Plan) => {
     navigate("/contact", {
       state: {
@@ -192,7 +210,7 @@ const Pricing = () => {
             </h1>
 
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Reliable, professional cleaning packages tailored to your property across Ennis, Limerick, and Galway. No hidden fees.
+              Reliable, professional commercial cleaning packages tailored to your business across Clare and Limerick, including Ennis and Shannon. No hidden fees.
             </p>
           </FadeIn>
 

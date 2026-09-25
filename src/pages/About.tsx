@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import cleaningTeam from "@/assets/cleaning-team.jpg";
 import CounterAnimation from "@/components/CounterAnimation";
 import CTA from "@/components/CTA";
@@ -66,6 +67,24 @@ const coreValues = [
 ];
 
 const About = () => {
+  useEffect(() => {
+    document.title = `About Force Services | Commercial Cleaning Specialists in Clare & Limerick`;
+    const descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) {
+      descMeta.setAttribute(
+        "content",
+        `Learn about Force Services - delivering commercial cleaning services, power washing, and facility maintenance across County Clare and County Limerick.`
+      );
+    }
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", "https://www.forceservices.ie/about");
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -146,7 +165,7 @@ const About = () => {
                     <strong className="text-foreground">{COMPANY.name}</strong> was founded five years ago in Ireland with a simple goal: to provide reliable, professional, and high-quality cleaning services that our customers can truly depend on.
                   </p>
                   <p>
-                    What started as a small business has grown through hard work, dedication, and, most importantly, the trust of our customers. Over the years, we have gained valuable experience working with commercial spaces, industrial facilities, and post-construction projects throughout {COMPANY.serviceArea} and beyond.
+                    What started as a small business has grown through hard work, dedication, and, most importantly, the trust of our customers. Over the years, we have gained valuable experience working with commercial spaces, industrial facilities, and post-construction projects throughout County Clare and County Limerick.
                   </p>
                   <p>
                     We take pride in every job we complete and believe that attention to detail, professionalism, and excellent customer service are the foundation of a successful cleaning company.

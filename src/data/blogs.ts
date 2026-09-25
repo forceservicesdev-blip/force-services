@@ -52,7 +52,7 @@ export const BLOGS_DATA: Blog[] = [
       <li><strong>Long-Term Asset Protection:</strong> Regular maintenance prolongs the lifespan of carpets, flooring, and office furnishings, saving money over time.</li>
       <li><strong>Customised Scheduling:</strong> Flexible after-hours or early-morning cleanings mean zero disruption to your daily operations.</li>
     </ol>
-    <p>Contact Force Services today to schedule a bespoke commercial cleaning assessment for your premises across Clare, Limerick, or Galway.</p>`,
+    <p>Contact Force Services today to schedule a bespoke commercial cleaning assessment for your premises across Clare or Limerick.</p>`,
     image_url: "/src/assets/hero-grid-2.jpg",
     category: "Commercial Cleaning",
     read_time: "4 min read",

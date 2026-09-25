@@ -47,16 +47,16 @@ interface ServiceDetailData {
 
 export const detailedServices: Record<string, ServiceDetailData> = {
   "power-washing": {
-    title: "Commercial Power Washing & Pressure Cleaning Services",
-    h1Title: "Commercial Power Washing & Pressure Cleaning",
-    tagline: "Heavy-duty exterior pressure cleaning for commercial premises, forecourts, carparks, and retail entrances across Clare, Limerick & Galway.",
+    title: "Commercial Power Washing & Pressure Cleaning Services in Clare & Limerick",
+    h1Title: "Commercial Power Washing & Pressure Cleaning Services",
+    tagline: "Heavy-duty exterior pressure washing for commercial premises, forecourts, carparks, and retail entrances across Clare and Limerick.",
     image: powerWashingImg,
     imageAlt: "Commercial power washing and heavy-duty pressure cleaning of commercial forecourts and paving by Force Services in Ireland",
-    metaDescription: "Commercial power washing and high-pressure cleaning services for business premises, carparks, paving, and facades across Ennis, Shannon, Limerick and Galway.",
+    metaDescription: "Commercial power washing and high-pressure cleaning services for business premises, carparks, paving, and facades across Ennis, Shannon, Clare, and Limerick.",
     targetAudience: "Business owners, property managers, commercial landlords, retail parks, and facility managers requiring immaculate presentation and slip-free safety compliance.",
     aboutTitle: "High-Performance Pressure Cleaning for Commercial Facilities",
     aboutDescription:
-      "Maintain a safe, welcoming, and pristine exterior for your commercial property with Force Services' specialized high-pressure washing.\n\nIn the West of Ireland, frequent rain and damp conditions cause rapid accumulation of slippery algae, black lichen, moss, and vehicle grime on commercial surfaces. We deploy commercial-grade rotary surface cleaners and high-output pressure washers to systematically restore concrete forecourts, block paving, loading areas, and exterior building perimeters without causing substrate damage.",
+      "Maintain a safe, welcoming, and pristine exterior for your commercial property with Force Services' specialized high-pressure washing.\n\nIn County Clare and County Limerick, frequent rain and damp conditions cause rapid accumulation of slippery algae, black lichen, moss, and vehicle grime on commercial surfaces. We deploy commercial-grade rotary surface cleaners and high-output pressure washers to systematically restore concrete forecourts, block paving, loading areas, and exterior building perimeters without causing substrate damage.",
     included: [
       "Commercial forecourts, carparks, and loading dock washdown",
       "Retail entrance paving, concrete walkways, and pedestrian paths",
@@ -80,20 +80,20 @@ export const detailedServices: Record<string, ServiceDetailData> = {
     relatedServices: [
       { slug: "exterior-cleaning", title: "Building Facade & Exterior Cleaning", shortDesc: "Specialized soft-wash and pressure cleaning for commercial building facades and cladding." },
       { slug: "industrial-cleaning", title: "Industrial & Warehouse Cleaning", shortDesc: "Heavy-duty mechanical floor scrubbing and degreasing for warehouse facilities." },
-      { slug: "commercial-cleaning", title: "Commercial & Office Cleaning", shortDesc: "Scheduled routine contract cleaning for office and corporate commercial premises." },
+      { slug: "commercial-cleaning", title: "Commercial Cleaning Services", shortDesc: "Scheduled routine contract cleaning for office and corporate commercial premises." },
     ],
   },
   "commercial-cleaning": {
-    title: "Commercial & Office Contract Cleaning Services",
-    h1Title: "Commercial & Office Cleaning Services",
-    tagline: "Reliable, hygienic, and flexible contract cleaning for corporate offices, shops, retail stores, and commercial premises across Clare, Limerick & Galway.",
+    title: "Commercial Cleaning Services in Clare & Limerick",
+    h1Title: "Commercial Cleaning Services in County Clare & Limerick",
+    tagline: "Reliable, hygienic, and flexible contract commercial cleaning services for corporate offices, retail stores, and commercial premises across Ennis, Shannon, Clare, and Limerick.",
     image: commercialImg,
     imageAlt: "Professional commercial and office cleaning operatives maintaining a modern workplace in Ireland",
-    metaDescription: "Professional commercial and office contract cleaning for businesses, corporate offices, and retail premises across Clare, Limerick, Ennis, and Shannon.",
-    targetAudience: "Office managers, business executives, retail store managers, medical clinic directors, and commercial premises requiring dependable, top-tier hygiene standards.",
-    aboutTitle: "Hygienic, Spotless Workspaces for Commercial Businesses",
+    metaDescription: "Professional commercial cleaning services and office cleaning services across County Clare and Limerick, including Ennis and Shannon. Flexible contracts for businesses.",
+    targetAudience: "Office managers, facility directors, business executives, retail managers, medical clinics, and commercial premises requiring dependable, top-tier hygiene standards.",
+    aboutTitle: "Tailored Commercial & Office Cleaning Services for Clare & Limerick Businesses",
     aboutDescription:
-      "A clean working environment improves productivity, protects staff health, and creates an exceptional first impression on visiting clients.\n\nForce Services provides tailored commercial cleaning contracts across County Clare (Ennis, Shannon, Newmarket-on-Fergus), Limerick, and Galway. We customize our cleaning schedules — whether daily, multi-day, weekly, or fortnightly — and align working hours with your operational preferences to ensure zero business disruption.",
+      "A clean working environment improves productivity, protects staff wellbeing, and creates an exceptional first impression on visiting clients.\n\nForce Services provides tailored commercial cleaning services and contract office cleaning across County Clare (including Ennis, Shannon, and Newmarket-on-Fergus) and County Limerick. We customize our cleaning schedules — whether daily, multi-day, weekly, or fortnightly — and align working hours with your operational preferences to ensure zero business disruption.",
     included: [
       "Desk, workstation, and high-touch point sanitization",
       "Commercial floor vacuuming, hard floor mopping, and machine buffing",
@@ -121,16 +121,16 @@ export const detailedServices: Record<string, ServiceDetailData> = {
     ],
   },
   "industrial-cleaning": {
-    title: "Industrial & Warehouse Cleaning Services",
+    title: "Industrial & Warehouse Cleaning Services in Clare & Limerick",
     h1Title: "Industrial & Warehouse Cleaning Services",
-    tagline: "Heavy-duty cleaning, floor scrubbing, and degreasing for warehouses, distribution hubs, and industrial facilities in Clare, Limerick & Galway.",
+    tagline: "Heavy-duty cleaning, floor scrubbing, and degreasing for warehouses, distribution hubs, and industrial facilities in Clare and Limerick.",
     image: industrialImg,
     imageAlt: "Industrial warehouse floor scrubbing and heavy-duty degreasing in a logistics facility",
-    metaDescription: "Heavy-duty industrial cleaning services for warehouses, manufacturing plants, and industrial units across Shannon, Ennis, Clare, Limerick, and Galway.",
+    metaDescription: "Heavy-duty industrial cleaning services for warehouses, manufacturing plants, and industrial units across Shannon, Ennis, Clare, and Limerick.",
     targetAudience: "Warehouse managers, logistics directors, factory supervisors, industrial unit operators, and health & safety compliance officers.",
     aboutTitle: "Heavy-Duty Cleaning Solutions for Industrial Operations",
     aboutDescription:
-      "Industrial facilities demand specialized cleaning machinery, heavy degreasing chemicals, and stringent health and safety adherence.\n\nForce Services brings experienced teams and industrial-grade equipment to tackle heavy oil, grease, tyre marks, dust accumulation, and overhead structural cleaning in factories and warehouses across County Clare (including Shannon Industrial Estate and Ennis), Limerick, and Galway.",
+      "Industrial facilities demand specialized cleaning machinery, heavy degreasing chemicals, and stringent health and safety adherence.\n\nForce Services brings experienced teams and industrial-grade equipment to tackle heavy oil, grease, tyre marks, dust accumulation, and overhead structural cleaning in factories and warehouses across County Clare (including Shannon Industrial Estate and Ennis) and County Limerick.",
     included: [
       "Warehouse floor mechanical scrubbing, sweeping, and degreasing",
       "Forklift tyre mark removal and industrial oil spill treatments",
@@ -158,16 +158,16 @@ export const detailedServices: Record<string, ServiceDetailData> = {
     ],
   },
   "post-construction-cleaning": {
-    title: "Post-Construction & Builders Cleaning Services",
+    title: "Post-Construction Cleaning Services in Clare & Limerick",
     h1Title: "Post-Construction & Builders Cleaning Services",
-    tagline: "Comprehensive multi-phase after-build sparkle cleans for new commercial developments, office fit-outs, and renovations across Clare, Limerick & Galway.",
+    tagline: "Comprehensive multi-phase after-build sparkle cleans for new commercial developments, office fit-outs, and renovations across Clare and Limerick.",
     image: postConstructionImg,
     imageAlt: "Post-construction sparkle cleaning and builders handover clean for commercial facilities",
-    metaDescription: "Post-construction and builders cleaning services across Clare, Limerick, and Galway. Sparkle cleans and handover detailing for commercial developments.",
+    metaDescription: "Post-construction cleaning services across Clare and Limerick, including Ennis and Shannon. Sparkle cleans and handover detailing for commercial developments.",
     targetAudience: "Building contractors, construction project managers, commercial property developers, architects, and commercial landlords needing move-in-ready handovers.",
     aboutTitle: "Turn Construction Sites into Move-In Ready Spaces",
     aboutDescription:
-      "Following construction or commercial remodeling, properties are left covered in fine drywall dust, plaster residue, paint splatters, silicon smudges, and building debris.\n\nForce Services specializes in multi-phase post-construction cleaning across Ennis, Shannon, Limerick, and Galway — from initial rough cleans to final sparkle cleans that prepare commercial facilities, offices, and retail units for immediate handover to owners, tenants, or letting agents.",
+      "Following construction or commercial remodeling, properties are left covered in fine drywall dust, plaster residue, paint splatters, silicon smudges, and building debris.\n\nForce Services specializes in multi-phase post-construction cleaning across Ennis, Shannon, and Limerick — from initial rough cleans to final sparkle cleans that prepare commercial facilities, offices, and retail units for immediate handover to owners, tenants, or letting agents.",
     included: [
       "Removal of fine drywall dust from walls, ceilings, ledges, and fixtures",
       "Paint overspray, plaster, mortar, and adhesive removal from glass and tiles",
@@ -189,22 +189,22 @@ export const detailedServices: Record<string, ServiceDetailData> = {
       { number: "04", title: "Handover Inspection", description: "White-glove inspection ensuring the property is 100% move-in ready." },
     ],
     relatedServices: [
-      { slug: "commercial-cleaning", title: "Commercial & Office Cleaning", shortDesc: "Ongoing contract cleaning following tenant occupancy." },
+      { slug: "commercial-cleaning", title: "Commercial Cleaning Services", shortDesc: "Ongoing contract cleaning following tenant occupancy." },
       { slug: "power-washing", title: "Commercial Power Washing", shortDesc: "Washdown of newly paved entrances, footpaths, and carparks." },
       { slug: "exterior-cleaning", title: "Building Facade & Exterior Cleaning", shortDesc: "Final exterior wash and cladding detailing for new developments." },
     ],
   },
   "exterior-cleaning": {
-    title: "Commercial Building Facade & Exterior Cleaning",
+    title: "Commercial Building Facade & Exterior Cleaning in Clare & Limerick",
     h1Title: "Commercial Building Facade & Exterior Cleaning",
-    tagline: "Specialized soft-wash and gentle pressure cleaning for commercial building facades, cladding, shopfronts, and roofs across Clare, Limerick & Galway.",
+    tagline: "Specialized soft-wash and gentle pressure cleaning for commercial building facades, cladding, shopfronts, and roofs across Clare and Limerick.",
     image: exteriorCleaningImg,
     imageAlt: "Commercial building facade soft-wash cleaning and render restoration in Ireland",
-    metaDescription: "Commercial facade and exterior building cleaning services across Clare, Limerick, and Galway. Soft-washing for render, cladding, and architectural masonry.",
+    metaDescription: "Commercial facade and exterior building cleaning services across Clare and Limerick. Soft-washing for render, cladding, and architectural masonry in Ennis and Shannon.",
     targetAudience: "Commercial property owners, facility directors, retail park managers, and property agents protecting architectural assets and curb appeal.",
     aboutTitle: "Specialized Exterior Cladding & Facade Restoration",
     aboutDescription:
-      "Keep your commercial property's exterior pristine and protected against atmospheric pollutants, algae, and weather staining.\n\nForce Services provides specialized soft-washing and gentle pressure cleaning for commercial facades, exterior render, architectural cladding, and roofs across Ennis, Shannon, Limerick, and Galway. We safely treat and eliminate red and green algae biofilms without eroding coatings or delicate masonry.",
+      "Keep your commercial property's exterior pristine and protected against atmospheric pollutants, algae, and weather staining.\n\nForce Services provides specialized soft-washing and gentle pressure cleaning for commercial facades, exterior render, architectural cladding, and roofs across Ennis, Shannon, and Limerick. We safely treat and eliminate red and green algae biofilms without eroding coatings or delicate masonry.",
     included: [
       "Commercial building facades, cladding panels, and shopfront detailing",
       "Low-pressure soft-washing for K-Rend, monocouche, and delicate render",
@@ -228,20 +228,20 @@ export const detailedServices: Record<string, ServiceDetailData> = {
     relatedServices: [
       { slug: "power-washing", title: "Commercial Power Washing", shortDesc: "Ground-level pressure cleaning for walkways, forecourts, and carparks." },
       { slug: "industrial-cleaning", title: "Industrial & Warehouse Cleaning", shortDesc: "Interior industrial cleaning to complement exterior building care." },
-      { slug: "commercial-cleaning", title: "Commercial & Office Cleaning", shortDesc: "Complete interior commercial cleaning packages." },
+      { slug: "commercial-cleaning", title: "Commercial Cleaning Services", shortDesc: "Complete interior commercial cleaning packages." },
     ],
   },
   "custom-cleaning": {
-    title: "Custom Tailored Commercial Cleaning Solutions",
+    title: "Custom Commercial Cleaning Services in Clare & Limerick",
     h1Title: "Custom Tailored Commercial Cleaning Solutions",
-    tagline: "Bespoke commercial cleaning packages designed around your exact facility schedule, scope, and operational requirements.",
+    tagline: "Bespoke commercial cleaning services designed around your exact facility schedule, scope, and operational requirements across Clare and Limerick.",
     image: customCleaningImg,
     imageAlt: "Custom tailored commercial cleaning team preparing specialized business premises",
-    metaDescription: "Bespoke commercial cleaning solutions across Clare, Limerick, and Galway. Tailored packages for events, emergency cleanups, and specialized facilities.",
+    metaDescription: "Bespoke commercial cleaning services across Clare and Limerick, including Ennis and Shannon. Tailored packages for events, deep cleans, and specialized facilities.",
     targetAudience: "Facilities with non-standard operating hours, corporate event organizers, property management firms, and businesses with custom cleaning requirements.",
     aboutTitle: "Bespoke Cleaning Specifications for Unique Business Requirements",
     aboutDescription:
-      "Every commercial property and business has unique operational demands. If your cleaning requirements don't fit standard categories, Force Services will design a personalized commercial cleaning package for you.\n\nFrom corporate event preparations to emergency spill response and specialized surface restoration, we deploy the right manpower, tools, and materials across County Clare, Limerick, and Galway.",
+      "Every commercial property and business has unique operational demands. If your cleaning requirements don't fit standard categories, Force Services will design a personalized commercial cleaning package for you.\n\nFrom corporate event preparations to emergency spill response and specialized surface restoration, we deploy the right manpower, tools, and materials across County Clare and County Limerick.",
     included: [
       "Custom checklist created specifically for your commercial property",
       "Flexible staffing options for large, multi-shift, or fast-turnaround jobs",
@@ -254,7 +254,7 @@ export const detailedServices: Record<string, ServiceDetailData> = {
       "Complete flexibility in scope, timing, frequencies, and budget",
       "No unnecessary charges for services your business does not need",
       "Direct communication with our operational management team",
-      "Quick response time throughout Clare, Limerick, and Galway",
+      "Quick response time throughout Clare and Limerick",
     ],
     workSteps: [
       { number: "01", title: "Consultation & Scope", description: "We discuss your specific needs and timeline over phone, WhatsApp, or in person." },
@@ -263,7 +263,7 @@ export const detailedServices: Record<string, ServiceDetailData> = {
       { number: "04", title: "Customer Sign-Off", description: "We ensure you are 100% satisfied before concluding the work." },
     ],
     relatedServices: [
-      { slug: "commercial-cleaning", title: "Commercial & Office Cleaning", shortDesc: "Regular contract office cleaning across Clare & Limerick." },
+      { slug: "commercial-cleaning", title: "Commercial Cleaning Services", shortDesc: "Regular contract office cleaning across Clare & Limerick." },
       { slug: "post-construction-cleaning", title: "Post-Construction Cleaning", shortDesc: "After-build sparkle cleans for new and renovated spaces." },
       { slug: "power-washing", title: "Commercial Power Washing", shortDesc: "Exterior pressure cleaning for commercial car parks and forecourts." },
     ],
@@ -552,7 +552,7 @@ const ServiceDetail = () => {
                       Related Commercial Services
                     </h3>
                     <p className="text-muted-foreground text-sm mb-6">
-                      Explore complementary commercial solutions to maintain your entire business facility with one trusted provider across Clare, Limerick & Galway.
+                      Explore complementary commercial solutions to maintain your entire business facility with one trusted provider across Clare &amp; Limerick.
                     </p>
                     <div className="grid sm:grid-cols-3 gap-4">
                       {service.relatedServices.map((rel) => (
@@ -644,7 +644,7 @@ const ServiceDetail = () => {
                         Project Details / Notes
                       </label>
                       <Textarea
-                        placeholder="Tell us about the property size, location (Ennis, Limerick, Galway, etc.), and timing..."
+                        placeholder="Tell us about the property size, location (Ennis, Shannon, Limerick, etc.), and timing..."
                         className="bg-background min-h-[90px]"
                         value={note}
                         onChange={(e) => setNote(e.target.value)}

@@ -143,7 +143,7 @@ const worksData: Record<string, WorkProjectData> = {
     image: work4,
     title: "Post-Construction Builders Clean",
     category: "Builders Clean",
-    description: "After-build sparkle cleaning for a multi-unit housing development in Galway.",
+    description: "After-build sparkle cleaning for a commercial retail development in Galway.",
     detailTitle: "Turnkey Sparkle Handover for New Developments",
     detailDescription:
       "Following the completion of an 8-unit commercial and retail development in Galway, Force Services was contracted to execute both the rough builders clean and the final sparkle clean for client handovers.",

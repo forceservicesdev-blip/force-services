@@ -27,12 +27,12 @@ const SERVICE_ICONS: Record<string, typeof Sparkles> = {
 
 const Services = () => {
   useEffect(() => {
-    document.title = `Our Cleaning Services | ${COMPANY.name}`;
+    document.title = `Commercial Cleaning Services in Clare & Limerick | ${COMPANY.name}`;
     const descMeta = document.querySelector('meta[name="description"]');
     if (descMeta) {
       descMeta.setAttribute(
         "content",
-        `From high-pressure power washing to commercial and industrial cleaning, ${COMPANY.name} offers a full range of professional cleaning services across ${COMPANY.serviceArea}.`
+        `Professional commercial cleaning services across County Clare and County Limerick, including Ennis and Shannon. Office cleaning, power washing, industrial and post-construction cleaning.`
       );
     }
     let canonical = document.querySelector('link[rel="canonical"]');
@@ -62,15 +62,12 @@ const Services = () => {
 
             <FadeIn>
               <h1 className="text-foreground font-bold text-4xl md:text-5xl lg:text-6xl mb-6">
-                Our Cleaning Services
+                Commercial Cleaning Services in Clare &amp; Limerick
               </h1>
             </FadeIn>
             <FadeIn delay={100}>
               <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
-                From high-pressure power washing and building facades to commercial, industrial, and
-                post-construction cleaning, {COMPANY.name} offers a full range of
-                professional cleaning services across {COMPANY.serviceArea}.
-                Fully insured, fully trusted, and tailored to you.
+                From routine office cleaning and contract cleaning services to heavy-duty power washing, industrial degreasing, and post-construction sparkle cleans, {COMPANY.name} delivers reliable commercial cleaning services for businesses across County Clare and County Limerick, including Ennis and Shannon.
               </p>
             </FadeIn>
           </div>

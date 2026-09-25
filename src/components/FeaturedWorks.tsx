@@ -56,7 +56,7 @@ const FeaturedWorks = () => {
           </div>
           <FadeIn delay={200}>
             <p className="text-white/80 max-w-xl mt-6 lg:mt-0 text-base leading-relaxed">
-              Explore our portfolio of power washing, commercial, and post-construction cleaning projects across Ennis, Limerick, and Galway. Every job reflects our dedication to quality and detail.
+              Explore our portfolio of commercial power washing, office cleaning, and post-construction cleaning projects across Ennis, Shannon, Clare, and Limerick. Every job reflects our dedication to quality and detail.
             </p>
           </FadeIn>
         </div>

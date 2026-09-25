@@ -22,7 +22,7 @@ export const CAREERS_DATA: Career[] = [
     slug: "power-washing-technician",
     title: "Power Washing & Surface Restoration Technician",
     department: "Exterior Services",
-    location: "Ennis, Co. Clare (covering Clare, Limerick & Galway)",
+    location: "Ennis, Co. Clare (covering Clare & Limerick)",
     employment_type: "Full-time / Permanent",
     experience_level: "1+ years experience preferred (Full training provided)",
     salary_range: "Competitive Hourly Rate + Performance Bonus",

@@ -1,8 +1,16 @@
 {
-  "rewrites": [
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/services/pressure-washing",
+      "destination": "/services/power-washing",
+      "permanent": true
+    },
+    {
+      "source": "/services/builders-cleaning",
+      "destination": "/services/post-construction-cleaning",
+      "permanent": true
     }
   ]
 }

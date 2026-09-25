@@ -42,7 +42,7 @@ const contactAssurances = [
     icon: MapPin,
     title: "Mid-West Service Coverage",
     description:
-      "Our mobile teams cover Ennis, Limerick City, Galway, Shannon, Sixmilebridge, and all across County Clare.",
+      "Our mobile teams cover Ennis, Shannon, Limerick, Sixmilebridge, and throughout County Clare and County Limerick.",
     highlight: "Mobile teams dispatched daily",
   },
   {
@@ -70,6 +70,24 @@ const Contact = () => {
     notes: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    document.title = `Contact Force Services | Commercial Cleaning in Clare & Limerick`;
+    const descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) {
+      descMeta.setAttribute(
+        "content",
+        "Get in touch with Force Services for commercial cleaning services, office cleaning, power washing, and facility maintenance in County Clare and County Limerick."
+      );
+    }
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", "https://www.forceservices.ie/contact");
+  }, []);
 
   useEffect(() => {
     if (quoteData) {
@@ -345,7 +363,7 @@ const Contact = () => {
                       <div className="min-w-0 flex-1">
                         <p className="text-xs uppercase font-medium tracking-wider text-primary-foreground/70">Base Location</p>
                         <p className="text-sm font-semibold text-white">{COMPANY.address}</p>
-                        <p className="text-xs text-primary-foreground/60">Serving Ennis, Limerick, Galway & Co. Clare</p>
+                        <p className="text-xs text-primary-foreground/60">Serving Clare &amp; Limerick (Ennis, Shannon &amp; surrounding areas)</p>
                       </div>
                     </div>
                   </div>

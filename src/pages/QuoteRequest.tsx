@@ -27,7 +27,7 @@ import {
   Truck,
   Waves,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -111,6 +111,24 @@ const QuoteRequest = () => {
   const [notes, setNotes] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+
+  useEffect(() => {
+    document.title = `Request a Free Quote | Force Services - Clare & Limerick`;
+    const descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) {
+      descMeta.setAttribute(
+        "content",
+        "Request a fast, free, no-obligation quote for commercial cleaning services, office cleaning, power washing, or builders cleans in Clare and Limerick."
+      );
+    }
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", "https://www.forceservices.ie/quote");
+  }, []);
 
   const activeService = CLEANING_SERVICES.find((s) => s.slug === selectedService);
 
@@ -212,7 +230,7 @@ const QuoteRequest = () => {
             </h1>
 
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Get in touch with Force Services for expert power washing, commercial, industrial, and post-construction cleaning across Ennis, Limerick & Galway.
+              Get in touch with Force Services for commercial cleaning services, office cleaning, power washing, and post-construction cleaning across Ennis, Shannon, Clare &amp; Limerick.
             </p>
           </FadeIn>
         </div>
@@ -636,10 +654,10 @@ const QuoteRequest = () => {
                 Coverage Area
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-                Serving Ennis, Limerick, Galway & Surrounding Areas
+                Serving County Clare &amp; County Limerick (Ennis, Shannon &amp; Surrounding Areas)
               </h2>
               <p className="text-muted-foreground text-base">
-                We provide mobile, fully-equipped power washing and professional cleaning teams across the entire Mid-West region.
+                We provide mobile, fully-equipped commercial cleaning and power washing teams across County Clare and County Limerick.
               </p>
             </div>
           </FadeIn>

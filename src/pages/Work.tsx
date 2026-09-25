@@ -3,6 +3,7 @@ import FadeIn from "@/components/FadeIn";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { COMPANY } from "@/lib/config";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import work1 from "@/assets/work-1.png";
@@ -70,6 +71,24 @@ export const works = [
 ];
 
 const Work = () => {
+  useEffect(() => {
+    document.title = `Completed Commercial Cleaning Projects | Force Services`;
+    const descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) {
+      descMeta.setAttribute(
+        "content",
+        "Explore case studies and completed commercial cleaning, power washing, and post-construction projects by Force Services in Clare and Limerick."
+      );
+    }
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", "https://www.forceservices.ie/work");
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -91,7 +110,7 @@ const Work = () => {
                 Featured Projects
               </h1>
               <p className="text-muted-foreground max-w-xl text-lg mt-3">
-                Proven results across Ennis, Limerick, and Galway. See how {COMPANY.name} transforms commercial and industrial properties.
+                Proven results across Ennis, Shannon, Clare, and Limerick. See how {COMPANY.name} transforms commercial and industrial properties.
               </p>
             </div>
             <Link to="/quote">

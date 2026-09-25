@@ -2,17 +2,17 @@ export const COMPANY = {
   name: "Force Services",
   legalName: "Force Services",
   cro: "",
-  tagline: "Professional Power Washing, Commercial, Industrial & Post-Construction Cleaning",
+  tagline: "Commercial Cleaning Services, Power Washing, Industrial & Post-Construction Cleaning",
   description:
-    "Professional power washing, commercial, industrial, and post-construction cleaning services across Ennis, Limerick, Galway, and surrounding areas.",
+    "Specialized commercial cleaning services, commercial power washing, industrial and post-construction cleaning for businesses across County Clare, Limerick, Ennis and Shannon.",
   phone: "+353 87 494 5684",
   secondaryPhone: "+353 85 765 0548",
   email: "forceservicesie@gmail.com",
   notificationEmail: "forceservicesie@gmail.com",
   whatsappNumber: "+353874945684",
   address: "Apartment 1, Limerick Road, Newmarket-on-Fergus, Ennis, Co. Clare",
-  serviceArea: "Ennis, Limerick & Galway",
-  county: "Co. Clare, Limerick & Galway",
+  serviceArea: "County Clare & County Limerick",
+  county: "Co. Clare & Co. Limerick",
   country: "Ireland",
   yearsInBusiness: 5,
   year: new Date().getFullYear(),
@@ -23,21 +23,19 @@ export const COMPANY = {
 };
 
 export const WHATSAPP_MESSAGE =
-  "Hi Force Services, I would like to get a free quote for your cleaning services.";
+  "Hi Force Services, I would like to get a free quote for commercial cleaning services.";
 
 export const SERVICE_AREAS = [
   "Ennis",
-  "Limerick",
-  "Galway",
-  "Newmarket-on-Fergus",
   "Shannon",
+  "Limerick",
+  "Newmarket-on-Fergus",
   "Sixmilebridge",
   "Clarecastle",
-  "Gort",
-  "Oranmore",
   "Castletroy",
   "Raheen",
   "Co. Clare",
+  "Co. Limerick",
 ];
 
 import powerWashingImg from "@/assets/cardimages/shawn-rain-0LIyVDJ6Xuk-unsplash.jpg";
@@ -56,7 +54,7 @@ export const CLEANING_SERVICES = [
     shortDescription:
       "High-pressure washing for commercial forecourts, carparks, retail entrances, paving, and business premises.",
     description:
-      "Heavy-duty exterior power washing and pressure cleaning tailored for businesses, commercial facilities, and property managers across Clare, Limerick, and Galway. We remove moss, algae, oil residues, tyre marks, and grime from commercial forecourts, carparks, retail walkways, building perimeters, and masonry.",
+      "Heavy-duty exterior power washing and pressure cleaning tailored for businesses, commercial facilities, and property managers across County Clare and County Limerick. We remove moss, algae, oil residues, tyre marks, and grime from commercial forecourts, carparks, retail walkways, building perimeters, and masonry.",
     basePrice: 80,
     features: [
       "Commercial Forecourts, Carparks & Loading Bays",
@@ -68,12 +66,12 @@ export const CLEANING_SERVICES = [
   },
   {
     slug: "commercial-cleaning",
-    title: "Commercial & Office Cleaning",
+    title: "Commercial Cleaning Services & Office Cleaning",
     image: commercialImg,
     shortDescription:
-      "Flexible and reliable contract cleaning for offices, shops, retail stores, and commercial premises.",
+      "Flexible and reliable commercial cleaning services and contract cleaning for offices, shops, retail stores, and commercial premises.",
     description:
-      "Maintain a spotless, welcoming, and hygienic environment for your employees and clients. Our commercial cleaning services are customized to your business hours and industry standards.",
+      "Maintain a spotless, welcoming, and hygienic environment for your business. Our commercial cleaning services and office contracts are tailored to your operational hours across Clare and Limerick with zero disruption.",
     basePrice: 65,
     features: [
       "Offices, Workspaces & Boardrooms",
@@ -191,12 +189,12 @@ export const FAQS = [
   {
     question: "What areas do Force Services cover?",
     answer:
-      "We are based in Newmarket-on-Fergus / Ennis, Co. Clare and proudly serve Ennis, Limerick, Galway, Shannon, and surrounding towns throughout the Mid-West of Ireland.",
+      "We are based in Newmarket-on-Fergus / Ennis, Co. Clare and proudly serve businesses across Ennis, Shannon, County Clare, and County Limerick throughout the Mid-West of Ireland.",
   },
   {
     question: "What types of cleaning services do you specialize in?",
     answer:
-      "We specialize in high-pressure power washing (driveways, patios, facades, roofs), commercial and office cleaning, industrial and warehouse cleaning, and post-construction / after-build cleans.",
+      "We specialize exclusively in commercial cleaning services: commercial and office cleaning contracts, high-pressure power washing for business premises, industrial warehouse cleaning, and post-construction sparkle cleans.",
   },
   {
     question: "How do I get a quote?",

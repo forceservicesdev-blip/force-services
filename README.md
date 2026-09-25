@@ -1,6 +1,6 @@
-# Force Services — Professional Cleaning & Power Washing Web Platform
+# Force Services — Professional Commercial Cleaning Web Platform
 
-Official website and lead-generation platform for **Force Services**, providing professional power washing, commercial, industrial, and post-construction cleaning across **Ennis, Limerick, Galway, and County Clare, Ireland**.
+Official website and lead-generation platform for **Force Services**, providing professional commercial cleaning services, power washing, industrial, and post-construction cleaning across **County Clare and County Limerick, Ireland** (including Ennis and Shannon).
 
 ---
 
@@ -128,7 +128,7 @@ The application will start locally at `http://localhost:8080` (or the port speci
 - **WhatsApp**: [+353 87 494 5684](https://wa.me/353874945684)
 - **Email**: [Forceservicesie@gmail.com](mailto:Forceservicesie@gmail.com)
 - **Address**: Apartment 1, Limerick Road, Newmarket-on-Fergus, Ennis, Co. Clare, Ireland
-- **Primary Service Areas**: Ennis, Limerick, Galway, Shannon, Sixmilebridge, Newmarket-on-Fergus & County Clare.
+- **Primary Service Areas**: Ennis, Shannon, Limerick, Sixmilebridge, Newmarket-on-Fergus, County Clare & County Limerick.
 
 ---
 
