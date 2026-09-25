@@ -88,94 +88,108 @@ export function trackLeadConversion(payload: ConversionPayload = {}) {
   }
 }
 
+export interface ClickTrackingContext {
+  button_location?: string;
+  page_path?: string;
+}
+
 /**
- * Tracks WhatsApp button clicks
+ * Tracks WhatsApp button/link clicks for dashboard reporting.
+ * Event: whatsapp_click
+ * Parameters: page_path, button_location (non-personal)
  */
-export function trackWhatsAppClick(context: {
-  button_text?: string;
-  page_location?: string;
-  destination_url?: string;
-} = {}) {
+export function trackWhatsAppClick(context: ClickTrackingContext = {}) {
   if (typeof window === "undefined") return;
 
-  const eventData = {
-    event: "click_whatsapp",
-    button_text: context.button_text || "WhatsApp Button",
-    page_location: context.page_location || window.location.pathname,
-    destination_url: context.destination_url || "",
-    timestamp: new Date().toISOString(),
+  const eventParams = {
+    page_path: context.page_path || window.location.pathname,
+    button_location: context.button_location || "unknown",
   };
 
-  // Push to dataLayer
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(eventData);
-
-  // Dispatch gtag events
   if (typeof window.gtag === "function") {
-    // Custom event: click_whatsapp
-    window.gtag("event", "click_whatsapp", {
-      event_category: "Engagement",
-      event_label: context.button_text || "WhatsApp Button",
-      page_location: context.page_location || window.location.pathname,
-      transport_type: "beacon",
-    });
-
-    // Standard GA4 contact event
-    window.gtag("event", "contact", {
-      method: "WhatsApp",
-      event_category: "Lead Generation",
-      event_label: context.button_text || "WhatsApp Button",
-      transport_type: "beacon",
+    window.gtag("event", "whatsapp_click", eventParams);
+  } else if (Array.isArray(window.dataLayer)) {
+    window.dataLayer.push({
+      event: "whatsapp_click",
+      ...eventParams,
     });
   }
 
   if (import.meta.env.DEV) {
-    console.log("[Analytics] Tracked WhatsApp click:", eventData);
-    if (!window.gtag) {
-      console.warn("[Analytics] Warning: window.gtag is not defined! Check if an ad-blocker is active.");
-    }
+    console.log("[Analytics] Tracked whatsapp_click:", eventParams);
   }
 }
 
 /**
- * Tracks Direct Phone Call clicks
+ * Tracks Direct Phone Call clicks for dashboard reporting.
+ * Event: phone_click
+ * Parameters: page_path, button_location (non-personal)
  */
-export function trackPhoneClick(context: {
-  button_text?: string;
-  phone_number?: string;
-  page_location?: string;
-} = {}) {
+export function trackPhoneClick(context: ClickTrackingContext = {}) {
   if (typeof window === "undefined") return;
 
-  const eventData = {
-    event: "click_phone",
-    button_text: context.button_text || "Phone Call",
-    phone_number: context.phone_number || "",
-    page_location: context.page_location || window.location.pathname,
+  const eventParams = {
+    page_path: context.page_path || window.location.pathname,
+    button_location: context.button_location || "unknown",
   };
 
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(eventData);
-
   if (typeof window.gtag === "function") {
-    window.gtag("event", "click_phone", eventData);
-    window.gtag("event", "contact", {
-      method: "Phone",
-      event_category: "Lead Generation",
+    window.gtag("event", "phone_click", eventParams);
+  } else if (Array.isArray(window.dataLayer)) {
+    window.dataLayer.push({
+      event: "phone_click",
+      ...eventParams,
     });
   }
 
   if (import.meta.env.DEV) {
-    console.log("[Analytics] Tracked Phone call click:", eventData);
+    console.log("[Analytics] Tracked phone_click:", eventParams);
   }
+}
+
+/**
+ * Helper to determine button_location from element or its DOM context
+ */
+function resolveButtonLocation(element: HTMLElement): string {
+  // 1. Check for explicit data-location on the element or any ancestor
+  const explicit = element.closest("[data-location]");
+  if (explicit) {
+    const loc = explicit.getAttribute("data-location");
+    if (loc) return loc;
+  }
+
+  // 2. Infer from semantic containers
+  if (element.closest("header")) {
+    return window.innerWidth < 1024 ? "header_mobile" : "header_desktop";
+  }
+  if (element.closest("footer")) return "footer";
+  if (element.closest("#hero") || element.closest("section.hero-section") || element.closest(".pt-6, .pt-8, .pt-10, .pt-12, .pt-32")) {
+    const path = window.location.pathname;
+    if (path === "/" || path === "") return "hero";
+  }
+  if (element.closest("#cta") || element.closest("section.bg-primary")) return "cta_section";
+  if (element.closest("#solutions")) return "solutions_section";
+  if (element.closest("#about")) return "about_section";
+  if (element.closest("aside") || element.closest(".sidebar")) return "sidebar";
+
+  const path = window.location.pathname;
+  if (path.includes("contact")) return "contact_page";
+  if (path.includes("quote")) return "quote_page";
+  if (path.includes("services")) return "service_page";
+  if (path.includes("thank-you")) return "thank_you_page";
+
+  return "page_content";
 }
 
 /**
  * Global click interceptor to automatically capture ANY WhatsApp or Phone clicks
- * anywhere across the entire website without having to manually wire up every component.
+ * across the entire website with deduplication protection.
  */
 export function setupGlobalAnalyticsListeners() {
   if (typeof window === "undefined") return () => {};
+
+  let lastClickTime = 0;
+  let lastClickHref = "";
 
   const handleClick = (event: MouseEvent) => {
     const target = event.target as HTMLElement | null;
@@ -189,24 +203,35 @@ export function setupGlobalAnalyticsListeners() {
     const hrefProp = anchor.href || "";
     const fullHref = `${hrefAttr} ${hrefProp}`.toLowerCase();
 
+    // Deduplication check: prevent multiple triggers from nested element clicks / rapid bubbles
+    const now = Date.now();
+    if (now - lastClickTime < 350 && lastClickHref === fullHref) {
+      return;
+    }
+
+    const buttonLocation = resolveButtonLocation(anchor);
+    const pagePath = window.location.pathname;
+
     // 1. Detect WhatsApp links
     if (fullHref.includes("wa.me") || fullHref.includes("whatsapp.com")) {
-      const buttonText = anchor.innerText?.trim() || anchor.getAttribute("aria-label") || "WhatsApp Link";
+      lastClickTime = now;
+      lastClickHref = fullHref;
       trackWhatsAppClick({
-        button_text: buttonText,
-        page_location: window.location.pathname,
-        destination_url: hrefAttr || hrefProp,
+        button_location: buttonLocation,
+        page_path: pagePath,
       });
+      return;
     }
 
     // 2. Detect Phone links
     if (fullHref.includes("tel:")) {
-      const buttonText = anchor.innerText?.trim() || anchor.getAttribute("aria-label") || "Phone Link";
+      lastClickTime = now;
+      lastClickHref = fullHref;
       trackPhoneClick({
-        button_text: buttonText,
-        phone_number: hrefAttr.replace("tel:", "").trim(),
-        page_location: window.location.pathname,
+        button_location: buttonLocation,
+        page_path: pagePath,
       });
+      return;
     }
   };
 

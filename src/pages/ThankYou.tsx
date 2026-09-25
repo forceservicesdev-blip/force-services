@@ -125,6 +125,7 @@ const ThankYou = () => {
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <a
                   href={`tel:${COMPANY.phone.replace(/\s/g, "")}`}
+                  data-location="thank_you_phone"
                   className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-full hover:bg-primary/90 transition-all shadow-sm"
                 >
                   <PhoneCall className="w-4 h-4" />
@@ -135,6 +136,7 @@ const ThankYou = () => {
                   href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-location="thank_you_whatsapp"
                   className="inline-flex items-center gap-2 bg-[#25D366] text-white font-semibold px-6 py-3 rounded-full hover:bg-[#20bd5a] transition-all shadow-sm"
                 >
                   <MessageCircle className="w-4 h-4" />

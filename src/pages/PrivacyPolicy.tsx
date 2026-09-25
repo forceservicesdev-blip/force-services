@@ -252,7 +252,7 @@ const PrivacyPolicy = () => {
                       Email Us
                     </Button>
                   </a>
-                  <a href={`tel:${COMPANY.phone}`}>
+                  <a href={`tel:${COMPANY.phone}`} data-location="privacy_policy_phone">
                     <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold rounded-full px-6">
                       <Phone className="h-4 w-4" />
                       {COMPANY.phone}

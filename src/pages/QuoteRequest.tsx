@@ -236,6 +236,7 @@ const QuoteRequest = () => {
                 href={`https://wa.me/${COMPANY.whatsappNumber.replace(/\D/g, "")}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-location="quote_hero_whatsapp"
                 className="shrink-0 inline-flex items-center gap-2 bg-white text-[#25D366] font-bold px-7 py-3.5 rounded-full hover:bg-white/90 transition-all shadow-md text-base whitespace-nowrap"
               >
                 <MessageCircle className="w-5 h-5" />
@@ -546,6 +547,7 @@ const QuoteRequest = () => {
                   <div className="space-y-4 pt-2">
                     <a
                       href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`}
+                      data-location="quote_sidebar_phone"
                       className="flex items-center gap-4 p-4 rounded-2xl bg-white/10 hover:bg-white/15 transition-all text-primary-foreground"
                     >
                       <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shrink-0">
@@ -561,6 +563,7 @@ const QuoteRequest = () => {
                       href={`https://wa.me/${COMPANY.whatsappNumber.replace(/\D/g, "")}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-location="quote_sidebar_whatsapp"
                       className="flex items-center gap-4 p-4 rounded-2xl bg-[#25D366]/20 hover:bg-[#25D366]/30 transition-all text-white border border-[#25D366]/40"
                     >
                       <div className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0">

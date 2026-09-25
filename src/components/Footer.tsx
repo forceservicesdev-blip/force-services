@@ -84,7 +84,7 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Phone className="h-5 w-5 text-tertiary flex-shrink-0 mt-0.5" />
-                <a href={`tel:${COMPANY.phone}`} className="text-primary-foreground/70 text-sm">
+                <a href={`tel:${COMPANY.phone}`} data-location="footer_phone" className="text-primary-foreground/70 text-sm hover:underline">
                   {COMPANY.phone}
                 </a>
               </li>
@@ -94,7 +94,8 @@ const Footer = () => {
                   href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary-foreground/70 text-sm"
+                  data-location="footer_whatsapp"
+                  className="text-primary-foreground/70 text-sm hover:underline"
                 >
                   WhatsApp Us
                 </a>

@@ -78,7 +78,7 @@ const About = () => {
                 </FadeIn>
               ))}
             </div>
-            <a href={`tel:${COMPANY.phone}`}>
+            <a href={`tel:${COMPANY.phone}`} data-location="about_phone">
               <FadeIn delay={600}>
                 <Button size="lg" className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
                   <Phone className="h-4 w-4" />

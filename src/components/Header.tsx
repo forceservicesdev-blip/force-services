@@ -1,7 +1,6 @@
 import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { COMPANY, WHATSAPP_MESSAGE } from "@/lib/config";
-import { trackWhatsAppClick } from "@/lib/analytics";
 import { Menu, MessageCircle, Phone, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -45,6 +44,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center gap-4">
             <a
               href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`}
+              data-location="header_desktop_phone"
               className="flex items-center gap-2 text-sm font-semibold text-foreground/80 hover:text-primary transition-colors"
             >
               <Phone className="h-4 w-4 text-primary" />
@@ -55,7 +55,7 @@ const Header = () => {
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackWhatsAppClick({ button_text: "Header WhatsApp Desktop" })}
+              data-location="header_desktop_whatsapp"
               className="flex items-center gap-2 text-sm font-medium text-tertiary hover:text-tertiary/80 transition-colors"
             >
               <MessageCircle className="h-5 w-5" />
@@ -96,6 +96,7 @@ const Header = () => {
               <div className="flex flex-col gap-3 mt-4">
                 <a
                   href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`}
+                  data-location="header_mobile_phone"
                   className="flex items-center justify-center gap-2 rounded-full border border-primary text-primary font-semibold py-2.5 hover:bg-primary hover:text-primary-foreground transition-colors"
                 >
                   <Phone className="h-4 w-4" />
@@ -105,7 +106,7 @@ const Header = () => {
                   href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackWhatsAppClick({ button_text: "Header WhatsApp Mobile" })}
+                  data-location="header_mobile_whatsapp"
                   className="flex items-center justify-center gap-2 rounded-full border border-tertiary text-tertiary font-semibold py-2.5"
                 >
                   <MessageCircle className="h-5 w-5" />

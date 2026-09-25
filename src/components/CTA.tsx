@@ -28,7 +28,7 @@ const CTA = () => {
                   Get a Free Quote
                 </Button>
               </Link>
-              <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer" data-location="cta_whatsapp">
                 <Button
                   size="lg"
                   variant="outline"

@@ -269,6 +269,7 @@ const Contact = () => {
                     {/* Primary Phone */}
                     <a
                       href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`}
+                      data-location="contact_page_phone_primary"
                       className="group flex items-center gap-4 p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/10 transition-all duration-200"
                     >
                       <div className="w-12 h-12 rounded-xl bg-white/10 text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
@@ -287,6 +288,7 @@ const Contact = () => {
                     {/* Secondary Phone (Old number as 2nd option) */}
                     <a
                       href={`tel:${COMPANY.secondaryPhone.replace(/\s+/g, "")}`}
+                      data-location="contact_page_phone_secondary"
                       className="group flex items-center gap-4 p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/10 transition-all duration-200"
                     >
                       <div className="w-12 h-12 rounded-xl bg-white/10 text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
@@ -306,6 +308,7 @@ const Contact = () => {
                       href={whatsappHref}
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-location="contact_page_whatsapp"
                       className="group flex items-center gap-4 p-4 rounded-2xl bg-emerald-500/15 hover:bg-emerald-500/25 backdrop-blur-md border border-emerald-400/25 transition-all duration-200"
                     >
                       <div className="w-12 h-12 rounded-xl bg-emerald-500/25 text-emerald-300 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">

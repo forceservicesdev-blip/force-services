@@ -216,13 +216,13 @@ const Hero = () => {
                   Get a Free Quote
                 </Button>
               </Link>
-              <a href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`}>
+              <a href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`} data-location="hero_phone">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold">
                   <Phone className="h-5 w-5" />
                   {COMPANY.phone}
                 </Button>
               </a>
-              <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer" data-location="hero_whatsapp">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
                   <MessageCircle className="h-5 w-5" />
                   WhatsApp Us

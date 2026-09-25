@@ -24,13 +24,13 @@ const FinalCTA = () => {
                 Get a Free Quote
               </Button>
             </Link>
-            <a href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`}>
+            <a href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`} data-location="final_cta_phone">
               <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 border-white/30 text-white hover:bg-white hover:text-primary font-semibold">
                 <Phone className="h-5 w-5" />
                 {COMPANY.phone}
               </Button>
             </a>
-            <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
+            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" data-location="final_cta_whatsapp">
               <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 border-white/30 text-white hover:bg-white hover:text-primary font-semibold">
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp Us

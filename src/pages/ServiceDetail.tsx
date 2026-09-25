@@ -429,7 +429,7 @@ const ServiceDetail = () => {
                     Get a Quote
                   </Button>
                 </Link>
-                <a href={`tel:${COMPANY.phone}`}>
+                <a href={`tel:${COMPANY.phone}`} data-location="service_detail_phone">
                   <Button size="lg" variant="outline" className="gap-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
                     <Phone className="h-4 w-4" />
                     Call Us
@@ -673,6 +673,7 @@ const ServiceDetail = () => {
                       href={`https://wa.me/${COMPANY.whatsappNumber.replace(/\D/g, "")}`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-location="service_detail_whatsapp"
                       className="inline-flex items-center gap-2 text-sm font-bold text-tertiary hover:underline"
                     >
                       Chat on WhatsApp: {COMPANY.phone}
