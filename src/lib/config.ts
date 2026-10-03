@@ -16,9 +16,12 @@ export const COMPANY = {
   country: "Ireland",
   yearsInBusiness: 5,
   year: new Date().getFullYear(),
+  googleBusinessProfile: "https://share.google/emX9mmcNmZZj1UgOQ",
+  googleReviewUrl: "https://g.page/r/CYDhNqldy-S2EAE/review",
   social: {
     facebook: "",
     instagram: "https://www.instagram.com/forceservicesie?utm_source=qr",
+    google: "https://share.google/emX9mmcNmZZj1UgOQ",
   },
 };
 
@@ -38,11 +41,11 @@ export const SERVICE_AREAS = [
   "Co. Limerick",
 ];
 
-import powerWashingImg from "@/assets/cardimages/shawn-rain-0LIyVDJ6Xuk-unsplash.jpg";
+import powerWashingImg from "@/assets/cardimages/power-washing-service.jpg";
 import commercialImg from "@/assets/cardimages/s-o-c-i-a-l-c-u-t-1RT4txDDAbM-unsplash.jpg";
 import industrialImg from "@/assets/cardimages/jacques-dillies-jcav1COVvOc-unsplash.jpg";
 import postConstructionImg from "@/assets/cardimages/steffen-lemmerzahl-Dqvb5xO0_Vg-unsplash.jpg";
-import exteriorCleaningImg from "@/assets/cardimages/sam-balye-y8URY9-ypSI-unsplash.jpg";
+import exteriorCleaningImg from "@/assets/cardimages/building-facade.jpg";
 import customCleaningImg from "@/assets/cardimages/cytonn-photography-n95VMLxqM2I-unsplash.jpg";
 
 export const CLEANING_SERVICES = [
@@ -50,7 +53,7 @@ export const CLEANING_SERVICES = [
     slug: "power-washing",
     title: "Commercial Power Washing & Pressure Cleaning",
     image: powerWashingImg,
-    imagePosition: "object-bottom",
+    imagePosition: "center 35%",
     shortDescription:
       "High-pressure washing for commercial forecourts, carparks, retail entrances, paving, and business premises.",
     description:
@@ -119,7 +122,7 @@ export const CLEANING_SERVICES = [
     slug: "exterior-cleaning",
     title: "Building Facade & Exterior Cleaning",
     image: exteriorCleaningImg,
-    imagePosition: "object-bottom",
+    imagePosition: "center 40%",
     shortDescription:
       "Specialized soft-wash and pressure cleaning for building facades, cladding, roofs, and stonework.",
     description:

@@ -105,16 +105,25 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   body {
     @apply bg-background text-foreground font-clash antialiased;
     background-image: radial-gradient(hsl(var(--primary) / 0.04) 1px, transparent 1px);
     background-size: 28px 28px;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  #root {
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight;
+    @apply text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight break-normal;
   }
 
   h2 {

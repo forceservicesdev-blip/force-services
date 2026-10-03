@@ -19,11 +19,11 @@ import { cn } from "@/lib/utils";
 import NotFound from "@/pages/NotFound";
 
 // Images
-import powerWashingImg from "@/assets/cardimages/shawn-rain-0LIyVDJ6Xuk-unsplash.jpg";
+import powerWashingImg from "@/assets/cardimages/power-washing-service.jpg";
 import commercialImg from "@/assets/cardimages/s-o-c-i-a-l-c-u-t-1RT4txDDAbM-unsplash.jpg";
 import industrialImg from "@/assets/cardimages/jacques-dillies-jcav1COVvOc-unsplash.jpg";
 import postConstructionImg from "@/assets/cardimages/steffen-lemmerzahl-Dqvb5xO0_Vg-unsplash.jpg";
-import exteriorCleaningImg from "@/assets/cardimages/sam-balye-y8URY9-ypSI-unsplash.jpg";
+import exteriorCleaningImg from "@/assets/cardimages/building-facade.jpg";
 import customCleaningImg from "@/assets/cardimages/cytonn-photography-n95VMLxqM2I-unsplash.jpg";
 
 const nameSchema = z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters");
@@ -412,7 +412,7 @@ const ServiceDetail = () => {
           <FadeIn>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-6">
               <div>
-                <h1 className="text-foreground text-4xl md:text-5xl lg:text-6xl font-bold">
+                <h1 className="text-foreground text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight">
                   {service.h1Title || service.title}
                 </h1>
                 <p className="text-muted-foreground text-lg md:text-xl mt-3 max-w-2xl">
@@ -446,10 +446,10 @@ const ServiceDetail = () => {
                 alt={service.imageAlt || service.title}
                 className={cn(
                   "w-full h-[360px] md:h-[480px] object-cover",
-                  (serviceKey === "power-washing" || serviceKey === "exterior-cleaning") && "object-bottom"
+                  serviceKey === "power-washing" && "object-bottom"
                 )}
                 style={{
-                  objectPosition: (serviceKey === "power-washing" || serviceKey === "exterior-cleaning") ? "center 75%" : undefined
+                  objectPosition: serviceKey === "power-washing" ? "center 35%" : serviceKey === "exterior-cleaning" ? "center 40%" : undefined
                 }}
               />
             </div>

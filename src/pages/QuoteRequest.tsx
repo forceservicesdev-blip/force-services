@@ -225,7 +225,7 @@ const QuoteRequest = () => {
               <span className="text-primary font-medium">Request a Quote</span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground">
+            <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground tracking-tight">
               Request a Free Quote & Assessment
             </h1>
 

@@ -45,12 +45,9 @@ const Services = () => {
                     <img
                       src={service.image}
                       alt={service.title}
-                      className={cn(
-                        "w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105",
-                        (service.slug === "power-washing" || service.slug === "exterior-cleaning") && "object-bottom"
-                      )}
+                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                       style={{
-                        objectPosition: (service.slug === "power-washing" || service.slug === "exterior-cleaning") ? "center 75%" : undefined
+                        objectPosition: (service as any).imagePosition || (service.slug === "power-washing" ? "center 35%" : undefined)
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />

@@ -21,10 +21,10 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border shadow-sm">
-      <div className="container">
-        <div className="flex items-center justify-between h-20">
-          <Link to="/" className="flex items-center group">
+    <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border shadow-sm">
+      <div className="container-custom section-padding w-full">
+        <div className="flex items-center justify-between h-16 sm:h-20">
+          <Link to="/" className="flex items-center shrink-0 group">
             <Logo size="lg" />
           </Link>
 

@@ -25,6 +25,7 @@ import serviceImg9 from "@/assets/servicesimages/a21e7b71-a5cf-40d8-b244-2b29387
 import serviceImg10 from "@/assets/servicesimages/b54edaf1-6bad-4a1b-9de9-0a1b2923cd5b.JPG";
 import serviceImg11 from "@/assets/servicesimages/b760514f-d69b-40b7-a559-9366f13c8736.JPG";
 import serviceImg12 from "@/assets/servicesimages/d5036617-31ab-42dd-8cea-0d72f76bee06.JPG";
+import buildingFacadeImg from "@/assets/servicesimages/building-facade-completed.jpg";
 
 const badges = [
   { icon: ShieldCheck, label: "Fully Insured" },
@@ -34,6 +35,7 @@ const badges = [
 ];
 
 const heroImages = [
+  buildingFacadeImg,
   serviceImg3,
   serviceImg4,
   serviceImg5,
@@ -192,7 +194,7 @@ const Hero = () => {
       <div className="container-custom section-padding relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl lg:text-h1 font-bold text-primary mb-6 text-balance">
+            <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-h1 font-bold text-primary mb-6 text-balance tracking-tight">
               Commercial Cleaning Services in County Clare &amp; Limerick
             </h1>
             <p className="text-lg text-muted-foreground mb-4 max-w-xl">

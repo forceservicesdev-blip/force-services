@@ -101,7 +101,7 @@ const About = () => {
                 <span className="text-primary font-medium">About Us</span>
               </div>
               <FadeIn>
-                <h1 className="leading-tight text-foreground font-bold text-4xl md:text-5xl lg:text-6xl mb-6">
+                <h1 className="leading-tight text-foreground font-bold text-2xl sm:text-3xl md:text-5xl lg:text-6xl mb-6 tracking-tight">
                   About {COMPANY.name}
                 </h1>
               </FadeIn>

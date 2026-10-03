@@ -11,7 +11,7 @@ import work1 from "@/assets/work-1.png";
 import work2 from "@/assets/work-2.png";
 import work3 from "@/assets/work-3.png";
 import work4 from "@/assets/work-4.png";
-import work5 from "@/assets/work-5.png";
+import work5 from "@/assets/cardimages/building-facade.jpg";
 import work6 from "@/assets/work-6.png";
 import problem1 from "@/assets/problem-1.png";
 import solution1 from "@/assets/solution-1.png";

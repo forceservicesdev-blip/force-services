@@ -15,6 +15,8 @@ const COMPANY = {
   address: "Apartment 1, Limerick Road, Newmarket-on-Fergus, Ennis, Co. Clare",
   serviceArea: "County Clare & County Limerick",
   year: new Date().getFullYear(),
+  googleBusinessProfile: "https://share.google/emX9mmcNmZZj1UgOQ",
+  googleReviewUrl: "https://g.page/r/CYDhNqldy-S2EAE/review",
 };
 
 const serviceData = {
@@ -616,9 +618,17 @@ function renderFooterHtml() {
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           <div>
             <span class="text-2xl font-bold text-white tracking-tight">Force Services</span>
-            <p class="text-primary-foreground/70 mt-4 text-sm leading-relaxed">
+            <p class="text-primary-foreground/70 mt-4 mb-5 text-sm leading-relaxed">
               Professional commercial power washing, office cleaning, industrial cleaning, and post-construction sparkle cleaning across County Clare and County Limerick.
             </p>
+            <div class="flex flex-col gap-2.5 mb-6 max-w-xs">
+              <a href="${COMPANY.googleBusinessProfile}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all text-center">
+                <span>View us on Google</span>
+              </a>
+              <a href="${COMPANY.googleReviewUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold bg-[#0372e9] hover:bg-[#025ec2] text-white transition-all text-center shadow-sm">
+                <span>Leave a Google Review</span>
+              </a>
+            </div>
           </div>
           <div>
             <h4 class="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Commercial Services</h4>
@@ -651,13 +661,14 @@ function renderFooterHtml() {
               <li>Phone: <a href="tel:${COMPANY.phone.replace(/\s+/g, "")}" data-location="footer_phone" class="text-white hover:underline">${COMPANY.phone}</a></li>
               <li>WhatsApp: <a href="https://wa.me/${COMPANY.whatsappNumber.replace(/\D/g, "")}" target="_blank" rel="noopener noreferrer" data-location="footer_whatsapp" class="text-white hover:underline">${COMPANY.phone}</a></li>
               <li>Email: <a href="mailto:${COMPANY.email}" class="text-white hover:underline">${COMPANY.email}</a></li>
-              <li>Location: <span class="text-primary-foreground/70">${COMPANY.address}</span></li>
+              <li>Location: <a href="${COMPANY.googleBusinessProfile}" target="_blank" rel="noopener noreferrer" class="text-primary-foreground/70 hover:underline">${COMPANY.address}</a></li>
             </ul>
           </div>
         </div>
         <div class="border-t border-primary-foreground/10 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-primary-foreground/60 gap-4">
           <p>© ${COMPANY.year} Force Services. All Rights Reserved. Commercial Cleaning Specialists.</p>
-          <div class="flex gap-6">
+          <div class="flex flex-wrap gap-6 items-center">
+            <a href="${COMPANY.googleBusinessProfile}" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">View us on Google</a>
             <a href="/privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a>
             <a href="/terms-and-conditions" class="hover:text-white transition-colors">Terms & Conditions</a>
           </div>
@@ -1114,7 +1125,7 @@ function generateStaticPages() {
       '<meta name="description" content="Professional commercial cleaning services across County Clare and County Limerick, including Ennis and Shannon. Routine office cleaning, power washing, and post-construction cleaning."'
     );
     homeHtml = homeHtml.replace(
-      /<link\s+rel=["']canonical["']\s+href=["'][^"']*["']/i,
+      /<link\s+rel=["']canonical["']\s+href=["'][^"']*["']\s*\/?>/i,
       '<link rel="canonical" href="https://www.forceservices.ie/">'
     );
     homeHtml = homeHtml.replace(
@@ -1171,7 +1182,7 @@ function generateStaticPages() {
       `<meta name="description" content="${s.metaDescription}">`
     );
     html = html.replace(
-      /<link\s+rel=["']canonical["']\s+href=["'][^"']*["']/i,
+      /<link\s+rel=["']canonical["']\s+href=["'][^"']*["']\s*\/?>/i,
       `<link rel="canonical" href="${canonicalUrl}">`
     );
     html = html.replace(
@@ -1223,7 +1234,7 @@ function generateStaticPages() {
       '<meta name="description" content="Explore commercial cleaning services by Force Services across County Clare and County Limerick. Office cleaning, power washing, industrial and post-construction cleaning.">'
     );
     html = html.replace(
-      /<link\s+rel=["']canonical["']\s+href=["'][^"']*["']/i,
+      /<link\s+rel=["']canonical["']\s+href=["'][^"']*["']\s*\/?>/i,
       `<link rel="canonical" href="${canonicalUrl}">`
     );
     html = html.replace(
@@ -1251,7 +1262,7 @@ function generateStaticPages() {
       `<meta name="description" content="${p.description}">`
     );
     html = html.replace(
-      /<link\s+rel=["']canonical["']\s+href=["'][^"']*["']/i,
+      /<link\s+rel=["']canonical["']\s+href=["'][^"']*["']\s*\/?>/i,
       `<link rel="canonical" href="${canonicalUrl}">`
     );
     html = html.replace(

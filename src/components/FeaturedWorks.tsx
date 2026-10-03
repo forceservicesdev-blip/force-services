@@ -1,6 +1,6 @@
 import completedBathroom from "@/assets/completed-bathroom.jpg";
 import completedKitchen from "@/assets/completed-kitchen.jpg";
-import heroGrid1 from "@/assets/hero-grid-1.jpg";
+import powerWashingImg from "@/assets/cardimages/power-washing-service.jpg";
 import FadeIn from "@/components/FadeIn";
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
@@ -10,7 +10,7 @@ const projects = [
   {
     title: "Driveway & Patio Power Wash",
     description: "Deep pressure cleaning and moss removal restoring natural paving stone.",
-    image: heroGrid1,
+    image: powerWashingImg,
     slug: "driveway-patio-power-wash",
   },
   {
